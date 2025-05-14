@@ -53,16 +53,14 @@ def reset_database():
         return False
 
 if __name__ == "__main__":
-    # Check for sqlalchemy-utils
     try:
         import sqlalchemy_utils
     except ImportError:
         print("Installing sqlalchemy-utils...")
         os.system("pip install sqlalchemy-utils")
     
-    # Confirm before proceeding
     confirmation = input("⚠️  WARNING: This will DELETE all data in the database. Are you sure? (yes/no): ")
-    if confirmation.lower() == "yes":
+    if confirmation.lower() == "yes" or confirmation.lower() == "y":
         reset_database()
     else:
         print("Operation cancelled.")

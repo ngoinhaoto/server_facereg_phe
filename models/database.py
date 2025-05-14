@@ -33,8 +33,7 @@ class User(Base):
     # Add role field to distinguish between students, teachers, admins
     role = Column(String, default="student")
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-    
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())    
     # Relationships
     face_embeddings = relationship("FaceEmbedding", back_populates="user", cascade="all, delete")
     # New relationships

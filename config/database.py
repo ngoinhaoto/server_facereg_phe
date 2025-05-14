@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from config.app import settings
 
 load_dotenv()
 
@@ -10,4 +11,4 @@ DB_PORT = os.getenv("DB_PORT", "5432")
 DB_NAME = os.getenv("DB_NAME", "facereg_db")
 
 # SQLAlchemy connection string
-DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+DATABASE_URL = settings.DATABASE_URL
