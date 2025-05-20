@@ -55,6 +55,7 @@ class Class(Base):
     end_time = Column(DateTime(timezone=True))
     location = Column(String)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())  # Add this line
     
     # Relationships
     students = relationship("User", secondary=student_class_association, back_populates="classes")

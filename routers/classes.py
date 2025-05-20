@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
 from typing import List, Optional
+from pydantic import BaseModel
 from database.db import get_db
 from schemas.class_schema import (
     ClassCreate, ClassResponse, ClassUpdate, 
@@ -13,6 +14,10 @@ from crud.class_crud import (
     get_class_sessions, get_session, create_class_session, update_class_session, delete_class_session
 )
 from security.auth import get_current_active_user, get_current_teacher_or_admin
+
+# Add this new model to your imports
+class ClassWithStudentsResponse(ClassResponse):
+    students: List[UserResponse] = []
 
 router = APIRouter(prefix="/classes", tags=["Classes"])
 

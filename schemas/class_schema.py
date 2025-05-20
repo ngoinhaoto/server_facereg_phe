@@ -13,7 +13,7 @@ class ClassBase(BaseModel):
     location: Optional[str] = None
     start_time: Optional[datetime] = None
     end_time: Optional[datetime] = None
-    students: List[int] = []  # List of student IDs
+    # students: List[int] = []  # List of student IDs
 
 class ClassCreate(ClassBase):
     pass
@@ -28,33 +28,33 @@ class ClassUpdate(ClassBase):
     location: Optional[str] = None
     start_time: Optional[datetime] = None
     end_time: Optional[datetime] = None
-    students: List[int] = []  # List of student IDs
+    # students: List[int] = []  # List of student IDs
 
 class ClassResponse(ClassBase):
     id: int
     created_at: datetime
-    updated_at: datetime
+    updated_at: Optional[datetime] = None  # Make updated_at optional with None as default
 
-    class Config:
-        orm_mode = True
+    model_config = {
+        "from_attributes": True
+    }
 
 class ClassSessionBase(BaseModel):
-    class_code: str
+    class_id: int  # This should be the correct field name, not class_code
+    session_date: datetime
     start_time: datetime
     end_time: datetime
-    location: Optional[str] = None
     notes: Optional[str] = None
-    students: List[int] = []  # List of student IDs
 
 class ClassSessionCreate(ClassSessionBase):
     pass
 
 class ClassSessionUpdate(ClassSessionBase):
+    class_id: Optional[int] = None  # Make optional for updates
+    session_date: Optional[datetime] = None
     start_time: Optional[datetime] = None
     end_time: Optional[datetime] = None
-    location: Optional[str] = None
     notes: Optional[str] = None
-    students: List[int] = []  
 
 class ClassSessionResponse(ClassSessionBase):
     id: int
@@ -62,4 +62,3 @@ class ClassSessionResponse(ClassSessionBase):
     model_config = {
         "from_attributes": True
     }
-        
