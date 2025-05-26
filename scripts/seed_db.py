@@ -11,20 +11,23 @@ from security.password import get_password_hash
 def create_sample_data():
     db = SessionLocal()
     try:
-        # Create users with different roles
+        # Create users with different roles and appropriate IDs
         teacher = User(
             username="prof_smith",
             email="smith@university.edu",
             hashed_password=get_password_hash("teacher123"),
-            role="teacher"
+            role="teacher",
+            staff_id="STAFF-001"  # Add staff ID for teacher
         )
         
+        # Create students with student IDs
         students = [
             User(
                 username=f"student{i}",
                 email=f"student{i}@university.edu",
                 hashed_password=get_password_hash(f"student{i}"),
-                role="student"
+                role="student",
+                student_id=f"STU-{1000+i}"  # Add student ID with format STU-100X
             )
             for i in range(1, 6)  # Create 5 students
         ]
@@ -33,7 +36,8 @@ def create_sample_data():
             username="admin",
             email="admin@university.edu",
             hashed_password=get_password_hash("admin123"),
-            role="admin"
+            role="admin",
+            staff_id="ADMIN-001"  # Add staff ID for admin
         )
         
         # Add users to session
@@ -62,8 +66,8 @@ def create_sample_data():
         for class_obj in classes:
             db.add(class_obj)
         db.flush()
-        #
-        # Register students to classes
+        
+        # Register students to classes by their student IDs
         for student in students:
             for class_obj in classes:
                 student.classes.append(class_obj)

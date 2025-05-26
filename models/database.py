@@ -30,8 +30,10 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
-    # Add role field to distinguish between students, teachers, admins
     role = Column(String, default="student")
+    # Add these new fields
+    student_id = Column(String, unique=True, index=True, nullable=True)
+    staff_id = Column(String, unique=True, index=True, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())    
     # Relationships

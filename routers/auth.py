@@ -6,20 +6,21 @@ from schemas.user import UserCreate, UserResponse
 from crud.user import create_user, get_user_by_email, get_user_by_username, authenticate_user
 from security.auth import create_access_token, Token
 from fastapi.security import OAuth2PasswordRequestForm
+from starlette.concurrency import run_in_threadpool
 
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
-@router.post("/register")
-def register_user(user: UserCreate, db: Session = Depends(get_db)):    
-    db_user = get_user_by_email(db, email=user.email)
+@router.post("/register", response_model=UserResponse)
+async def register_user(user: UserCreate, db: Session = Depends(get_db)):    
+    db_user = await run_in_threadpool(lambda: get_user_by_email(db, email=user.email))
     if db_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Email already registered"
         )
 
-    db_user = get_user_by_username(db, username=user.username)
+    db_user = await run_in_threadpool(lambda: get_user_by_username(db, username=user.username))
     if db_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -32,7 +33,7 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
             detail="Password and password confirmation do not match"
         )
 
-    return create_user(db=db, user=user)
+    return await run_in_threadpool(lambda: create_user(db=db, user=user))
 
 @router.post("/token", response_model=Token)
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
@@ -58,7 +59,7 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db:
 
 
 @router.post("/login")
-def login_user(form_data: OAuth2PasswordRequestForm = Depends()):
+async def login_user(form_data: OAuth2PasswordRequestForm = Depends()):
     """
     Redirect to token endpoint for backward compatibility
     """

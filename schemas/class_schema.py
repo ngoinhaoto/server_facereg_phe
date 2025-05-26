@@ -9,7 +9,7 @@ class ClassBase(BaseModel):
     description: Optional[str] = None
     semester: str
     academic_year: str
-    teacher_id: int
+    teacher_id: Optional[int] = None  # Make this optional with None as default
     location: Optional[str] = None
     start_time: Optional[datetime] = None
     end_time: Optional[datetime] = None

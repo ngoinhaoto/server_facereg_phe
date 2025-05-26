@@ -22,6 +22,16 @@ def get_users(db: Session, skip: int = 0, limit: int = 100, role: Optional[str] 
 
 def create_user(db: Session, user: UserCreate) -> UserResponse:
     now = datetime.datetime.now()
+    
+    # Set the appropriate ID field based on role
+    student_id = None
+    staff_id = None
+    
+    if user.role == "student":
+        student_id = user.student_id
+    elif user.role in ["teacher", "admin"]:
+        staff_id = user.staff_id
+    
     db_user = User(
         username=user.username,
         email=user.email,
@@ -29,7 +39,9 @@ def create_user(db: Session, user: UserCreate) -> UserResponse:
         hashed_password=get_password_hash(user.password),
         is_active=True,
         created_at=now,
-        updated_at=now 
+        updated_at=now,
+        student_id=student_id,
+        staff_id=staff_id
     )
     db.add(db_user)
     db.commit()
@@ -68,3 +80,10 @@ def authenticate_user(db: Session, username: str, password: str) -> Optional[Use
     if not user or not verify_password(password, user.hashed_password):
         return False
     return user
+
+# Add these new functions to look up users by student/staff ID
+def get_user_by_student_id(db: Session, student_id: str) -> UserResponse:
+    return db.query(User).filter(User.student_id == student_id).first()
+
+def get_user_by_staff_id(db: Session, staff_id: str) -> UserResponse:
+    return db.query(User).filter(User.staff_id == staff_id).first()
