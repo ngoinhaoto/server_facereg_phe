@@ -45,13 +45,12 @@ class UserCreate(UserBase):
 class UserUpdate(BaseModel):
     username: Optional[str] = Field(None, min_length=3, max_length=50)
     email: Optional[EmailStr] = None
+    full_name: Optional[str] = Field(None, min_length=1, max_length=100)  # Make sure this line exists
     role: Optional[UserRole] = None
     is_active: Optional[bool] = None
     password: Optional[str] = Field(None, min_length=8, max_length=128)
-    # Add these fields
     student_id: Optional[str] = None
     staff_id: Optional[str] = None
-
 class UserResponse(UserBase):
     id: int
     is_active: bool

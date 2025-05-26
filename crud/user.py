@@ -53,18 +53,27 @@ def update_user(db: Session, user_id: int, user: UserUpdate) -> UserResponse:
     if not db_user:
         return None
     
-    update_data = user.model_dump(exclude_unset=True)  # Updated for Pydantic v2
+    update_data = user.model_dump(exclude_unset=True)
     
+    # Handle password separately
     if "password" in update_data and update_data["password"]:
         update_data["hashed_password"] = get_password_hash(update_data["password"])
         del update_data["password"]
     
+    # Update the model fields
     for key, value in update_data.items():
-        setattr(db_user, key, value)
+        if hasattr(db_user, key):  # Only update fields that exist in the model
+            setattr(db_user, key, value)
     
-    db.commit()
-    db.refresh(db_user)
-    return db_user
+    # Commit the changes
+    try:
+        db.commit()
+        db.refresh(db_user)
+        return db_user
+    except Exception as e:
+        db.rollback()
+        print(f"Error updating user: {e}")
+        raise
 
 def delete_user(db: Session, user_id: int):
     db_user = db.query(User).filter(User.id == user_id).first()

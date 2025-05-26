@@ -121,3 +121,4 @@ class AuthLog(Base):
     success = Column(Boolean, default=False)
     timestamp = Column(DateTime(timezone=True), server_default=func.now())
     ip_address = Column(String)
+

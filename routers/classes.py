@@ -17,6 +17,10 @@ from security.auth import get_current_active_user, get_current_teacher_or_admin
 from starlette.concurrency import run_in_threadpool  # Add this import
 from models.database import Class, User
 
+# Add this model for the request body
+class StudentRegistration(BaseModel):
+    student_id: int
+
 # Add this new model to your imports
 class ClassWithStudentsResponse(ClassResponse):
     students: List[UserResponse] = []
@@ -156,17 +160,20 @@ async def delete_class_endpoint(
     success = delete_class(db, class_id=class_id)
     return None
 
-@router.post("/{class_id}/students/{student_id}", status_code=status.HTTP_200_OK)
+@router.post("/{class_id}/students", status_code=status.HTTP_200_OK)
 async def register_student(
     class_id: int,
-    student_id: int,
+    student_data: StudentRegistration,
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_teacher_or_admin)
 ):
     """
     Register a student to a class. Only teachers of the class and admins can register students.
     """
-    db_class = get_class(db, class_id=class_id)
+    db_class = await run_in_threadpool(
+        lambda: get_class(db, class_id=class_id)
+    )
+    
     if db_class is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, 
@@ -180,7 +187,10 @@ async def register_student(
             detail="Not enough permissions"
         )
     
-    success = register_student_to_class(db, class_id=class_id, student_id=student_id)
+    success = await run_in_threadpool(
+        lambda: register_student_to_class(db, class_id=class_id, student_id=student_data.student_id)
+    )
+    
     if not success:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, 
@@ -189,17 +199,20 @@ async def register_student(
     
     return {"message": "Student registered successfully"}
 
-@router.delete("/{class_id}/students/{student_id}", status_code=status.HTTP_200_OK)
+@router.delete("/{class_id}/students", status_code=status.HTTP_200_OK)
 async def remove_student(
     class_id: int,
-    student_id: int,
+    student_data: StudentRegistration,
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_teacher_or_admin)
 ):
     """
     Remove a student from a class. Only teachers of the class and admins can remove students.
     """
-    db_class = get_class(db, class_id=class_id)
+    db_class = await run_in_threadpool(
+        lambda: get_class(db, class_id=class_id)
+    )
+    
     if db_class is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, 
@@ -213,7 +226,10 @@ async def remove_student(
             detail="Not enough permissions"
         )
     
-    success = remove_student_from_class(db, class_id=class_id, student_id=student_id)
+    success = await run_in_threadpool(
+        lambda: remove_student_from_class(db, class_id=class_id, student_id=student_data.student_id)
+    )
+    
     if not success:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, 
