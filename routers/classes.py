@@ -160,10 +160,10 @@ async def delete_class_endpoint(
     success = delete_class(db, class_id=class_id)
     return None
 
-@router.post("/{class_id}/students", status_code=status.HTTP_200_OK)
+@router.post("/{class_id}/students/{student_id}", status_code=status.HTTP_200_OK)
 async def register_student(
     class_id: int,
-    student_data: StudentRegistration,
+    student_id: int,  # Now directly as a path parameter
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_teacher_or_admin)
 ):
@@ -188,7 +188,7 @@ async def register_student(
         )
     
     success = await run_in_threadpool(
-        lambda: register_student_to_class(db, class_id=class_id, student_id=student_data.student_id)
+        lambda: register_student_to_class(db, class_id=class_id, student_id=student_id)
     )
     
     if not success:
@@ -199,10 +199,10 @@ async def register_student(
     
     return {"message": "Student registered successfully"}
 
-@router.delete("/{class_id}/students", status_code=status.HTTP_200_OK)
+@router.delete("/{class_id}/students/{student_id}", status_code=status.HTTP_200_OK)
 async def remove_student(
     class_id: int,
-    student_data: StudentRegistration,
+    student_id: int,  # Now directly as a path parameter
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_teacher_or_admin)
 ):
@@ -227,7 +227,7 @@ async def remove_student(
         )
     
     success = await run_in_threadpool(
-        lambda: remove_student_from_class(db, class_id=class_id, student_id=student_data.student_id)
+        lambda: remove_student_from_class(db, class_id=class_id, student_id=student_id)
     )
     
     if not success:
@@ -369,3 +369,35 @@ async def delete_session(
     
     success = delete_class_session(db, session_id=session_id)
     return None
+
+@router.get("/{class_id}/students", response_model=List[UserResponse])
+async def get_class_students_endpoint(
+    class_id: int,
+    db: Session = Depends(get_db),
+    current_user: UserResponse = Depends(get_current_active_user)
+):
+    """
+    Get all students registered for a specific class.
+    """
+    db_class = await run_in_threadpool(
+        lambda: get_class(db, class_id=class_id)
+    )
+    
+    if db_class is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, 
+            detail="Class not found"
+        )
+    
+    # Teachers can only see students in their own classes
+    if current_user.role == "teacher" and db_class.teacher_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not enough permissions"
+        )
+    
+    students = await run_in_threadpool(
+        lambda: get_class_students(db, class_id=class_id)
+    )
+    
+    return students
