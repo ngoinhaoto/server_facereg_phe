@@ -13,11 +13,12 @@ class UserRole(str, Enum):
 class UserBase(BaseModel):
     username: str = Field(..., min_length=3, max_length=50)
     email: EmailStr
+    full_name: Optional[str] = Field(None, min_length=1, max_length=100)  # Add this line
     role: UserRole
-    # Add these fields
     student_id: Optional[str] = None
     staff_id: Optional[str] = None
-
+    
+        
 class UserCreate(UserBase):
     password: str = Field(..., min_length=8, max_length=128)
     password_confirmation: str = Field(..., min_length=8, max_length=128)

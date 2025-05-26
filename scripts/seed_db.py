@@ -15,6 +15,7 @@ def create_sample_data():
         teacher = User(
             username="prof_smith",
             email="smith@university.edu",
+            full_name="John Pork Smith",  # Add this line
             hashed_password=get_password_hash("teacher123"),
             role="teacher",
             staff_id="STAFF-001"  # Add staff ID for teacher
@@ -25,6 +26,7 @@ def create_sample_data():
             User(
                 username=f"student{i}",
                 email=f"student{i}@university.edu",
+                full_name=f"Student {i} Lastname",  # Add this line
                 hashed_password=get_password_hash(f"student{i}"),
                 role="student",
                 student_id=f"STU-{1000+i}"  # Add student ID with format STU-100X
@@ -35,6 +37,7 @@ def create_sample_data():
         admin = User(
             username="admin",
             email="admin@university.edu",
+            full_name="Admin User",  # Add this line
             hashed_password=get_password_hash("admin123"),
             role="admin",
             staff_id="ADMIN-001"  # Add staff ID for admin

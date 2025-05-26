@@ -31,6 +31,8 @@ class User(Base):
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
     role = Column(String, default="student")
+    full_name = Column(String, nullable=True)  # Add this line
+
     # Add these new fields
     student_id = Column(String, unique=True, index=True, nullable=True)
     staff_id = Column(String, unique=True, index=True, nullable=True)
