@@ -13,8 +13,6 @@ class Settings(BaseSettings):
     DB_PORT: str = os.getenv("DB_PORT", "5432")
     DB_NAME: str = os.getenv("DB_NAME", "facereg_db")
     
-    # ConcreteML settings
-    CONCRETML_MODEL_PATH: str = os.getenv("CONCRETML_MODEL_PATH", "./models/face_model")
     
     # Database URL property
     @property
