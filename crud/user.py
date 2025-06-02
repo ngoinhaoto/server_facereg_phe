@@ -36,6 +36,7 @@ def create_user(db: Session, user: UserCreate) -> UserResponse:
         username=user.username,
         email=user.email,
         role=user.role,
+        full_name=user.full_name,  # Add this line
         hashed_password=get_password_hash(user.password),
         is_active=True,
         created_at=now,
@@ -47,6 +48,7 @@ def create_user(db: Session, user: UserCreate) -> UserResponse:
     db.commit()
     db.refresh(db_user)
     return db_user
+
 
 def update_user(db: Session, user_id: int, user: UserUpdate) -> UserResponse:
     db_user = db.query(User).filter(User.id == user_id).first()

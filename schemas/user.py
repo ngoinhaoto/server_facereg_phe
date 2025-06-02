@@ -32,13 +32,13 @@ class UserCreate(UserBase):
     
     # Add a validator to ensure the right ID field is used based on role
     @field_validator('student_id', 'staff_id')
-    def validate_ids(cls, v, values, **kwargs):
-        field = kwargs.get('field')
-        if 'role' in values.data:
-            role = values.data['role']
-            if field.name == 'student_id' and role != 'student' and v is not None:
+    def validate_ids(cls, v, info):
+        field_name = info.field_name
+        if 'role' in info.data:
+            role = info.data['role']
+            if field_name == 'student_id' and role != 'student' and v is not None:
                 raise ValueError('Only students should have a student ID')
-            if field.name == 'staff_id' and role == 'student' and v is not None:
+            if field_name == 'staff_id' and role == 'student' and v is not None:
                 raise ValueError('Students should not have a staff ID')
         return v
 
