@@ -44,14 +44,35 @@ class FaceRecognitionService:
             face = max(faces, key=lambda x: x.det_score)
             
             # Get aligned face image for storage (optional)
-            aligned_face = face.bbox_crop(img)
             aligned_face_bytes = None
-            if aligned_face is not None:
-                # Convert to bytes for storage
-                aligned_face_bgr = cv2.cvtColor(aligned_face, cv2.COLOR_RGB2BGR)
-                _, buf = cv2.imencode('.jpg', aligned_face_bgr)
-                aligned_face_bytes = buf.tobytes()
-            
+            try:
+                # First try using the built-in method if available
+                if hasattr(face, 'bbox_crop') and callable(face.bbox_crop):
+                    aligned_face = face.bbox_crop(img)
+                    if aligned_face is not None:
+                        # Convert to bytes for storage
+                        aligned_face_bgr = cv2.cvtColor(aligned_face, cv2.COLOR_RGB2BGR)
+                        _, buf = cv2.imencode('.jpg', aligned_face_bgr)
+                        aligned_face_bytes = buf.tobytes()
+                else:
+                    # Manual crop as fallback
+                    bbox = face.bbox.astype(int)
+                    x1, y1, x2, y2 = bbox
+                    # Add some margin (20%)
+                    h, w = y2-y1, x2-x1
+                    x1 = max(0, x1 - int(w*0.1))
+                    y1 = max(0, y1 - int(h*0.1))
+                    x2 = min(img.shape[1], x2 + int(w*0.1))
+                    y2 = min(img.shape[0], y2 + int(h*0.1))
+                    # Crop and convert
+                    aligned_face = img[y1:y2, x1:x2]
+                    aligned_face_bgr = cv2.cvtColor(aligned_face, cv2.COLOR_RGB2BGR)
+                    _, buf = cv2.imencode('.jpg', aligned_face_bgr)
+                    aligned_face_bytes = buf.tobytes()
+            except Exception as e:
+                logger.warning(f"Failed to crop face: {str(e)}")
+                # Continue with the embedding even if cropping fails
+        
             # Return embedding, confidence score, and aligned face
             return face.embedding, float(face.det_score), aligned_face_bytes
             

@@ -1,0 +1,12 @@
+2025-06-03 18:24:12,798 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-03 18:24:15,169 - face_recognition - ERROR - Error extracting face embedding: 'NoneType' object is not callable
+2025-06-03 18:24:24,198 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-03 18:24:24,584 - face_recognition - ERROR - Error extracting face embedding: 'NoneType' object is not callable
+2025-06-03 18:24:27,944 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-03 18:24:28,281 - face_recognition - ERROR - Error extracting face embedding: 'NoneType' object is not callable
+2025-06-03 18:27:02,288 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-03 18:27:02,680 - face_recognition - ERROR - Error extracting face embedding: 'NoneType' object is not callable
+2025-06-03 18:29:14,342 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-03 18:29:14,779 - face_recognition - ERROR - Error extracting face embedding: 'NoneType' object is not callable
+2025-06-03 18:29:58,077 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-03 18:34:57,207 - face_recognition - INFO - InsightFace model loaded successfully

@@ -290,3 +290,41 @@ async def delete_face(
     db.commit()
     
     return {"message": "Face embedding deleted successfully"}
+
+@router.get("/faces/{embedding_id}", response_model=dict)
+async def get_face_details(
+    embedding_id: int,
+    db: Session = Depends(get_db),
+    current_user: UserResponse = Depends(get_current_active_user)
+):
+    """Get details of a specific face embedding."""
+    # First check if the user is an admin or the owner of this embedding
+    embedding = db.query(FaceEmbedding).filter(FaceEmbedding.id == embedding_id).first()
+    
+    if not embedding:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Face embedding not found"
+        )
+    
+    # Only allow users to view their own face embeddings (or admins)
+    if embedding.user_id != current_user.id and current_user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not authorized to view this face embedding"
+        )
+    
+    # Get the user this embedding belongs to
+    user = db.query(User).filter(User.id == embedding.user_id).first()
+    
+    # Return the embedding details
+    response = {
+        "id": embedding.id,
+        "user_id": embedding.user_id,
+        "username": user.username if user else "Unknown",
+        "confidence_score": embedding.confidence_score,
+        "device_id": embedding.device_id,
+        "created_at": embedding.created_at
+    }
+    
+    return response
