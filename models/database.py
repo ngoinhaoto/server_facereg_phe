@@ -94,24 +94,34 @@ class Attendance(Base):
     # Relationships
     student = relationship("User", back_populates="attendances")
     session = relationship("ClassSession", back_populates="attendances")
-    
+
 class FaceEmbedding(Base):
     __tablename__ = "face_embeddings"
     
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"))
     
-    # Store the encrypted face embedding vector
     encrypted_embedding = Column(LargeBinary, nullable=False)
     
-    # Optional metadata
     confidence_score = Column(Float)
     device_id = Column(String, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     
     # Relationships
     user = relationship("User", back_populates="face_embeddings")
+    face_image = relationship("FaceImage", back_populates="embedding", uselist=False, cascade="all, delete")
+
+class FaceImage(Base):
+    __tablename__ = "face_images"
     
+    id = Column(Integer, primary_key=True, index=True)
+    embedding_id = Column(Integer, ForeignKey("face_embeddings.id", ondelete="CASCADE"), unique=True)
+    image_data = Column(LargeBinary, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    
+    # Relationship to face embedding
+    embedding = relationship("FaceEmbedding", back_populates="face_image")
+
 class AuthLog(Base):
     __tablename__ = "auth_logs"
     

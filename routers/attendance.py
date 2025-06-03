@@ -4,9 +4,9 @@ from database.db import get_db
 from services.face_recognition import FaceRecognitionService
 from schemas.user import UserResponse
 from security.auth import get_current_active_user
-from models.database import ClassSession, Attendance, User, AttendanceStatus, FaceEmbedding
+from models.database import ClassSession, Attendance, User, AttendanceStatus, FaceEmbedding, FaceImage
 from datetime import datetime
-from typing import Optional, List
+from typing import Optional, List, Dict
 from starlette.concurrency import run_in_threadpool
 import base64
 from utils.logging import logger
@@ -221,51 +221,77 @@ async def register_face(
         lambda: face_service.get_user_embeddings_count(db, current_user.id)
     )
     
-    success = await run_in_threadpool(
+    embedding_id = await run_in_threadpool(
         lambda: face_service.store_face_embedding(
             db, current_user.id, embedding, confidence, device_id
         )
     )
     
-    if not success:
+    if not embedding_id:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to store face embedding"
         )
     
+    # Store the aligned face image if available
+    if aligned_face:
+        try:
+            face_image = FaceImage(
+                embedding_id=embedding_id,
+                image_data=aligned_face
+            )
+            db.add(face_image)
+            db.commit()
+        except Exception as e:
+            logger.error(f"Error storing face image: {str(e)}")
+            # Continue even if image storage fails
+    
     # Return response with aligned face preview if available
     response = {
         "message": "Face registered successfully",
         "embeddings_count": embeddings_count + 1,
-        "confidence": confidence
+        "confidence": confidence,
+        "face_id": embedding_id
     }
     
     if aligned_face:
         response["aligned_face"] = base64.b64encode(aligned_face).decode('utf-8')
-    
+
     return response
 
-@router.get("/my-faces")
+@router.get("/my-faces", response_model=Dict)
 async def get_my_faces(
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_active_user)
 ):
-    """Get information about registered faces for the current user."""
+    """Get information about registered faces for the current user, including images if available."""
+    # Get face registrations with newest first
     embeddings = db.query(FaceEmbedding).filter(
         FaceEmbedding.user_id == current_user.id
-    ).all()
+    ).order_by(FaceEmbedding.created_at.desc()).all()
+    
+    result_faces = []
+    for emb in embeddings:
+        face_dict = {
+            "id": emb.id,
+            "created_at": emb.created_at,
+            "device_id": emb.device_id,
+            "confidence": emb.confidence_score
+        }
+        
+        # Try to get the face image if it exists
+        try:
+            # Check if this embedding has an associated image
+            if hasattr(emb, 'face_image') and emb.face_image and emb.face_image.image_data:
+                face_dict["image"] = base64.b64encode(emb.face_image.image_data).decode('utf-8')
+        except Exception as e:
+            logger.error(f"Error retrieving face image for embedding {emb.id}: {str(e)}")
+        
+        result_faces.append(face_dict)
     
     return {
         "count": len(embeddings),
-        "faces": [
-            {
-                "id": emb.id,
-                "created_at": emb.created_at,
-                "device_id": emb.device_id,
-                "confidence": emb.confidence_score
-            }
-            for emb in embeddings
-        ]
+        "faces": result_faces
     }
 
 @router.delete("/my-faces/{embedding_id}")
@@ -328,3 +354,98 @@ async def get_face_details(
     }
     
     return response
+
+
+
+@router.get("/student/{student_id}")
+async def get_student_attendance(
+    student_id: int,
+    db: Session = Depends(get_db),
+    current_user: UserResponse = Depends(get_current_active_user)
+):
+    """Get attendance records for a specific student."""
+    if current_user.role != "admin" and current_user.id != student_id:
+        if current_user.role != "teacher":
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Not enough permissions"
+            )
+        
+        # For teachers, verify they teach at least one class the student is in
+        student = db.query(User).filter(User.id == student_id).first()
+        if not student:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Student not found"
+            )
+            
+        # Check if the teacher teaches any class the student is in
+        teacher_classes = [c.id for c in current_user.teaching_classes]
+        student_classes = [c.id for c in student.classes]
+        if not any(c_id in teacher_classes for c_id in student_classes):
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Not enough permissions"
+            )
+    
+    attendance_records = db.query(Attendance).filter(Attendance.student_id == student_id).all()
+    
+    result = []
+    for record in attendance_records:
+        session = record.session
+        if session:
+            class_obj = session.class_obj
+            if class_obj:
+                result.append({
+                    "id": record.id,
+                    "session_id": session.id,
+                    "session_date": session.session_date,
+                    "start_time": session.start_time,
+                    "end_time": session.end_time,
+                    "class_id": class_obj.id,
+                    "class_name": class_obj.name,
+                    "class_code": class_obj.class_code,
+                    "status": record.status,
+                    "check_in_time": record.check_in_time,
+                    "late_minutes": record.late_minutes,
+                    "created_at": record.created_at
+                })
+    
+    # Sort by session date, most recent first
+    result.sort(key=lambda x: x["session_date"], reverse=True)
+    
+    return result
+
+
+
+@router.get("/my-faces", response_model=Dict)
+async def get_user_face_registrations(
+    db: Session = Depends(get_db),
+    current_user: UserResponse = Depends(get_current_active_user)
+):
+    """Get face registrations for the current user."""
+    # Get face registrations
+    faces_query = db.query(FaceEmbedding).filter(FaceEmbedding.user_id == current_user.id)
+    faces = faces_query.order_by(FaceEmbedding.created_at.desc()).all()
+    
+    result_faces = []
+    for face in faces:
+        face_dict = {
+            "id": face.id,
+            "created_at": face.created_at,
+            "device_id": face.device_id,
+            "confidence_score": face.confidence_score
+        }
+        
+        # Try to get the face image from the database or storage
+        try:
+            # Query the aligned face from the database (if you store it)
+            face_image = db.query(FaceImage).filter(FaceImage.embedding_id == face.id).first()
+            if face_image and face_image.image_data:
+                face_dict["image"] = base64.b64encode(face_image.image_data).decode('utf-8')
+        except Exception as e:
+            logger.error(f"Error retrieving face image: {str(e)}")
+        
+        result_faces.append(face_dict)
+    
+    return {"faces": result_faces}

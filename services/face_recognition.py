@@ -81,19 +81,19 @@ class FaceRecognitionService:
             return None, 0.0, None
     
     def store_face_embedding(self, db: Session, user_id: int, embedding: np.ndarray, 
-                             confidence: float, device_id: str = "web") -> bool:
+                         confidence: float, device_id: str = "web") -> int:
         """
         Store a face embedding in the database
         
         Args:
             db: Database session
-            staff_id
+            user_id: User ID
             embedding: Face embedding numpy array
             confidence: Confidence score
             device_id: Device identifier
             
         Returns:
-            True if successful, False otherwise
+            ID of the new embedding or 0 if failed
         """
         try:
             # Serialize the numpy array
@@ -109,11 +109,12 @@ class FaceRecognitionService:
             
             db.add(db_embedding)
             db.commit()
-            return True
+            db.refresh(db_embedding)
+            return db_embedding.id
         except Exception as e:
             logger.error(f"Error storing face embedding: {str(e)}")
             db.rollback()
-            return False
+            return 0
     
     def compare_face(self, embedding: np.ndarray, db: Session, user_id: int = None,
                      threshold: float = 0.5) -> Tuple[bool, Optional[int], float]:
