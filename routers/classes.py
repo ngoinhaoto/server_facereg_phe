@@ -401,3 +401,17 @@ async def get_class_students_endpoint(
     )
     
     return students
+
+@router.get("/me/classes", response_model=List[ClassResponse])
+async def get_my_classes(
+    db: Session = Depends(get_db),
+    current_user: UserResponse = Depends(get_current_active_user)
+):
+    
+    if current_user.role == "student":
+        return current_user.classes
+    elif current_user.role == "teacher":
+        # Return classes the teacher teaches
+        return db.query(Class).filter(Class.teacher_id == current_user.id).all()
+    else:
+        return []

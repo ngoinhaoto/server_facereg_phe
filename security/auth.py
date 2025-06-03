@@ -24,9 +24,24 @@ class Token(BaseModel):
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
 
-def create_access_token(data: dict):
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    
+    # Get user from database to include more information
+    username = data.get("sub")
+    if username:
+        db = next(get_db())  # Get database session
+        user = db.query(User).filter(User.username == username).first()
+        if user:
+            # Add user ID and role to the token
+            to_encode["user_id"] = user.id
+            to_encode["role"] = user.role
+    
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt

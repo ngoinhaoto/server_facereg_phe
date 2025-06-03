@@ -9,6 +9,7 @@ from datetime import datetime
 from typing import Optional, List
 from starlette.concurrency import run_in_threadpool
 import base64
+from utils.logging import logger
 
 router = APIRouter(prefix="/attendance", tags=["Attendance"])
 
@@ -104,17 +105,17 @@ async def check_in(
     now = datetime.now()
     # Calculate late minutes if student is late
     late_minutes = 0
-    status = AttendanceStatus.PRESENT.value
+    attendance_status = AttendanceStatus.PRESENT.value
     if now > session.start_time:
         # Calculate minutes late
         time_diff = now - session.start_time
         late_minutes = int(time_diff.total_seconds() / 60)
         if late_minutes > 0:
-            status = AttendanceStatus.LATE.value
-    
+            attendance_status = AttendanceStatus.LATE.value
+
     if existing_attendance:
         # Update existing attendance
-        existing_attendance.status = status
+        existing_attendance.status = attendance_status
         existing_attendance.check_in_time = now
         existing_attendance.late_minutes = late_minutes
     else:
@@ -122,7 +123,7 @@ async def check_in(
         attendance = Attendance(
             student_id=current_user.id,
             session_id=session_id,
-            status=status,
+            status=attendance_status,
             check_in_time=now,
             late_minutes=late_minutes
         )
@@ -143,8 +144,8 @@ async def check_in(
     
     return {
         "message": "Attendance recorded successfully",
-        "status": status,
-        "late_minutes": late_minutes if status == AttendanceStatus.LATE.value else 0,
+        "status": attendance_status,
+        "late_minutes": late_minutes if attendance_status == AttendanceStatus.LATE.value else 0,
         "face_match_confidence": similarity
     }
 

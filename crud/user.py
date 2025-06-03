@@ -23,7 +23,6 @@ def get_users(db: Session, skip: int = 0, limit: int = 100, role: Optional[str] 
 def create_user(db: Session, user: UserCreate) -> UserResponse:
     now = datetime.datetime.now()
     
-    # Set the appropriate ID field based on role
     student_id = None
     staff_id = None
     

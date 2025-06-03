@@ -3,6 +3,9 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 from database.db import get_db
 from schemas.user import UserCreate, UserResponse, UserUpdate
+from schemas.class_schema import ClassResponse
+from models.database import User, Class
+
 from crud.user import (
     create_user, get_user, get_users, update_user, 
     delete_user, get_user_by_email, get_user_by_username,
@@ -176,3 +179,45 @@ async def delete_user_endpoint(
             detail="User not found"
         )
     return None
+
+@router.get("/me", response_model=UserResponse)
+async def get_current_user_info(
+    db: Session = Depends(get_db),
+    current_user: UserResponse = Depends(get_current_active_user)
+):
+    """
+    Get the currently authenticated user's information.
+    This endpoint is accessible by all authenticated users regardless of role.
+    """
+    return current_user
+
+@router.get("/{user_id}/classes", response_model=List[ClassResponse])
+async def get_user_classes(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: UserResponse = Depends(get_current_active_user)
+):
+    """Get classes a user is enrolled in or teaches"""
+    # Check permissions
+    if current_user.id != user_id and current_user.role not in ["admin", "teacher"]:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, 
+            detail="Not authorized to view this user's classes"
+        )
+    
+    # Get the user
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+    
+    if user.role == "student":
+        # Return classes the student is enrolled in
+        return user.classes
+    elif user.role == "teacher":
+        # Return classes the teacher teaches
+        return db.query(Class).filter(Class.teacher_id == user.id).all()
+    else:
+        return []
