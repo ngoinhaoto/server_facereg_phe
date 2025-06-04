@@ -31,35 +31,7 @@ async def check_in(
             detail="Class session not found"
         )
     
-    # Remove the student role check to allow all roles to check in
-    # (The following code block should be deleted or commented out)
-    # if current_user.role != "student":
-    #     raise HTTPException(
-    #         status_code=status.HTTP_403_FORBIDDEN,
-    #         detail="Only students can check in to classes"
-    #     )
-    
-    # Instead, just check if the user is registered for the class or is teaching/admin
-    user_has_access = False
-    
-    if current_user.role == "admin":
-        # Admins can check in for any class
-        user_has_access = True
-    elif current_user.role == "teacher":
-        # Teachers can check in if they teach this class
-        teacher = db.query(User).filter(User.id == current_user.id).first()
-        user_has_access = any(c.id == session.class_id for c in teacher.teaching_classes)
-    else:
-        # Students can check in if they're enrolled in the class
-        student = db.query(User).filter(User.id == current_user.id).first()
-        user_has_access = any(c.id == session.class_id for c in student.classes)
-    
-    if not user_has_access:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="You don't have access to this class session"
-        )
-    
+    # Now we'll check access after identifying the face
     # Read the image file
     image_data = await file.read()
     
@@ -82,37 +54,76 @@ async def check_in(
             detail="No face detected in the image. Please try with a clearer photo."
         )
     
-    # Verify the face matches the user
+    # Match against ALL stored face embeddings, not just the current user's
     match, matched_user_id, similarity = await run_in_threadpool(
-        lambda: face_service.compare_face(embedding, db, current_user.id)
+        lambda: face_service.compare_face(embedding, db, user_id=None, threshold=0.5)
     )
     
-    # Get the number of stored embeddings for the user
-    embeddings_count = await run_in_threadpool(
-        lambda: face_service.get_user_embeddings_count(db, current_user.id)
-    )
-    
-    # If user has no face embeddings, store this one automatically
-    if embeddings_count == 0:
-        logger.info(f"First-time face registration for user {current_user.id}")
-        # Store the embedding
-        await run_in_threadpool(
-            lambda: face_service.store_face_embedding(
-                db, current_user.id, embedding, confidence, "attendance"
-            )
+    # If no match found and current user has no embeddings, allow first-time registration
+    if not match and current_user.role == "student":
+        embeddings_count = await run_in_threadpool(
+            lambda: face_service.get_user_embeddings_count(db, current_user.id)
         )
-        # Skip verification for first registration
-        match = True
-    elif not match:
-        # User has embeddings but face doesn't match
+        
+        if embeddings_count == 0:
+            logger.info(f"First-time face registration for user {current_user.id}")
+            # Store the embedding
+            await run_in_threadpool(
+                lambda: face_service.store_face_embedding(
+                    db, current_user.id, embedding, confidence, "attendance"
+                )
+            )
+            # Use the current user since this is their first registration
+            matched_user_id = current_user.id
+            match = True
+    
+    # If still no match, authentication failed
+    if not match:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=f"Face verification failed (similarity score: {similarity:.2f}). Please try again."
+            detail=f"Face verification failed. No matching user found (best similarity: {similarity:.2f})."
+        )
+    
+    # Now get the student user who matched
+    student_user = db.query(User).filter(User.id == matched_user_id).first()
+    if not student_user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Matched user not found in database."
+        )
+    
+    # Check if the matched student has access to this class
+    student_has_access = any(c.id == session.class_id for c in student_user.classes)
+    
+    # Admin can check in any student, teacher can check in their students
+    allowed_to_check_in = False
+    if current_user.id == matched_user_id:
+        # Users can check themselves in
+        allowed_to_check_in = student_has_access
+    elif current_user.role == "admin":
+        # Admins can check in any student
+        allowed_to_check_in = True
+    elif current_user.role == "teacher":
+        # Teachers can check in students for classes they teach
+        teacher = db.query(User).filter(User.id == current_user.id).first()
+        teaches_class = any(c.id == session.class_id for c in teacher.teaching_classes)
+        allowed_to_check_in = teaches_class and student_has_access
+    
+    if not allowed_to_check_in:
+        # Be careful with error messages to avoid revealing too much information
+        if current_user.id == matched_user_id:
+            detail = "You are not enrolled in this class."
+        else:
+            detail = "You are not authorized to check in this student."
+            
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=detail
         )
     
     # Check if attendance record already exists
     existing_attendance = db.query(Attendance).filter(
-        Attendance.student_id == current_user.id,
+        Attendance.student_id == matched_user_id,
         Attendance.session_id == session_id
     ).first()
     
@@ -135,7 +146,7 @@ async def check_in(
     else:
         # Create new attendance record
         attendance = Attendance(
-            student_id=current_user.id,
+            student_id=matched_user_id,
             session_id=session_id,
             status=attendance_status,
             check_in_time=now,
@@ -143,12 +154,17 @@ async def check_in(
         )
         db.add(attendance)
     
-    if match and similarity < 0.85 and embeddings_count < 10 and similarity > 0.65:
-        if background_tasks:
+    # Optionally store this new face to improve recognition if it's the student's own face
+    if match and similarity < 0.85 and similarity > 0.65 and current_user.id == matched_user_id:
+        embeddings_count = await run_in_threadpool(
+            lambda: face_service.get_user_embeddings_count(db, matched_user_id)
+        )
+        
+        if embeddings_count < 10 and background_tasks:
             background_tasks.add_task(
                 face_service.store_face_embedding,
                 db=db, 
-                user_id=current_user.id,
+                user_id=matched_user_id,
                 embedding=embedding,
                 confidence=confidence,
                 device_id="auto_update"
@@ -156,20 +172,25 @@ async def check_in(
     
     db.commit()
     
-    # Get the class information for context
     class_info = session.class_obj
-    
+
     # Include more comprehensive information in the response
     return {
         "message": "Attendance recorded successfully",
         "status": attendance_status,
         "late_minutes": late_minutes if attendance_status == AttendanceStatus.LATE.value else 0,
         "face_match_confidence": similarity,
-        "user": {
+        "admin_user": {
             "id": current_user.id,
             "name": current_user.full_name,
             "username": current_user.username,
             "role": current_user.role
+        } if current_user.id != matched_user_id else None,
+        "user": {
+            "id": student_user.id,
+            "name": student_user.full_name,
+            "username": student_user.username,
+            "role": student_user.role
         },
         "session": {
             "id": session.id,
@@ -407,22 +428,22 @@ async def get_student_attendance(
                 detail="Not enough permissions"
             )
         
-        # For teachers, verify they teach at least one class the student is in
-        student = db.query(User).filter(User.id == student_id).first()
-        if not student:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="Student not found"
-            )
-            
-        # Check if the teacher teaches any class the student is in
-        teacher_classes = [c.id for c in current_user.teaching_classes]
-        student_classes = [c.id for c in student.classes]
-        if not any(c_id in teacher_classes for c_id in student_classes):
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="Not enough permissions"
-            )
+            # For teachers, verify they teach at least one class the student is in
+            student = db.query(User).filter(User.id == student_id).first()
+            if not student:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="Student not found"
+                )
+                
+            # Check if the teacher teaches any class the student is in
+            teacher_classes = [c.id for c in current_user.teaching_classes]
+            student_classes = [c.id for c in student.classes]
+            if not any(c_id in teacher_classes for c_id in student_classes):
+                raise HTTPException(
+                    status_code=status.HTTP_403_FORBIDDEN,
+                    detail="Not enough permissions"
+                )
     
     attendance_records = db.query(Attendance).filter(Attendance.student_id == student_id).all()
     
@@ -485,3 +506,97 @@ async def get_user_face_registrations(
         result_faces.append(face_dict)
     
     return {"faces": result_faces}
+
+
+
+@router.post("/guest-check-in")
+async def guest_check_in(
+    session_id: int,
+    file: UploadFile = File(...),
+    background_tasks: BackgroundTasks = None,
+    db: Session = Depends(get_db)
+):
+    """Check in to a class session using face recognition without authentication."""
+    # Check if the session exists
+    session = db.query(ClassSession).filter(ClassSession.id == session_id).first()
+    
+    if not session:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Class session not found"
+        )
+    
+    # Read the image file
+    image_data = await file.read()
+    
+    # Initialize face recognition service
+    face_service = FaceRecognitionService()
+    
+    # Preprocess the image
+    processed_image = await run_in_threadpool(
+        lambda: face_service.preprocess_image(image_data)
+    )
+    
+    # Extract face embedding
+    embedding, confidence, _ = await run_in_threadpool(
+        lambda: face_service.extract_face_embedding(processed_image)
+    )
+    
+    if embedding is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No face detected in the image. Please try with a clearer photo."
+        )
+    
+    # Verify the face matches a registered user
+    match, matched_user_id, similarity = await run_in_threadpool(
+        lambda: face_service.compare_face(embedding, db)
+    )
+    
+    if not match or similarity < 0.7:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Face verification failed. You must be registered to check in."
+        )
+    
+    # Check if attendance record already exists
+    existing_attendance = db.query(Attendance).filter(
+        Attendance.student_id == matched_user_id,
+        Attendance.session_id == session_id
+    ).first()
+    
+    now = datetime.now(timezone.utc)
+    # Calculate late minutes if student is late
+    late_minutes = 0
+    attendance_status = AttendanceStatus.PRESENT.value
+    if now > session.start_time:
+        # Calculate minutes late
+        time_diff = now - session.start_time
+        late_minutes = int(time_diff.total_seconds() / 60)
+        if late_minutes > 0:
+            attendance_status = AttendanceStatus.LATE.value
+
+    if existing_attendance:
+        # Update existing attendance
+        existing_attendance.status = attendance_status
+        existing_attendance.check_in_time = now
+        existing_attendance.late_minutes = late_minutes
+    else:
+        # Create new attendance record
+        attendance = Attendance(
+            student_id=matched_user_id,
+            session_id=session_id,
+            status=attendance_status,
+            check_in_time=now,
+            late_minutes=late_minutes
+        )
+        db.add(attendance)
+    
+    db.commit()
+    
+    return {
+        "message": "Guest check-in successful",
+        "status": attendance_status,
+        "late_minutes": late_minutes if attendance_status == AttendanceStatus.LATE.value else 0,
+        "check_in_time": now
+    }
