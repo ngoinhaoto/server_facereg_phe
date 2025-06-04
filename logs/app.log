@@ -14,3 +14,26 @@
 2025-06-03 19:03:59,412 - face_recognition - INFO - InsightFace model loaded successfully
 2025-06-03 19:05:55,935 - face_recognition - INFO - InsightFace model loaded successfully
 2025-06-03 19:06:15,811 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-03 22:51:01,722 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-03 23:01:07,192 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-03 23:01:17,867 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:25:06,966 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:25:21,132 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:25:30,279 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:25:36,730 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:25:40,435 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:25:44,311 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:26:11,036 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:26:23,643 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:26:31,521 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:26:38,782 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:26:44,975 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:59:45,218 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 16:59:45,705 - face_recognition - WARNING - No stored embeddings found for comparison
+2025-06-04 16:59:45,710 - face_recognition - INFO - First-time face registration for user 12
+2025-06-04 17:01:37,094 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 17:05:39,112 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 17:05:49,090 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 17:12:44,909 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 17:13:23,879 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 17:14:47,318 - face_recognition - INFO - InsightFace model loaded successfully

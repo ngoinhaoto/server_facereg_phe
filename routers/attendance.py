@@ -5,7 +5,7 @@ from services.face_recognition import FaceRecognitionService
 from schemas.user import UserResponse
 from security.auth import get_current_active_user
 from models.database import ClassSession, Attendance, User, AttendanceStatus, FaceEmbedding, FaceImage
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, List, Dict
 from starlette.concurrency import run_in_threadpool
 import base64
@@ -31,19 +31,33 @@ async def check_in(
             detail="Class session not found"
         )
     
-    # Check if the user is a student
-    if current_user.role != "student":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Only students can check in to classes"
-        )
+    # Remove the student role check to allow all roles to check in
+    # (The following code block should be deleted or commented out)
+    # if current_user.role != "student":
+    #     raise HTTPException(
+    #         status_code=status.HTTP_403_FORBIDDEN,
+    #         detail="Only students can check in to classes"
+    #     )
     
-    # Check if the student is registered for the class
-    student = db.query(User).filter(User.id == current_user.id).first()
-    if not any(c.id == session.class_id for c in student.classes):
+    # Instead, just check if the user is registered for the class or is teaching/admin
+    user_has_access = False
+    
+    if current_user.role == "admin":
+        # Admins can check in for any class
+        user_has_access = True
+    elif current_user.role == "teacher":
+        # Teachers can check in if they teach this class
+        teacher = db.query(User).filter(User.id == current_user.id).first()
+        user_has_access = any(c.id == session.class_id for c in teacher.teaching_classes)
+    else:
+        # Students can check in if they're enrolled in the class
+        student = db.query(User).filter(User.id == current_user.id).first()
+        user_has_access = any(c.id == session.class_id for c in student.classes)
+    
+    if not user_has_access:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="You are not registered for this class"
+            detail="You don't have access to this class session"
         )
     
     # Read the image file
@@ -102,7 +116,7 @@ async def check_in(
         Attendance.session_id == session_id
     ).first()
     
-    now = datetime.now()
+    now = datetime.now(timezone.utc)
     # Calculate late minutes if student is late
     late_minutes = 0
     attendance_status = AttendanceStatus.PRESENT.value
@@ -142,11 +156,33 @@ async def check_in(
     
     db.commit()
     
+    # Get the class information for context
+    class_info = session.class_obj
+    
+    # Include more comprehensive information in the response
     return {
         "message": "Attendance recorded successfully",
         "status": attendance_status,
         "late_minutes": late_minutes if attendance_status == AttendanceStatus.LATE.value else 0,
-        "face_match_confidence": similarity
+        "face_match_confidence": similarity,
+        "user": {
+            "id": current_user.id,
+            "name": current_user.full_name,
+            "username": current_user.username,
+            "role": current_user.role
+        },
+        "session": {
+            "id": session.id,
+            "date": session.session_date,
+            "start_time": session.start_time,
+            "end_time": session.end_time,
+            "class": {
+                "id": class_info.id,
+                "name": class_info.name,
+                "code": class_info.class_code
+            }
+        },
+        "check_in_time": now
     }
 
 @router.get("/sessions/{session_id}/students")
