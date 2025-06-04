@@ -98,13 +98,16 @@ async def check_in(
     # Admin can check in any student, teacher can check in their students
     allowed_to_check_in = False
     if current_user.id == matched_user_id:
-        # Users can check themselves in
+        # Users can check themselves in only if enrolled
         allowed_to_check_in = student_has_access
     elif current_user.role == "admin":
-        # Admins can check in any student
+        # Admins can check in any student to any class
         allowed_to_check_in = True
+        # Optionally, add the student to the class if they're not enrolled
+        if not student_has_access:
+            logger.info(f"Admin {current_user.id} checking in non-enrolled student {matched_user_id} to class {session.class_id}")
     elif current_user.role == "teacher":
-        # Teachers can check in students for classes they teach
+        # Teachers can check in students for classes they teach (student must be enrolled)
         teacher = db.query(User).filter(User.id == current_user.id).first()
         teaches_class = any(c.id == session.class_id for c in teacher.teaching_classes)
         allowed_to_check_in = teaches_class and student_has_access
@@ -509,94 +512,3 @@ async def get_user_face_registrations(
 
 
 
-@router.post("/guest-check-in")
-async def guest_check_in(
-    session_id: int,
-    file: UploadFile = File(...),
-    background_tasks: BackgroundTasks = None,
-    db: Session = Depends(get_db)
-):
-    """Check in to a class session using face recognition without authentication."""
-    # Check if the session exists
-    session = db.query(ClassSession).filter(ClassSession.id == session_id).first()
-    
-    if not session:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Class session not found"
-        )
-    
-    # Read the image file
-    image_data = await file.read()
-    
-    # Initialize face recognition service
-    face_service = FaceRecognitionService()
-    
-    # Preprocess the image
-    processed_image = await run_in_threadpool(
-        lambda: face_service.preprocess_image(image_data)
-    )
-    
-    # Extract face embedding
-    embedding, confidence, _ = await run_in_threadpool(
-        lambda: face_service.extract_face_embedding(processed_image)
-    )
-    
-    if embedding is None:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="No face detected in the image. Please try with a clearer photo."
-        )
-    
-    # Verify the face matches a registered user
-    match, matched_user_id, similarity = await run_in_threadpool(
-        lambda: face_service.compare_face(embedding, db)
-    )
-    
-    if not match or similarity < 0.7:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Face verification failed. You must be registered to check in."
-        )
-    
-    # Check if attendance record already exists
-    existing_attendance = db.query(Attendance).filter(
-        Attendance.student_id == matched_user_id,
-        Attendance.session_id == session_id
-    ).first()
-    
-    now = datetime.now(timezone.utc)
-    # Calculate late minutes if student is late
-    late_minutes = 0
-    attendance_status = AttendanceStatus.PRESENT.value
-    if now > session.start_time:
-        # Calculate minutes late
-        time_diff = now - session.start_time
-        late_minutes = int(time_diff.total_seconds() / 60)
-        if late_minutes > 0:
-            attendance_status = AttendanceStatus.LATE.value
-
-    if existing_attendance:
-        # Update existing attendance
-        existing_attendance.status = attendance_status
-        existing_attendance.check_in_time = now
-        existing_attendance.late_minutes = late_minutes
-    else:
-        # Create new attendance record
-        attendance = Attendance(
-            student_id=matched_user_id,
-            session_id=session_id,
-            status=attendance_status,
-            check_in_time=now,
-            late_minutes=late_minutes
-        )
-        db.add(attendance)
-    
-    db.commit()
-    
-    return {
-        "message": "Guest check-in successful",
-        "status": attendance_status,
-        "late_minutes": late_minutes if attendance_status == AttendanceStatus.LATE.value else 0,
-        "check_in_time": now
-    }

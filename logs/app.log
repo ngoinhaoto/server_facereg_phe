@@ -61,3 +61,370 @@
 2025-06-04 17:39:20,817 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
 2025-06-04 17:39:20,817 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
 2025-06-04 17:39:20,817 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:19:16,106 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:19:16,541 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:19:16,541 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:19:16,541 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:19:16,541 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:19:16,541 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:19:16,541 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:19:16,541 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:19:16,541 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:19:16,541 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:19:16,541 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:47,100 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:21:47,750 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:47,750 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:47,751 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:47,751 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:47,751 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:47,751 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:47,751 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:47,751 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:47,751 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:47,751 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:56,960 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:21:57,434 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:57,434 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:57,434 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:57,434 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:57,434 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:57,434 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:57,434 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:57,434 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:57,434 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:21:57,434 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:03,260 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:22:03,494 - face_recognition - WARNING - No face detected in the image
+2025-06-04 20:22:13,517 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:22:13,981 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:13,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:13,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:13,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:13,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:13,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:13,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:13,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:13,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:13,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:44,176 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:22:44,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:44,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:44,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:44,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:44,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:44,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:44,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:44,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:44,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:44,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:48,777 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:22:49,182 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:49,182 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:49,182 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:49,182 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:49,182 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:49,182 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:49,182 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:49,182 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:49,182 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:49,182 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:52,432 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:22:52,981 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:52,981 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:52,981 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:52,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:52,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:52,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:52,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:52,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:52,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:52,982 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:55,671 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:22:56,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:56,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:56,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:56,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:56,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:56,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:56,102 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:56,102 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:56,102 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:22:56,102 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:19,129 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:38:19,862 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:19,862 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:19,862 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:19,863 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:19,863 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:19,863 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:19,863 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:19,863 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:19,863 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:19,863 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:26,390 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:38:26,891 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:26,891 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:26,892 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:26,892 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:26,892 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:26,892 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:26,892 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:26,892 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:26,892 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:26,893 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:32,910 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:38:33,468 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:33,468 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:33,468 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:33,468 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:33,469 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:33,469 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:33,469 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:33,470 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:33,470 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:33,470 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:36,697 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:38:37,753 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:37,753 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:37,753 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:37,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:37,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:37,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:37,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:37,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:37,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:37,754 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:46,724 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:38:47,336 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:47,336 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:47,337 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:47,337 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:47,337 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:47,337 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:47,337 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:47,337 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:47,337 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:47,337 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:52,073 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:38:52,547 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:52,547 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:52,548 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:52,548 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:52,548 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:52,548 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:52,548 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:52,548 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:52,548 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:52,548 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:54,248 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:38:54,765 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:54,765 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:54,765 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:54,765 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:54,765 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:54,765 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:54,766 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:54,766 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:54,766 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:54,766 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:58,592 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:38:59,100 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:59,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:59,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:59,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:59,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:59,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:59,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:59,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:59,101 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:38:59,102 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:39:28,567 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:39:34,267 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:39:41,695 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:39:47,749 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:40:06,822 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:40:07,786 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:40:08,004 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,004 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,004 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,004 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,004 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,005 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,005 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,005 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,005 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,005 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,537 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,538 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,538 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,538 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,538 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,538 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,538 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,538 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,538 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:08,538 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:09,996 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:40:10,515 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:10,515 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:10,515 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:10,515 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:10,515 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:10,515 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:10,515 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:10,515 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:10,515 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:10,516 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:12,221 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:40:12,726 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:12,726 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:12,726 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:12,726 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:12,726 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:12,727 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:12,727 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:12,727 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:12,727 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:12,727 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:14,717 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:40:15,249 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:15,249 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:15,249 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:15,249 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:15,249 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:15,250 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:15,250 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:15,250 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:15,250 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:15,250 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:16,887 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:40:17,335 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:17,335 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:17,335 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:17,335 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:17,335 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:17,336 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:17,336 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:17,336 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:17,336 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:17,336 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:19,134 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:40:19,759 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:19,759 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:19,759 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:19,759 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:19,760 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:19,760 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:19,760 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:19,760 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:19,760 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:19,760 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:40:22,123 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:40:22,288 - face_recognition - WARNING - No face detected in the image
+2025-06-04 20:41:30,875 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:41:31,587 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:41:31,954 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:31,954 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:31,954 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:31,954 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:31,954 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:31,954 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:31,955 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:31,955 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:31,955 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:31,955 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:32,453 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:32,453 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:32,453 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:32,453 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:32,453 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:32,453 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:32,454 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:32,454 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:32,454 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:41:32,454 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:42:18,136 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:42:19,272 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:42:19,272 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:42:19,272 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:42:19,274 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:42:19,274 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:42:19,274 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:42:19,274 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:42:19,274 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:42:19,274 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:42:19,274 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:16,925 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:44:18,034 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:44:18,237 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,237 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,237 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,237 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,237 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,237 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,237 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,238 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,238 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,238 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,868 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,868 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,868 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,868 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,868 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,868 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,868 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,868 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,869 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:18,869 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:50,905 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:44:52,663 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:52,664 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:52,664 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:52,664 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:52,665 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:52,665 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:52,665 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:52,665 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:52,665 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:44:52,665 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:15,779 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:47:16,703 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:16,703 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:16,703 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:16,703 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:16,703 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:16,703 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:16,703 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:16,704 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:16,704 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:16,704 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:17,937 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:47:18,352 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:18,352 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:18,352 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:18,352 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:18,352 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:18,353 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:18,353 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:18,353 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:18,353 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:18,353 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:37,864 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:47:38,377 - face_recognition - ERROR - Error comparing face embeddings: shapes (512,) and (32,) not aligned: 512 (dim 0) != 32 (dim 0)
+2025-06-04 20:47:42,270 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:47:42,826 - face_recognition - ERROR - Error comparing face embeddings: shapes (512,) and (32,) not aligned: 512 (dim 0) != 32 (dim 0)
+2025-06-04 20:47:50,721 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:47:51,358 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:51,359 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:51,359 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:51,359 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:51,359 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:51,359 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:51,359 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:51,359 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:51,359 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:47:51,359 - face_recognition - ERROR - Error deserializing embedding: invalid load key, '\x00'.
+2025-06-04 20:51:44,327 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:51:52,952 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-04 20:51:57,535 - face_recognition - INFO - InsightFace model loaded successfully

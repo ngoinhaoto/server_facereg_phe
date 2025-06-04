@@ -8,6 +8,8 @@ from models.database import User, Class, ClassSession, Attendance, FaceEmbedding
 from database.db import SessionLocal
 from security.password import get_password_hash
 import random
+import numpy as np
+import pickle
 
 def create_sample_data():
     db = SessionLocal()
@@ -214,11 +216,13 @@ def create_sample_data():
         
         # Create dummy face embeddings (normally these would be encrypted vectors)
         for student in students:
-            # Create a dummy binary embedding for demonstration
-            dummy_embedding = bytes([i % 256 for i in range(128)])
+            # Create a properly pickled embedding (random 512-dim vector)
+            embedding_vector = np.random.rand(512).astype(np.float32)  # Use correct dimensions
+            pickled_embedding = pickle.dumps(embedding_vector)
+            
             embedding = FaceEmbedding(
                 user_id=student.id,
-                encrypted_embedding=dummy_embedding,
+                encrypted_embedding=pickled_embedding,
                 confidence_score=0.95,
                 device_id="test_device_001"
             )
