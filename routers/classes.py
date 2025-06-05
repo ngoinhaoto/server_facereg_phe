@@ -264,14 +264,14 @@ async def create_session(
     
     return create_class_session(db=db, session=session)
 
-@router.get("/sessions/{session_id}", response_model=ClassSessionResponse)
+@router.get("/sessions/{session_id}", response_model=dict)
 async def read_session(
     session_id: int, 
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_active_user)
 ):
     """
-    Get a specific class session by ID.
+    Get a specific class session by ID with teacher details.
     """
     db_session = get_session(db, session_id=session_id)
     if db_session is None:
@@ -288,7 +288,32 @@ async def read_session(
             detail="Not enough permissions"
         )
     
-    return db_session
+    # Convert session to dict (instead of using undefined schema)
+    session_data = {
+        "id": db_session.id,
+        "class_id": db_session.class_id,
+        "session_date": db_session.session_date,
+        "start_time": db_session.start_time,
+        "end_time": db_session.end_time,
+        "notes": db_session.notes,
+        # Add class information
+        "class_name": db_class.name,
+        "class_code": db_class.class_code,
+        "location": db_class.location,
+        # Add teacher placeholder
+        "teacher_id": db_class.teacher_id,
+        "teacher_name": None,
+        "teacher_username": None
+    }
+    
+    # Get teacher information if available
+    if db_class.teacher_id:
+        teacher = db.query(User).filter(User.id == db_class.teacher_id).first()
+        if teacher:
+            session_data["teacher_name"] = teacher.full_name
+            session_data["teacher_username"] = teacher.username
+    
+    return session_data
 
 @router.get("/{class_id}/sessions", response_model=List[ClassSessionResponse])
 async def read_class_sessions(
