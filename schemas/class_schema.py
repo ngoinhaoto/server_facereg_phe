@@ -2,7 +2,7 @@ from pydantic import BaseModel, EmailStr, Field
 from typing import List, Optional
 from datetime import datetime
 
-
+from pydantic import BaseModel
 class ClassBase(BaseModel):
     class_code: str
     name: str
@@ -62,3 +62,17 @@ class ClassSessionResponse(ClassSessionBase):
     model_config = {
         "from_attributes": True
     }
+
+
+# Add this at the end of your file
+class TeacherInfo(BaseModel):
+    id: int
+    full_name: Optional[str] = None
+    username: Optional[str] = None
+    
+    model_config = {
+        "from_attributes": True
+    }
+
+class ClassWithTeacherResponse(ClassResponse):
+    teacher: Optional[TeacherInfo] = None

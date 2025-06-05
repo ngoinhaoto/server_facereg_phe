@@ -5,7 +5,8 @@ from pydantic import BaseModel
 from database.db import get_db
 from schemas.class_schema import (
     ClassCreate, ClassResponse, ClassUpdate, 
-    ClassSessionCreate, ClassSessionResponse, ClassSessionUpdate
+    ClassSessionCreate, ClassSessionResponse, ClassSessionUpdate,
+    ClassWithTeacherResponse  # Add this
 )
 from schemas.user import UserResponse
 from crud.class_crud import (
@@ -57,7 +58,7 @@ async def create_class_endpoint(
     # Run the database operation in a thread pool
     return await run_in_threadpool(lambda: create_class(db=db, class_obj=class_obj))
 
-@router.get("/", response_model=List[ClassResponse])
+@router.get("/", response_model=List[ClassWithTeacherResponse])
 async def read_classes(
     skip: int = 0, 
     limit: int = 100,
@@ -71,12 +72,46 @@ async def read_classes(
     if current_user.role == "teacher":
         teacher_id = current_user.id
     
+    # Get classes from the database
     classes = await run_in_threadpool(
         lambda: get_classes(db, skip=skip, limit=limit, teacher_id=teacher_id)
     )
-    return classes
+    
+    # Enhance classes with teacher information
+    result = []
+    for class_obj in classes:
+        # Convert to dict for easier manipulation
+        class_dict = {
+            "id": class_obj.id,
+            "class_code": class_obj.class_code,
+            "name": class_obj.name,
+            "description": class_obj.description,
+            "semester": class_obj.semester,
+            "academic_year": class_obj.academic_year,
+            "teacher_id": class_obj.teacher_id,
+            "location": class_obj.location,
+            "start_time": class_obj.start_time,
+            "end_time": class_obj.end_time,
+            "created_at": class_obj.created_at,
+            "updated_at": class_obj.updated_at,
+            "teacher": None
+        }
+        
+        # Add teacher information if available
+        if class_obj.teacher_id:
+            teacher = db.query(User).filter(User.id == class_obj.teacher_id).first()
+            if teacher:
+                class_dict["teacher"] = {
+                    "id": teacher.id,
+                    "full_name": teacher.full_name,
+                    "username": teacher.username
+                }
+        
+        result.append(class_dict)
+    
+    return result
 
-@router.get("/{class_id}", response_model=ClassResponse)
+@router.get("/{class_id}", response_model=ClassWithTeacherResponse)
 async def read_class(
     class_id: int, 
     db: Session = Depends(get_db),
@@ -98,7 +133,32 @@ async def read_class(
             detail="Not enough permissions"
         )
     
-    return db_class
+    response = {
+        "id": db_class.id,
+        "class_code": db_class.class_code,
+        "name": db_class.name,
+        "description": db_class.description,
+        "semester": db_class.semester,
+        "academic_year": db_class.academic_year,
+        "teacher_id": db_class.teacher_id,
+        "location": db_class.location,
+        "start_time": db_class.start_time,
+        "end_time": db_class.end_time,
+        "created_at": db_class.created_at,
+        "updated_at": db_class.updated_at,
+        "teacher": None
+    }
+    
+    if db_class.teacher_id:
+        teacher = db.query(User).filter(User.id == db_class.teacher_id).first()
+        if teacher:
+            response["teacher"] = {
+                "id": teacher.id,
+                "full_name": teacher.full_name,
+                "username": teacher.username
+            }
+    
+    return response
 
 @router.put("/{class_id}", response_model=ClassResponse)
 async def update_class_endpoint(
@@ -303,15 +363,27 @@ async def read_session(
         # Add teacher placeholder
         "teacher_id": db_class.teacher_id,
         "teacher_name": None,
-        "teacher_username": None
+        "teacher_username": None,
+        "teacher": None 
     }
     
     # Get teacher information if available
     if db_class.teacher_id:
         teacher = db.query(User).filter(User.id == db_class.teacher_id).first()
         if teacher:
-            session_data["teacher_name"] = teacher.full_name
-            session_data["teacher_username"] = teacher.username
+            session_data["teacher"] = {
+                "id": teacher.id,
+                "name": teacher.full_name,
+                "username": teacher.username,
+                "role": teacher.role
+            }
+        else:
+            # If teacher ID exists but teacher not found, provide partial info
+            session_data["teacher"] = {
+                "id": db_class.teacher_id,
+                "name": "Unknown Teacher",
+                "username": None
+            }
     
     return session_data
 
