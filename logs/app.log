@@ -604,3 +604,294 @@
 2025-06-19 21:54:39,506 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
 2025-06-19 21:55:50,394 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
 2025-06-19 21:55:51,048 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 21:58:55,128 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 21:59:41,362 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 21:59:41,903 - face_recognition - INFO - InsightFace spoof detection: score=0.08, texture=0.00, edges=0.01, detection=0.03, color=0.04
+2025-06-19 21:59:41,903 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.08
+2025-06-19 22:03:04,869 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:03:05,292 - face_recognition - INFO - InsightFace spoof detection: score=0.08, texture=0.00, edges=0.01, detection=0.03, color=0.04
+2025-06-19 22:03:05,292 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.08
+2025-06-19 22:07:26,061 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:07:26,630 - face_recognition - INFO - InsightFace spoof detection: score=0.11, texture=0.00, edges=0.01, detection=0.07, color=0.04
+2025-06-19 22:07:26,631 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.11
+2025-06-19 22:07:27,836 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:07:28,502 - face_recognition - INFO - InsightFace spoof detection: score=0.07, texture=0.00, edges=0.01, detection=0.03, color=0.04
+2025-06-19 22:07:28,502 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.07
+2025-06-19 22:16:50,518 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:16:51,060 - face_recognition - INFO - InsightFace spoof detection: score=0.06, texture=0.00, edges=0.01, detection=0.04, color=0.01
+2025-06-19 22:16:51,061 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.06
+2025-06-19 22:24:48,574 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:24:49,239 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:24:49,622 - face_recognition - INFO - InsightFace spoof detection: score=0.07, texture=0.00, edges=0.01, detection=0.03, color=0.03
+2025-06-19 22:24:49,622 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.07
+2025-06-19 22:24:50,177 - face_recognition - INFO - InsightFace spoof detection: score=0.07, texture=0.00, edges=0.01, detection=0.03, color=0.03
+2025-06-19 22:24:50,177 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.07
+2025-06-19 22:25:09,792 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:25:10,358 - face_recognition - INFO - InsightFace spoof detection: score=0.07, texture=0.00, edges=0.01, detection=0.04, color=0.02
+2025-06-19 22:25:10,358 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.07
+2025-06-19 22:25:39,790 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 22:30:15,303 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 22:30:15,304 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 22:30:15,304 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 22:30:15,321 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 22:30:15,322 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 22:30:15,322 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 22:30:31,258 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 22:30:31,258 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 22:30:31,259 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 22:35:15,826 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 22:35:15,827 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 22:35:15,827 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 22:35:47,920 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 22:36:25,430 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 22:38:09,775 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:38:48,995 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:38:57,792 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:39:07,428 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:39:12,295 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:39:27,946 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:39:28,620 - face_recognition - INFO - InsightFace spoof detection: score=0.08, texture=0.00, edges=0.01, detection=0.03, color=0.03
+2025-06-19 22:39:28,621 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.08
+2025-06-19 22:39:28,667 - face_recognition - INFO - InsightFace spoof detection: score=0.08, texture=0.00, edges=0.01, detection=0.04, color=0.04
+2025-06-19 22:39:28,670 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.08
+2025-06-19 22:41:40,177 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 22:41:40,177 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 22:41:40,190 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 22:41:40,191 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp0m7ch938.jpg
+2025-06-19 22:41:40,191 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=retinaface
+2025-06-19 22:43:53,358 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 22:43:53,363 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 22:43:53,364 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp5kda29uv.jpg
+2025-06-19 22:43:53,364 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=retinaface
+2025-06-19 22:45:10,795 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 22:45:10,801 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 22:45:10,802 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmplvydsrpv.jpg
+2025-06-19 22:45:10,802 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=retinaface
+2025-06-19 22:45:29,791 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 22:45:29,795 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 22:45:29,796 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmptf44d5rg.jpg
+2025-06-19 22:45:29,797 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=retinaface
+2025-06-19 22:47:57,220 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 22:47:57,232 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 22:47:57,268 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 22:47:57,269 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp6d5lqg3h.jpg
+2025-06-19 22:47:57,269 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 22:47:57,269 - face_recognition - ERROR - DeepFace face detection failed: signal only works in main thread of the main interpreter
+2025-06-19 22:47:57,270 - face_recognition - WARNING - DeepFace face extraction failed - falling back to InsightFace
+2025-06-19 22:47:58,128 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:47:58,612 - face_recognition - INFO - InsightFace fallback succeeded
+2025-06-19 22:47:58,612 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.86
+2025-06-19 22:48:05,704 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 22:48:05,710 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 22:48:05,712 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpvuw2gtdz.jpg
+2025-06-19 22:48:05,712 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 22:48:05,712 - face_recognition - ERROR - DeepFace face detection failed: signal only works in main thread of the main interpreter
+2025-06-19 22:48:05,713 - face_recognition - WARNING - DeepFace face extraction failed - falling back to InsightFace
+2025-06-19 22:48:06,455 - face_recognition - INFO - InsightFace fallback succeeded
+2025-06-19 22:48:06,455 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.86
+2025-06-19 22:53:00,104 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 22:53:00,104 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 22:53:00,120 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 22:53:00,121 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpw3circ7m.jpg
+2025-06-19 22:53:00,121 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 22:53:01,107 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 22:53:01,107 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 22:53:01,111 - face_recognition - INFO - Face image captured successfully
+2025-06-19 22:53:01,112 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.90
+2025-06-19 22:53:16,850 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 22:53:16,857 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 22:53:16,857 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpv0o3hvcg.jpg
+2025-06-19 22:53:16,857 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 22:53:17,165 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 22:53:17,165 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 22:53:17,168 - face_recognition - INFO - Face image captured successfully
+2025-06-19 22:53:17,169 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.90
+2025-06-19 22:53:23,079 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 22:53:23,083 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 22:53:23,083 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpu6dhs0g3.jpg
+2025-06-19 22:53:23,083 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 22:53:23,330 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 22:53:23,330 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 22:53:23,333 - face_recognition - INFO - Face image captured successfully
+2025-06-19 22:53:23,334 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.90
+2025-06-19 22:53:36,173 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 22:53:36,178 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 22:53:36,179 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp_a_4zuir.jpg
+2025-06-19 22:53:36,179 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 22:53:36,608 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 22:53:36,608 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 22:53:36,611 - face_recognition - INFO - Face image captured successfully
+2025-06-19 22:53:36,612 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.90
+2025-06-19 22:53:54,515 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:53:55,410 - face_recognition - INFO - InsightFace spoof detection: score=0.09, texture=0.00, edges=0.01, detection=0.04, color=0.04
+2025-06-19 22:53:55,410 - face_recognition - INFO - InsightFace spoof detection: score=0.08, texture=0.00, edges=0.01, detection=0.03, color=0.04
+2025-06-19 22:53:55,411 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.09
+2025-06-19 22:53:55,411 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.08
+2025-06-19 22:54:04,854 - face_recognition - INFO - InsightFace spoof detection: score=0.08, texture=0.00, edges=0.01, detection=0.02, color=0.05
+2025-06-19 22:54:04,855 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.08
+2025-06-19 22:55:12,416 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 22:55:12,991 - face_recognition - INFO - InsightFace spoof detection: score=0.07, texture=0.00, edges=0.01, detection=0.04, color=0.02
+2025-06-19 22:55:12,993 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.07
+2025-06-19 22:55:25,340 - face_recognition - INFO - InsightFace spoof detection: score=0.08, texture=0.00, edges=0.01, detection=0.03, color=0.04
+2025-06-19 22:55:25,342 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.08
+2025-06-19 23:01:18,962 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 23:01:18,963 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:01:18,963 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:01:18,975 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:01:18,975 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpana4kod_.jpg
+2025-06-19 23:01:18,976 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:01:19,445 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:01:19,445 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:01:19,448 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:01:30,639 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 23:01:30,639 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:01:30,640 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:01:30,650 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:01:30,650 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpioywh5c_.jpg
+2025-06-19 23:01:30,650 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:01:31,027 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:01:31,028 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:01:31,030 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:01:52,584 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 23:01:52,584 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:01:52,584 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:01:52,592 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:01:52,593 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmposltj997.jpg
+2025-06-19 23:01:52,593 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:01:52,980 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:01:52,980 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:01:52,982 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:03:27,897 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:03:27,898 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:03:27,903 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:03:27,904 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp3fk5zb0w.jpg
+2025-06-19 23:03:27,904 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:03:28,355 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:03:28,355 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:03:28,358 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:03:30,397 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:03:30,397 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:03:30,400 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:03:30,401 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp2afoh82w.jpg
+2025-06-19 23:03:30,401 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:03:30,730 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:03:30,731 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:03:30,734 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:03:32,201 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:03:32,201 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:03:32,204 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:03:32,205 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpz4ax1k3q.jpg
+2025-06-19 23:03:32,205 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:03:32,447 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:03:32,448 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:03:32,451 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:03:39,683 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:03:39,685 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:03:39,690 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:03:39,691 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmps5ksdm6k.jpg
+2025-06-19 23:03:39,691 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:03:40,062 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:03:40,062 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:03:40,065 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:03:45,908 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:03:45,909 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:03:45,913 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:03:45,913 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpznp0y_1j.jpg
+2025-06-19 23:03:45,913 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:03:46,168 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:03:46,168 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:03:46,171 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:03:48,576 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:03:48,576 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:03:48,579 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:03:48,579 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpzxp522d7.jpg
+2025-06-19 23:03:48,580 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:03:48,748 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:03:48,749 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:03:48,751 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:03:51,209 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:03:51,209 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:03:51,213 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:03:51,214 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp3ulghm7h.jpg
+2025-06-19 23:03:51,214 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:03:51,461 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:03:51,461 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:03:51,464 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:03:53,184 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:03:53,184 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:03:53,188 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:03:53,189 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp6v7fca1n.jpg
+2025-06-19 23:03:53,189 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:03:53,351 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:03:53,351 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:03:53,353 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:12:41,200 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-19 23:12:41,865 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 23:12:41,975 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-19 23:12:42,603 - face_recognition - INFO - InsightFace spoof detection: score=0.09, texture=0.00, edges=0.01, detection=0.04, color=0.05
+2025-06-19 23:12:42,604 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.09
+2025-06-19 23:12:42,604 - face_recognition - INFO - InsightFace spoof detection: score=0.10, texture=0.00, edges=0.01, detection=0.04, color=0.05
+2025-06-19 23:12:42,604 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.10
+2025-06-19 23:13:11,812 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-19 23:13:12,355 - face_recognition - INFO - InsightFace spoof detection: score=0.09, texture=0.00, edges=0.01, detection=0.05, color=0.03
+2025-06-19 23:13:12,355 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.09
+2025-06-19 23:13:37,399 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-19 23:13:37,942 - face_recognition - INFO - InsightFace spoof detection: score=0.09, texture=0.00, edges=0.01, detection=0.03, color=0.05
+2025-06-19 23:13:37,942 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.09
+2025-06-19 23:13:46,277 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-19 23:13:54,534 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 23:13:54,536 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:13:54,536 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:13:54,550 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:13:54,551 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp31ultsyz.jpg
+2025-06-19 23:13:54,552 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:13:55,115 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:13:55,115 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:13:55,118 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:13:58,238 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-19 23:13:58,240 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:13:58,240 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:13:58,243 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:13:58,244 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpn6x2exh3.jpg
+2025-06-19 23:13:58,244 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:13:58,501 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:13:58,501 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:13:58,504 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:14:00,454 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-19 23:14:00,456 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:14:00,457 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:14:00,460 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:14:00,460 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp1_vhpto4.jpg
+2025-06-19 23:14:00,461 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:14:00,658 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:14:00,658 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:14:00,662 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:14:08,098 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-19 23:14:08,866 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 23:14:09,728 - face_recognition - INFO - InsightFace spoof detection: score=0.10, texture=0.00, edges=0.01, detection=0.04, color=0.06
+2025-06-19 23:14:09,729 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.10
+2025-06-19 23:15:58,001 - face_recognition - INFO - Using default model for register_face: insightface
+2025-06-19 23:15:58,869 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 23:15:58,870 - face_recognition - INFO - Registering new face using insightface model
+2025-06-19 23:15:59,587 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.77
+2025-06-19 23:16:02,742 - face_recognition - INFO - Using default model for register_face: insightface
+2025-06-19 23:16:02,742 - face_recognition - INFO - Registering new face using insightface model
+2025-06-19 23:16:03,162 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.81
+2025-06-19 23:16:07,659 - face_recognition - INFO - Using default model for register_face: insightface
+2025-06-19 23:16:07,659 - face_recognition - INFO - Registering new face using insightface model
+2025-06-19 23:16:08,050 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.82
+2025-06-19 23:16:11,379 - face_recognition - INFO - Using default model for register_face: insightface
+2025-06-19 23:16:11,379 - face_recognition - INFO - Registering new face using insightface model
+2025-06-19 23:16:11,806 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.89
+2025-06-19 23:16:15,065 - face_recognition - INFO - Using default model for register_face: insightface
+2025-06-19 23:16:15,065 - face_recognition - INFO - Registering new face using insightface model
+2025-06-19 23:16:15,517 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.85
+2025-06-19 23:16:53,512 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-19 23:16:54,173 - face_recognition - INFO - InsightFace spoof detection: score=0.09, texture=0.00, edges=0.01, detection=0.04, color=0.04
+2025-06-19 23:16:54,173 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.09
+2025-06-19 23:16:54,705 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-19 23:16:55,232 - face_recognition - INFO - InsightFace spoof detection: score=0.10, texture=0.00, edges=0.01, detection=0.04, color=0.05
+2025-06-19 23:16:55,233 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.10
+2025-06-19 23:16:55,866 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-19 23:16:56,372 - face_recognition - INFO - InsightFace spoof detection: score=0.09, texture=0.00, edges=0.01, detection=0.04, color=0.05
+2025-06-19 23:16:56,373 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.09

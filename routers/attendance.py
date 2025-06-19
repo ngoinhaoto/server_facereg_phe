@@ -10,6 +10,7 @@ from typing import Optional, List, Dict
 from starlette.concurrency import run_in_threadpool
 import base64
 from utils.logging import logger
+from config.face_recognition_config import face_recognition_config
 
 router = APIRouter(prefix="/attendance", tags=["Attendance"])
 
@@ -17,11 +18,14 @@ router = APIRouter(prefix="/attendance", tags=["Attendance"])
 async def check_in(
     session_id: int,
     file: UploadFile = File(...),
-    model: str = "deepface", 
+    model: str = None,  # Make this optional
     background_tasks: BackgroundTasks = None,
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_active_user)
 ):
+    # If model is not specified in the request, get it from config
+    if model is None:
+        model = face_recognition_config.get_model_for_operation("check_in")
     
     if model not in ["insightface", "deepface"]:
         raise HTTPException(
@@ -48,19 +52,23 @@ async def check_in(
     
     image_data = await file.read()
     
-    face_service = FaceRecognitionService(model_type=model)
+    face_service = FaceRecognitionService.get_instance(model_type=model)
     
-    spoof_result = await run_in_threadpool(
-        lambda: face_service.detect_spoofing(image_data)
-    )
-    
-    if spoof_result["is_spoof"]:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Possible photo/screen attack detected. Please use your real face for check-in. (Score: {spoof_result['spoof_score']:.2f})"
+    # Use config for anti-spoofing feature flag
+    if face_recognition_config.ENABLE_ANTISPOOFING:
+        spoof_result = await run_in_threadpool(
+            lambda: face_service.detect_spoofing(image_data)
         )
-    
-    logger.info(f"Anti-spoofing check passed using {model} model. Score: {spoof_result['spoof_score']:.2f}")
+        
+        if spoof_result["is_spoof"]:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Possible photo/screen attack detected. Please use your real face for check-in. (Score: {spoof_result['spoof_score']:.2f})"
+            )
+        
+        logger.info(f"Anti-spoofing check passed using {model} model. Score: {spoof_result['spoof_score']:.2f}")
+    else:
+        logger.info(f"Anti-spoofing check skipped (disabled in config)")
     
     # Continue with regular face recognition process
     processed_image = await run_in_threadpool(
@@ -80,7 +88,7 @@ async def check_in(
     
     # Match against ALL stored face embeddings, not just the current user's
     match, matched_user_id, similarity = await run_in_threadpool(
-        lambda: face_service.compare_face(embedding, db, user_id=None, threshold=0.5)
+        lambda: face_service.compare_face(embedding, db, user_id=None, threshold=face_recognition_config.SIMILARITY_THRESHOLD)
     )
     
     # If no match found and current user has no embeddings, allow first-time registration
@@ -268,6 +276,7 @@ async def get_session_attendance(
         result.append({
             "student_id": attendance.student_id,
             "username": attendance.student.username,
+            "full_name": attendance.student.full_name,  # Add the full name here
             "status": attendance.status,
             "check_in_time": attendance.check_in_time,
             "late_minutes": attendance.late_minutes
@@ -279,12 +288,41 @@ async def get_session_attendance(
 async def register_face(
     file: UploadFile = File(...),
     device_id: str = "web",
+    model: str = None,  # Make this optional
+    fallback_if_failed: bool = None,  # Make this optional
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_active_user)
 ):
-    face_service = FaceRecognitionService()
+    # Use configuration if parameters aren't provided
+    if model is None:
+        model = face_recognition_config.get_model_for_operation("register_face")
+    
+    if fallback_if_failed is None:
+        fallback_if_failed = face_recognition_config.ENABLE_FALLBACK
+    
+    if model not in ["insightface", "deepface"]:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid model selection. Choose 'insightface' or 'deepface'"
+        )
+    
+
+    if model == "deepface":
+        try:
+            import deepface
+        except ImportError:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="DeepFace model is not installed on the server. Please contact administrator."
+            )
+    
+    # Use the singleton pattern with specified model
+    face_service = FaceRecognitionService.get_instance(model_type=model)
     
     image_data = await file.read()
+    
+    # Log which model we're using
+    logger.info(f"Registering new face using {model} model")
     
     processed_image = await run_in_threadpool(
         lambda: face_service.preprocess_image(image_data)
@@ -294,11 +332,27 @@ async def register_face(
         lambda: face_service.extract_face_embedding(processed_image)
     )
     
+    # If DeepFace fails and fallback is enabled, try with InsightFace
+    if embedding is None and fallback_if_failed and model == "deepface":
+        logger.warning("DeepFace face extraction failed - falling back to InsightFace")
+        
+        fallback_service = FaceRecognitionService.get_instance(model_type="insightface")
+        embedding, confidence, aligned_face = await run_in_threadpool(
+            lambda: fallback_service.extract_face_embedding(processed_image)
+        )
+        
+        if embedding is not None:
+            logger.info("InsightFace fallback succeeded")
+    
+    # Add more detailed logging for debugging
     if embedding is None:
+        logger.error("Face extraction failed - no embedding returned")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="No face detected in the image. Please try with a clearer photo."
         )
+    else:
+        logger.info(f"Face embedding extracted successfully with confidence: {confidence:.2f}")
     
     embeddings_count = await run_in_threadpool(
         lambda: face_service.get_user_embeddings_count(db, current_user.id)
