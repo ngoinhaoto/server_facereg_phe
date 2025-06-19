@@ -17,12 +17,27 @@ router = APIRouter(prefix="/attendance", tags=["Attendance"])
 async def check_in(
     session_id: int,
     file: UploadFile = File(...),
+    model: str = "deepface", 
     background_tasks: BackgroundTasks = None,
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_active_user)
 ):
-    """Check in to a class session using face recognition."""
-    # Check if the session exists
+    
+    if model not in ["insightface", "deepface"]:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid model selection. Choose 'insightface' or 'deepface'"
+        )
+    
+    if model == "deepface":
+        try:
+            import deepface
+        except ImportError:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="DeepFace model is not installed on the server. Please contact administrator."
+            )
+    
     session = db.query(ClassSession).filter(ClassSession.id == session_id).first()
     
     if not session:
@@ -31,20 +46,29 @@ async def check_in(
             detail="Class session not found"
         )
     
-    # Now we'll check access after identifying the face
-    # Read the image file
     image_data = await file.read()
     
-    # Initialize face recognition service
-    face_service = FaceRecognitionService()
+    face_service = FaceRecognitionService(model_type=model)
     
-    # Preprocess the image
+    spoof_result = await run_in_threadpool(
+        lambda: face_service.detect_spoofing(image_data)
+    )
+    
+    if spoof_result["is_spoof"]:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Possible photo/screen attack detected. Please use your real face for check-in. (Score: {spoof_result['spoof_score']:.2f})"
+        )
+    
+    logger.info(f"Anti-spoofing check passed using {model} model. Score: {spoof_result['spoof_score']:.2f}")
+    
+    # Continue with regular face recognition process
     processed_image = await run_in_threadpool(
         lambda: face_service.preprocess_image(image_data)
     )
     
     # Extract face embedding
-    embedding, confidence, _ = await run_in_threadpool(
+    embedding, confidence, aligned_face = await run_in_threadpool(
         lambda: face_service.extract_face_embedding(processed_image)
     )
     
@@ -177,7 +201,6 @@ async def check_in(
     
     class_info = session.class_obj
 
-    # Include more comprehensive information in the response
     return {
         "message": "Attendance recorded successfully",
         "status": attendance_status,
@@ -509,6 +532,54 @@ async def get_user_face_registrations(
         result_faces.append(face_dict)
     
     return {"faces": result_faces}
+
+@router.get("/face-recognition-settings")
+async def get_face_recognition_settings(
+    db: Session = Depends(get_db),
+    current_user: UserResponse = Depends(get_current_active_user)
+):
+    """Get available face recognition settings and capabilities"""
+    if current_user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only administrators can access face recognition settings"
+        )
+    
+    available_models = ["insightface"] 
+    
+    try:
+        import deepface
+        available_models.append("deepface")
+        deepface_version = deepface.__version__
+    except ImportError:
+        deepface_version = None
+    
+    try:
+        import face_recognition
+        available_models.append("dlib")
+        dlib_available = True
+    except ImportError:
+        dlib_available = False
+    
+    try:
+        import insightface
+        insightface_version = insightface.__version__
+    except:
+        insightface_version = "Unknown"
+    
+    return {
+        "available_models": available_models,
+        "model_versions": {
+            "insightface": insightface_version,
+            "deepface": deepface_version,
+            "dlib": "Available" if dlib_available else "Not installed"
+        },
+        "anti_spoofing_supported": {
+            "insightface": "Custom implementation",
+            "deepface": "Yes" if "deepface" in available_models else "Not installed",
+            "dlib": "Limited" if dlib_available else "Not installed"
+        }
+    }
 
 
 

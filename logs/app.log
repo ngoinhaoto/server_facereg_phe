@@ -510,3 +510,97 @@
 2025-06-05 21:55:29,651 - face_recognition - INFO - InsightFace model loaded successfully
 2025-06-05 21:55:39,421 - face_recognition - INFO - InsightFace model loaded successfully
 2025-06-05 21:55:46,670 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-05 23:14:29,446 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-05 23:15:51,980 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-05 23:15:57,449 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-05 23:16:01,486 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-05 23:16:17,344 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-05 23:30:47,174 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-05 23:30:48,096 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 10:43:06,672 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 10:43:07,750 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 10:43:19,766 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 10:43:25,613 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 10:43:27,708 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 10:43:29,694 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 10:48:10,532 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 10:52:06,389 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 10:52:06,852 - face_recognition - ERROR - Error checking liveness: No module named 'insightface.app.antisp'
+2025-06-06 11:33:27,558 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:33:27,559 - face_recognition - WARNING - InsightFace anti-spoofing module not available: No module named 'insightface.app.antisp'
+2025-06-06 11:33:27,993 - face_recognition - WARNING - InsightFace anti-spoofing module not available: No module named 'insightface.app.antisp'
+2025-06-06 11:33:27,997 - face_recognition - INFO - Fallback liveness check: REAL face (score: 3.16, texture: 6.62, edge: 0.97, detection: 0.75)
+2025-06-06 11:33:27,998 - face_recognition - INFO - Liveness check passed for user 12: score=3.16, method=texture_analysis
+2025-06-06 11:34:28,235 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:34:28,236 - face_recognition - WARNING - InsightFace anti-spoofing module not available: No module named 'insightface.app.antisp'
+2025-06-06 11:34:28,476 - face_recognition - WARNING - InsightFace anti-spoofing module not available: No module named 'insightface.app.antisp'
+2025-06-06 11:34:28,477 - face_recognition - INFO - Fallback liveness check: REAL face (score: 4.11, texture: 8.98, edge: 0.96, detection: 0.77)
+2025-06-06 11:34:28,477 - face_recognition - INFO - Liveness check passed for user 12: score=4.11, method=texture_analysis
+2025-06-06 11:40:09,842 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:40:10,220 - face_recognition - INFO - Liveness check: REAL face (score: 4.03, texture: 8.79, edge: 0.96, detection: 0.76)
+2025-06-06 11:40:10,221 - face_recognition - INFO - Liveness check passed for user 12: score=4.03
+2025-06-06 11:40:13,150 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:40:13,530 - face_recognition - INFO - Liveness check: REAL face (score: 3.84, texture: 8.25, edge: 0.97, detection: 0.84)
+2025-06-06 11:40:13,530 - face_recognition - INFO - Liveness check passed for user 12: score=3.84
+2025-06-06 11:42:29,397 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:42:29,791 - face_recognition - INFO - Liveness check: REAL face (score: 4.33, texture: 9.45, edge: 0.97, detection: 0.85)
+2025-06-06 11:42:29,792 - face_recognition - INFO - Liveness check passed for user 12: score=4.33, strict=False
+2025-06-06 11:44:34,927 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:44:35,399 - face_recognition - WARNING - DCT check failed: OpenCV(4.11.0) /Users/xperience/GHA-Actions-OpenCV/_work/opencv-python/opencv-python/opencv/modules/core/src/dxt.cpp:4320: error: (-213:The function/feature is not implemented) Odd-size DCT's are not implemented in function 'apply'
+
+2025-06-06 11:44:35,402 - face_recognition - INFO - Liveness check: REAL face (score: 0.87, texture: 1.00, edge: 0.98, detection: 0.85, dct: 0.50, color: 1.00)
+2025-06-06 11:44:35,402 - face_recognition - INFO - Liveness check passed for user 12: score=0.87, strict=False
+2025-06-06 11:44:37,747 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:44:38,239 - face_recognition - WARNING - DCT check failed: OpenCV(4.11.0) /Users/xperience/GHA-Actions-OpenCV/_work/opencv-python/opencv-python/opencv/modules/core/src/dxt.cpp:4320: error: (-213:The function/feature is not implemented) Odd-size DCT's are not implemented in function 'apply'
+
+2025-06-06 11:44:38,239 - face_recognition - INFO - Liveness check: REAL face (score: 0.87, texture: 1.00, edge: 0.97, detection: 0.85, dct: 0.50, color: 1.00)
+2025-06-06 11:44:38,239 - face_recognition - INFO - Liveness check passed for user 12: score=0.87, strict=False
+2025-06-06 11:52:23,574 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:55:21,250 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:55:22,719 - face_recognition - INFO - Spoof detection results: score=0.33, texture=0.00, reflection=0.03, quality=0.14, color_ratio=0.00, frequency=0.15
+2025-06-06 11:56:45,091 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:56:45,488 - face_recognition - INFO - Spoof detection results: score=0.31, texture=0.00, reflection=0.02, quality=0.13, color_ratio=0.01, frequency=0.15
+2025-06-06 11:56:48,367 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:56:48,662 - face_recognition - INFO - Spoof detection results: score=0.34, texture=0.00, reflection=0.02, quality=0.16, color_ratio=0.01, frequency=0.15
+2025-06-06 11:56:58,341 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:56:58,712 - face_recognition - INFO - Spoof detection results: score=0.41, texture=0.00, reflection=0.07, quality=0.18, color_ratio=0.00, frequency=0.15
+2025-06-06 11:57:07,004 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 11:57:07,418 - face_recognition - INFO - Spoof detection results: score=0.41, texture=0.00, reflection=0.07, quality=0.18, color_ratio=0.01, frequency=0.15
+2025-06-06 17:40:35,395 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 17:40:36,128 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-06 17:40:46,142 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-18 18:32:01,712 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-18 18:32:25,379 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-18 18:37:45,667 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-18 18:48:27,094 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-18 18:48:32,830 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-18 18:49:23,561 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-18 18:49:27,060 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-18 18:50:26,279 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-18 18:50:27,041 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-18 18:50:27,240 - face_recognition - INFO - InsightFace spoof detection: score=0.05, texture=0.00, edges=0.01, detection=0.03, color=0.01
+2025-06-18 18:50:27,241 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.05
+2025-06-18 18:50:27,886 - face_recognition - INFO - InsightFace spoof detection: score=0.05, texture=0.00, edges=0.01, detection=0.03, color=0.01
+2025-06-18 18:50:27,888 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.05
+2025-06-19 21:37:47,385 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 21:37:47,996 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 21:37:48,597 - face_recognition - INFO - InsightFace spoof detection: score=0.09, texture=0.00, edges=0.01, detection=0.02, color=0.05
+2025-06-19 21:37:48,598 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.09
+2025-06-19 21:37:48,643 - face_recognition - INFO - InsightFace spoof detection: score=0.09, texture=0.00, edges=0.01, detection=0.02, color=0.06
+2025-06-19 21:37:48,643 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.09
+2025-06-19 21:43:37,033 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 21:43:37,752 - face_recognition - INFO - InsightFace spoof detection: score=0.07, texture=0.00, edges=0.01, detection=0.04, color=0.03
+2025-06-19 21:43:37,752 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.07
+2025-06-19 21:43:48,405 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-19 21:43:48,778 - face_recognition - INFO - InsightFace spoof detection: score=0.07, texture=0.00, edges=0.01, detection=0.04, color=0.03
+2025-06-19 21:43:48,778 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.07
+2025-06-19 21:45:06,229 - face_recognition - ERROR - Error initializing DeepFace: You have tensorflow 2.19.0 and this requires tf-keras package. Please run `pip install tf-keras` or downgrade your tensorflow.
+2025-06-19 21:45:50,702 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 21:50:15,811 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 21:50:59,153 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 21:52:24,176 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 21:54:04,528 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 21:54:04,540 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 21:54:39,506 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 21:55:50,394 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 21:55:51,048 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
