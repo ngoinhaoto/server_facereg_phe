@@ -13,11 +13,9 @@ class FaceRecognitionConfig(BaseModel):
     REGISTER_FACE_MODEL: Optional[ModelType] = None
     CHECK_IN_MODEL: Optional[ModelType] = None
     
-    # Feature flags
     ENABLE_ANTISPOOFING: bool = True
     ENABLE_FALLBACK: bool = True
     
-    # Model-specific settings
     SIMILARITY_THRESHOLD: float = 0.5
     
     def get_model_for_operation(self, operation: str) -> ModelType:

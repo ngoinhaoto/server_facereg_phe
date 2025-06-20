@@ -5,7 +5,7 @@ from security.auth import oauth2_scheme  # Import the OAuth2 scheme
 from sqlalchemy.orm import Session
 from database.db import get_db
 import uvicorn
-from routers import auth, users, classes, attendance
+from routers import auth, users, classes, attendance  
 
 # Create your FastAPI instance with security scheme
 app = FastAPI(
