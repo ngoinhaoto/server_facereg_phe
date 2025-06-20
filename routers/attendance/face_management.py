@@ -50,10 +50,15 @@ async def register_face(
             detail="No face detected in the image. Please try with a clearer photo."
         )
     
-    # Store the primary model embedding
+    # Generate a unique registration group ID for this face registration
+    import uuid
+    registration_group_id = str(uuid.uuid4())
+    
+    # Store the primary model embedding with the group ID
     embedding_id_primary = await run_in_threadpool(
         lambda: face_service.store_face_embedding(
-            db, current_user.id, embedding_primary, confidence_primary, device_id, model
+            db, current_user.id, embedding_primary, confidence_primary, 
+            device_id, model, registration_group_id
         )
     )
     
@@ -69,7 +74,7 @@ async def register_face(
         except Exception as e:
             logger.error(f"Error storing face image: {str(e)}")
     
-    # If requested, also store with the secondary model
+    # If requested, also store with the secondary model (with the same group ID)
     embedding_id_secondary = None
     if store_both_models:
         # Get the other model
@@ -83,13 +88,26 @@ async def register_face(
             )
             
             if embedding_secondary is not None:
-                # Store the secondary embedding
+                # Store the secondary embedding with the same group ID
                 embedding_id_secondary = await run_in_threadpool(
                     lambda: secondary_service.store_face_embedding(
                         db, current_user.id, embedding_secondary, confidence_secondary, 
-                        f"{device_id}_auto_{other_model}", other_model
+                        f"{device_id}_auto_{other_model}", other_model, registration_group_id
                     )
                 )
+                
+                # Also store the face image for the secondary embedding
+                if aligned_face_primary and embedding_id_secondary:
+                    try:
+                        secondary_face_image = FaceImage(
+                            embedding_id=embedding_id_secondary,
+                            image_data=aligned_face_primary
+                        )
+                        db.add(secondary_face_image)
+                        db.commit()
+                    except Exception as e:
+                        logger.error(f"Error storing face image for secondary model: {str(e)}")
+                
                 logger.info(f"Successfully stored secondary embedding with {other_model}")
         except Exception as e:
             logger.error(f"Error processing with secondary model {other_model}: {str(e)}")
@@ -119,33 +137,53 @@ async def get_my_faces(
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_active_user)
 ):
-    """Get information about registered faces for the current user, including images if available."""
-    # Get face registrations with newest first
+    """Get information about registered faces for the current user, grouping by registration."""
     embeddings = db.query(FaceEmbedding).filter(
         FaceEmbedding.user_id == current_user.id
     ).order_by(FaceEmbedding.created_at.desc()).all()
     
-    result_faces = []
+    grouped_embeddings = {}
+    
     for emb in embeddings:
-        face_dict = {
-            "id": emb.id,
-            "created_at": emb.created_at,
-            "device_id": emb.device_id,
-            "confidence": emb.confidence_score
-        }
+        # Check if this embedding has a registration group
+        group_id = getattr(emb, 'registration_group_id', None)
         
-        # Try to get the face image if it exists
-        try:
-            # Check if this embedding has an associated image
-            if hasattr(emb, 'face_image') and emb.face_image and emb.face_image.image_data:
-                face_dict["image"] = base64.b64encode(emb.face_image.image_data).decode('utf-8')
-        except Exception as e:
-            logger.error(f"Error retrieving face image for embedding {emb.id}: {str(e)}")
+        # If no group ID, use the embedding ID as a unique identifier
+        if not group_id:
+            group_id = f"single_{emb.id}"
         
-        result_faces.append(face_dict)
+        # Initialize group if not exists
+        if group_id not in grouped_embeddings:
+            grouped_embeddings[group_id] = {
+                "id": emb.id,  # Use the ID of the first embedding found
+                "created_at": emb.created_at,
+                "device_id": emb.device_id.split('_auto_')[0] if '_auto_' in emb.device_id else emb.device_id,
+                "confidence": emb.confidence_score,
+                "models": [],
+                "image": None
+            }
+        
+        # Add this model to the group's models list
+        model_type = getattr(emb, 'model_type', 'unknown')
+        grouped_embeddings[group_id]["models"].append(model_type)
+        
+        # Try to get the face image if we don't have one yet
+        if not grouped_embeddings[group_id]["image"]:
+            try:
+                # Check if this embedding has an associated image
+                if hasattr(emb, 'face_image') and emb.face_image and emb.face_image.image_data:
+                    grouped_embeddings[group_id]["image"] = base64.b64encode(emb.face_image.image_data).decode('utf-8')
+            except Exception as e:
+                logger.error(f"Error retrieving face image for embedding {emb.id}: {str(e)}")
+    
+    # Convert the grouped dictionary to a list
+    result_faces = list(grouped_embeddings.values())
+    
+    # Sort by created_at (newest first)
+    result_faces.sort(key=lambda x: x["created_at"], reverse=True)
     
     return {
-        "count": len(embeddings),
+        "count": len(result_faces),
         "faces": result_faces
     }
 
@@ -155,7 +193,8 @@ async def delete_face(
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_active_user)
 ):
-    """Delete a face embedding."""
+    """Delete all face embeddings from the same registration group."""
+    # First get the embedding to find its group ID
     embedding = db.query(FaceEmbedding).filter(
         FaceEmbedding.id == embedding_id,
         FaceEmbedding.user_id == current_user.id
@@ -167,10 +206,25 @@ async def delete_face(
             detail="Face embedding not found"
         )
     
-    db.delete(embedding)
+    # Check if the attribute exists before using it
+    has_group_id = hasattr(embedding, 'registration_group_id') and embedding.registration_group_id
+    
+    # If this embedding has a group ID, delete all embeddings in that group
+    if has_group_id:
+        embeddings_to_delete = db.query(FaceEmbedding).filter(
+            FaceEmbedding.registration_group_id == embedding.registration_group_id,
+            FaceEmbedding.user_id == current_user.id
+        ).all()
+        
+        for emb in embeddings_to_delete:
+            db.delete(emb)
+    else:
+        # If no group ID (legacy data), just delete the single embedding
+        db.delete(embedding)
+    
     db.commit()
     
-    return {"message": "Face embedding deleted successfully"}
+    return {"message": "Face embedding(s) deleted successfully"}
 
 @router.get("/faces/{embedding_id}", response_model=dict)
 async def get_face_details(

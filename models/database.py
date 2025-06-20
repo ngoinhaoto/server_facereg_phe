@@ -104,8 +104,9 @@ class FaceEmbedding(Base):
     confidence_score = Column(Float)
     device_id = Column(String, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-    model_type = Column(String, index=True) 
-    
+    model_type = Column(String, index=True)
+    registration_group_id = Column(String, index=True)  # Add this column
+
     # Relationships
     user = relationship("User", back_populates="face_embeddings")
     face_image = relationship("FaceImage", back_populates="embedding", uselist=False, cascade="all, delete")

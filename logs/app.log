@@ -1305,3 +1305,240 @@
 2025-06-20 17:38:24,483 - face_recognition - INFO - DeepFace returned 1 embeddings
 2025-06-20 17:38:24,483 - face_recognition - INFO - Embedding extracted with shape: (512,)
 2025-06-20 17:38:24,487 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:31:21,364 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:31:21,365 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:31:32,618 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 21:31:32,698 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:31:32,699 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmputd3ztv6.jpg
+2025-06-20 21:31:32,699 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:31:33,207 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:31:33,207 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:31:33,212 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:31:33,247 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:31:35,961 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 21:31:36,931 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:31:36,931 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:32:09,241 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:32:09,242 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:32:16,217 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 21:32:16,235 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:32:16,236 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp79sv94nh.jpg
+2025-06-20 21:32:16,236 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:32:16,607 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:32:16,607 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:32:16,610 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:32:16,638 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:32:18,169 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 21:32:18,817 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:32:18,818 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:32:21,403 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:32:21,403 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:32:21,406 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:32:21,406 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpp9ili1za.jpg
+2025-06-20 21:32:21,407 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:32:21,865 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:32:21,865 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:32:21,871 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:32:21,892 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:32:22,821 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:32:22,822 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:38:35,053 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:38:35,054 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:38:43,060 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 21:38:43,112 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:38:43,114 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp6hqdoka3.jpg
+2025-06-20 21:38:43,114 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:38:43,833 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:38:43,833 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:38:43,837 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:38:43,878 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:38:45,800 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 21:38:46,521 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:38:46,521 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:41:47,671 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:41:47,672 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:41:54,604 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 21:41:54,632 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:41:54,632 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpeqvie9z3.jpg
+2025-06-20 21:41:54,632 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:41:55,386 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:41:55,386 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:41:55,390 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:41:55,434 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:41:57,065 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 21:41:57,583 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:41:57,588 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:43:14,757 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:43:14,758 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:43:21,359 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 21:43:21,374 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:43:21,374 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpai9gq3ex.jpg
+2025-06-20 21:43:21,374 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:43:21,723 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:43:21,723 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:43:21,725 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:43:21,734 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:43:23,082 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 21:43:23,607 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:43:23,607 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:44:30,628 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:44:30,629 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:44:37,185 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 21:44:37,200 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:44:37,200 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp_c8ppv0j.jpg
+2025-06-20 21:44:37,201 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:44:37,572 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:44:37,573 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:44:37,575 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:44:37,602 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:44:39,198 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 21:44:40,406 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:44:40,406 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:44:43,397 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:44:43,397 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:44:43,400 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:44:43,400 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp1sbsxb6o.jpg
+2025-06-20 21:44:43,400 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:44:43,791 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:44:43,791 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:44:43,793 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:44:43,812 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:44:44,323 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:44:44,323 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:44:48,789 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:44:48,789 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:44:48,792 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:44:48,793 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpbm6rnez7.jpg
+2025-06-20 21:44:48,793 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:44:48,963 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:44:48,964 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:44:48,966 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:44:48,969 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:44:49,405 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:44:49,405 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:45:13,670 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:45:13,674 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:45:13,701 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:45:13,702 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp9xuw5_rm.jpg
+2025-06-20 21:45:13,702 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:45:13,976 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:45:13,976 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:45:13,978 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:45:13,983 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:45:14,501 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:45:14,501 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:46:26,242 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 21:46:26,246 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-20 21:46:26,246 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:46:26,247 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmps7hbg548.jpg
+2025-06-20 21:46:26,247 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:46:26,503 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:46:26,503 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:46:26,505 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:46:26,507 - face_recognition - INFO - No match found with deepface, trying insightface
+2025-06-20 21:46:27,284 - face_recognition - WARNING - No stored embeddings found for comparison with model insightface
+2025-06-20 21:46:27,481 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 21:46:27,487 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-20 21:46:27,488 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:46:27,489 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpxx90h_c6.jpg
+2025-06-20 21:46:27,489 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:46:28,011 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:46:28,012 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:46:28,015 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:46:28,019 - face_recognition - INFO - No match found with deepface, trying insightface
+2025-06-20 21:46:28,836 - face_recognition - WARNING - No stored embeddings found for comparison with model insightface
+2025-06-20 21:50:40,982 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:50:40,982 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:50:49,175 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 21:50:49,196 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:50:49,197 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpoximmegh.jpg
+2025-06-20 21:50:49,197 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:50:49,646 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:50:49,646 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:50:49,648 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:50:49,658 - face_recognition - ERROR - Error storing face embedding: (psycopg2.errors.UndefinedColumn) column "registration_group_id" of relation "face_embeddings" does not exist
+LINE 1: ...bedding, confidence_score, device_id, model_type, registrati...
+                                                             ^
+
+[SQL: INSERT INTO face_embeddings (user_id, encrypted_embedding, confidence_score, device_id, model_type, registration_group_id) VALUES (%(user_id)s, %(encrypted_embedding)s, %(confidence_score)s, %(device_id)s, %(model_type)s, %(registration_group_id)s) RETURNING face_embeddings.id, face_embeddings.created_at]
+[parameters: {'user_id': 13, 'encrypted_embedding': <psycopg2.extensions.Binary object at 0x2a364efa0>, 'confidence_score': 0.9, 'device_id': 'web', 'model_type': 'deepface', 'registration_group_id': '65f7a59c-6494-4ed4-96e8-8e5e1682c530'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-06-20 21:50:51,256 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 21:50:51,814 - face_recognition - ERROR - Error storing face embedding: (psycopg2.errors.UndefinedColumn) column "registration_group_id" of relation "face_embeddings" does not exist
+LINE 1: ...bedding, confidence_score, device_id, model_type, registrati...
+                                                             ^
+
+[SQL: INSERT INTO face_embeddings (user_id, encrypted_embedding, confidence_score, device_id, model_type, registration_group_id) VALUES (%(user_id)s, %(encrypted_embedding)s, %(confidence_score)s, %(device_id)s, %(model_type)s, %(registration_group_id)s) RETURNING face_embeddings.id, face_embeddings.created_at]
+[parameters: {'user_id': 13, 'encrypted_embedding': <psycopg2.extensions.Binary object at 0x2d7ef24c0>, 'confidence_score': 0.8238179683685303, 'device_id': 'web_auto_insightface', 'model_type': 'insightface', 'registration_group_id': '65f7a59c-6494-4ed4-96e8-8e5e1682c530'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-06-20 21:50:51,814 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:52:48,552 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:52:48,557 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:52:48,567 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:52:48,568 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpq3frcoa3.jpg
+2025-06-20 21:52:48,568 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:52:48,896 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:52:48,896 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:52:48,899 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:52:48,937 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:52:49,719 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:52:49,719 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:54:03,608 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:54:03,609 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:54:11,643 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 21:54:11,664 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:54:11,664 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpc_wgx9qu.jpg
+2025-06-20 21:54:11,665 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:54:12,087 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:54:12,087 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:54:12,091 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:54:12,099 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:54:13,717 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 21:54:14,603 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:54:14,608 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:56:11,485 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:56:11,485 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:56:19,880 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 21:56:19,915 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:56:19,916 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpjex2kz5r.jpg
+2025-06-20 21:56:19,916 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:56:20,391 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:56:20,391 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:56:20,395 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:56:20,430 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:56:22,406 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 21:56:23,476 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:56:23,495 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:56:29,517 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:56:29,517 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:56:29,521 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:56:29,521 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpbso4yxzh.jpg
+2025-06-20 21:56:29,521 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:56:29,867 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:56:29,867 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:56:29,869 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:56:29,875 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:56:30,373 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:56:30,379 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:57:22,608 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:57:22,609 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:57:22,614 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:57:22,615 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpry10rct7.jpg
+2025-06-20 21:57:22,615 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:57:22,979 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:57:22,979 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:57:22,981 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:57:22,984 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:57:23,529 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:57:23,534 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 21:57:39,170 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 21:57:39,171 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 21:57:39,176 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 21:57:39,177 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpbraoz5r1.jpg
+2025-06-20 21:57:39,177 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 21:57:39,582 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 21:57:39,583 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 21:57:39,586 - face_recognition - INFO - Face image captured successfully
+2025-06-20 21:57:39,592 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 21:57:40,285 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 21:57:40,291 - face_recognition - INFO - Successfully stored secondary embedding with insightface

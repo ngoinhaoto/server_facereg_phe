@@ -40,7 +40,8 @@ class FaceRecognitionBase:
         raise NotImplementedError("Subclass must implement this method")
     
     def store_face_embedding(self, db: Session, user_id: int, embedding: np.ndarray, 
-                     confidence: float, device_id: str = "web", model_type: str = None) -> int:
+                 confidence: float, device_id: str = "web", model_type: str = None,
+                 registration_group_id: str = None) -> int:
         """Store a face embedding in the database"""
         from models.database import FaceEmbedding
         import pickle
@@ -55,7 +56,8 @@ class FaceRecognitionBase:
                 encrypted_embedding=binary_embedding,
                 confidence_score=confidence,
                 device_id=device_id,
-                model_type=model_to_use
+                model_type=model_to_use,
+                registration_group_id=registration_group_id
             )
             
             db.add(db_embedding)
