@@ -1542,3 +1542,464 @@ LINE 1: ...bedding, confidence_score, device_id, model_type, registrati...
 2025-06-20 21:57:39,592 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
 2025-06-20 21:57:40,285 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
 2025-06-20 21:57:40,291 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 22:00:36,267 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 22:00:36,267 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 22:00:44,747 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 22:00:44,766 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 22:00:44,767 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp1yyi2_zx.jpg
+2025-06-20 22:00:44,767 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 22:00:45,472 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 22:00:45,472 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 22:00:45,475 - face_recognition - INFO - Face image captured successfully
+2025-06-20 22:00:45,492 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 22:00:47,704 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:00:48,409 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 22:00:48,415 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 22:00:55,205 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 22:00:55,206 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 22:00:55,210 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 22:00:55,210 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpzxdt3ga6.jpg
+2025-06-20 22:00:55,210 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 22:00:55,440 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 22:00:55,440 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 22:00:55,442 - face_recognition - INFO - Face image captured successfully
+2025-06-20 22:00:55,446 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 22:00:55,982 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 22:00:55,987 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 22:01:18,471 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 22:01:18,472 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 22:01:18,477 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 22:01:18,479 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpvih5zm0y.jpg
+2025-06-20 22:01:18,479 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 22:01:18,784 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 22:01:18,784 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 22:01:18,786 - face_recognition - INFO - Face image captured successfully
+2025-06-20 22:01:18,795 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 22:01:19,470 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 22:01:19,473 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 22:01:35,252 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 22:01:35,253 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 22:01:35,258 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 22:01:35,259 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpdilwd_8f.jpg
+2025-06-20 22:01:35,259 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 22:01:35,711 - face_recognition - INFO - DeepFace returned 2 embeddings
+2025-06-20 22:01:35,711 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 22:01:35,714 - face_recognition - INFO - Face image captured successfully
+2025-06-20 22:01:35,718 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 22:01:36,308 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 22:01:36,313 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 22:01:48,787 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 22:01:48,792 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-20 22:01:48,792 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 22:01:48,793 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpxb8n8fcy.jpg
+2025-06-20 22:01:48,793 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 22:01:49,127 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 22:01:49,127 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 22:01:49,129 - face_recognition - INFO - Face image captured successfully
+2025-06-20 22:01:49,601 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 22:01:49,604 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-20 22:01:49,604 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 22:01:49,604 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpdkqszms_.jpg
+2025-06-20 22:01:49,604 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 22:01:49,846 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 22:01:49,846 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 22:01:49,848 - face_recognition - INFO - Face image captured successfully
+2025-06-20 22:02:04,963 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:02:06,675 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:02:07,168 - face_recognition - INFO - InsightFace spoof detection: score=0.07, texture=0.00, edges=0.01, detection=0.03, color=0.03
+2025-06-20 22:02:09,311 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:02:09,747 - face_recognition - INFO - InsightFace spoof detection: score=0.04, texture=0.00, edges=0.01, detection=0.03, color=0.01
+2025-06-20 22:02:11,601 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:02:12,012 - face_recognition - INFO - InsightFace spoof detection: score=0.04, texture=0.00, edges=0.01, detection=0.03, color=0.00
+2025-06-20 22:02:17,686 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 22:02:24,689 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 22:02:24,701 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-20 22:02:24,702 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 22:02:24,702 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp22howkqu.jpg
+2025-06-20 22:02:24,702 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 22:02:25,083 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 22:02:25,083 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 22:02:25,085 - face_recognition - INFO - Face image captured successfully
+2025-06-20 22:02:26,247 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 22:02:26,254 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-20 22:02:26,254 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 22:02:26,256 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpqdpa9o66.jpg
+2025-06-20 22:02:26,256 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 22:02:26,438 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 22:02:26,439 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 22:02:26,441 - face_recognition - INFO - Face image captured successfully
+2025-06-20 22:02:43,407 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 22:02:43,408 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 22:02:43,411 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 22:02:43,412 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpj2zq5408.jpg
+2025-06-20 22:02:43,412 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 22:02:43,669 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 22:02:43,669 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 22:02:43,672 - face_recognition - INFO - Face image captured successfully
+2025-06-20 22:02:43,676 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 22:02:45,147 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:02:45,689 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 22:02:45,695 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 22:02:49,066 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 22:02:49,067 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 22:02:49,071 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 22:02:49,072 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpy5t7kkdq.jpg
+2025-06-20 22:02:49,072 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 22:02:49,310 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 22:02:49,310 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 22:02:49,312 - face_recognition - INFO - Face image captured successfully
+2025-06-20 22:02:49,317 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 22:02:49,721 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 22:02:49,728 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 22:07:08,838 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 22:07:08,839 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 22:07:08,844 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 22:07:08,845 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp9t8_64ty.jpg
+2025-06-20 22:07:08,846 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 22:07:09,155 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 22:07:09,155 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 22:07:09,158 - face_recognition - INFO - Face image captured successfully
+2025-06-20 22:07:09,166 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 22:07:09,806 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 22:07:09,810 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 22:15:56,864 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:15:58,785 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:15:58,800 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:15:59,612 - face_recognition - INFO - InsightFace spoof detection: score=0.05, texture=0.00, edges=0.01, detection=0.03, color=0.02
+2025-06-20 22:15:59,612 - face_recognition - INFO - InsightFace spoof detection: score=0.10, texture=0.05, edges=0.00, detection=0.03, color=0.02
+2025-06-20 22:17:26,538 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:17:27,233 - face_recognition - INFO - InsightFace spoof detection: score=0.07, texture=0.00, edges=0.02, detection=0.05, color=0.01
+2025-06-20 22:17:45,754 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:17:46,315 - face_recognition - INFO - InsightFace spoof detection: score=0.05, texture=0.00, edges=0.01, detection=0.03, color=0.02
+2025-06-20 22:18:04,850 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:18:05,367 - face_recognition - INFO - InsightFace spoof detection: score=0.05, texture=0.00, edges=0.01, detection=0.04, color=0.01
+2025-06-20 22:20:51,221 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:20:53,134 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:20:53,775 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.47, texture=0.15, edges=0.00, detection=0.01, color=0.01, reflection=0.02, background=0.00, moire=0.15, saturation=0.13
+2025-06-20 22:20:53,777 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.4659694141806232), 'details': {'texture_score': np.float64(0.024881184054120008), 'edge_score': np.float64(0.9611716936281991), 'detection_score': 0.8145623803138733, 'color_score': np.float64(0.8891049326846766), 'reflection_score': np.float64(0.8930787942691714), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.13720538282601258)}, 'threshold': 0.35, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:20:58,916 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:20:59,519 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.48, texture=0.15, edges=0.00, detection=0.01, color=0.01, reflection=0.03, background=0.00, moire=0.15, saturation=0.13
+2025-06-20 22:20:59,519 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.47588145692171846), 'details': {'texture_score': np.float64(0.02798644893263161), 'edge_score': np.float64(0.958147059596335), 'detection_score': 0.7766170501708984, 'color_score': np.float64(0.8599866522551389), 'reflection_score': np.float64(0.8331137461572244), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.16206193414073844)}, 'threshold': 0.35, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:21:02,192 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:21:02,619 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.48, texture=0.15, edges=0.00, detection=0.01, color=0.01, reflection=0.03, background=0.00, moire=0.15, saturation=0.12
+2025-06-20 22:21:02,620 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.4790655242979245), 'details': {'texture_score': np.float64(0.03284448114364309), 'edge_score': np.float64(0.957244217397474), 'detection_score': 0.8044700622558594, 'color_score': np.float64(0.8849302592814824), 'reflection_score': np.float64(0.7681992337164751), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.17557978461579393)}, 'threshold': 0.35, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:21:08,338 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:21:08,864 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.47, texture=0.14, edges=0.00, detection=0.01, color=0.01, reflection=0.03, background=0.00, moire=0.15, saturation=0.12
+2025-06-20 22:21:08,865 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.46681593041988634), 'details': {'texture_score': np.float64(0.03426802941188263), 'edge_score': np.float64(0.9569089947810744), 'detection_score': 0.8339872360229492, 'color_score': np.float64(0.9139675192054563), 'reflection_score': np.float64(0.8110288322126753), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.18401684757752979)}, 'threshold': 0.35, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:21:10,140 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:21:10,549 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.48, texture=0.14, edges=0.00, detection=0.01, color=0.01, reflection=0.03, background=0.00, moire=0.15, saturation=0.12
+2025-06-20 22:21:10,549 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.47689927413558564), 'details': {'texture_score': np.float64(0.03477107096203137), 'edge_score': np.float64(0.9566184758637588), 'detection_score': 0.8174088001251221, 'color_score': np.float64(0.9042625456327769), 'reflection_score': np.float64(0.7673119333496692), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.17219822041166377)}, 'threshold': 0.35, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:21:18,767 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:21:19,168 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.50, texture=0.15, edges=0.00, detection=0.01, color=0.01, reflection=0.00, background=0.11, moire=0.15, saturation=0.07
+2025-06-20 22:21:19,169 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.49805591912372443), 'details': {'texture_score': np.float64(0.009876638639783695), 'edge_score': np.float64(0.9912512365342554), 'detection_score': 0.8068214058876038, 'color_score': np.float64(0.92867473708925), 'reflection_score': np.float64(1.0), 'background_score': np.float64(0.26048855728), 'moire_score': 0.0, 'saturation_score': np.float64(0.5270375588771815)}, 'threshold': 0.35, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:21:21,167 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:21:21,658 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.52, texture=0.15, edges=0.00, detection=0.01, color=0.00, reflection=0.00, background=0.11, moire=0.15, saturation=0.10
+2025-06-20 22:21:21,659 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.5229702427812041), 'details': {'texture_score': np.float64(0.009891843310068621), 'edge_score': np.float64(0.9943834900731452), 'detection_score': 0.783469557762146, 'color_score': np.float64(0.9704722384911334), 'reflection_score': np.float64(1.0), 'background_score': np.float64(0.2515156034007071), 'moire_score': 0.0, 'saturation_score': np.float64(0.3477305964509628)}, 'threshold': 0.35, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:21:25,753 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:21:26,197 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.46, texture=0.15, edges=0.00, detection=0.01, color=0.02, reflection=0.00, background=0.05, moire=0.15, saturation=0.08
+2025-06-20 22:21:26,197 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.4616771545744043), 'details': {'texture_score': np.float64(0.009754829574639948), 'edge_score': np.float64(0.9894743251824596), 'detection_score': 0.8181383609771729, 'color_score': np.float64(0.804488133581445), 'reflection_score': np.float64(1.0), 'background_score': np.float64(0.6494572296800001), 'moire_score': 0.0, 'saturation_score': np.float64(0.46091915074767087)}, 'threshold': 0.35, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:21:37,334 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:21:37,847 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.47, texture=0.15, edges=0.00, detection=0.01, color=0.01, reflection=0.03, background=0.00, moire=0.15, saturation=0.12
+2025-06-20 22:21:37,848 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.46710377386934543), 'details': {'texture_score': np.float64(0.030230188797575254), 'edge_score': np.float64(0.9533412629757786), 'detection_score': 0.8843990564346313, 'color_score': np.float64(0.889560249349506), 'reflection_score': np.float64(0.8259083044982699), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.17310232054678487)}, 'threshold': 0.35, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:21:57,444 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:21:57,985 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.59, texture=0.14, edges=0.01, detection=0.01, color=0.00, reflection=0.15, background=0.02, moire=0.15, saturation=0.10
+2025-06-20 22:21:57,986 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.5912713787179039), 'details': {'texture_score': np.float64(0.034774972219769), 'edge_score': np.float64(0.934022196708764), 'detection_score': 0.801007866859436, 'color_score': np.float64(0.9558135583128232), 'reflection_score': 0.0, 'background_score': np.float64(0.8548578379417083), 'moire_score': 0.0, 'saturation_score': np.float64(0.30833153941829317)}, 'threshold': 0.35, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:22:28,293 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:22:30,223 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:22:30,688 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.57, texture=0.15, edges=0.00, detection=0.01, color=0.01, reflection=0.15, background=0.00, moire=0.15, saturation=0.11
+2025-06-20 22:22:30,688 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.569235118475021), 'details': {'texture_score': np.float64(0.02596434556322472), 'edge_score': np.float64(0.9512749794358156), 'detection_score': 0.8656350374221802, 'color_score': np.float64(0.9478693316184046), 'reflection_score': 0.0, 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.2911603114264286)}, 'threshold': 0.35, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:24:10,455 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:24:12,295 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:24:12,848 - face_recognition - INFO - High detection confidence 0.84, using adaptive threshold: 0.46
+2025-06-20 22:24:12,848 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.33, threshold=0.46, texture=0.10, edges=0.00, detection=0.01, color=0.00, reflection=0.02, background=0.00, moire=0.12, saturation=0.08
+2025-06-20 22:24:24,792 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:24:25,410 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.43, threshold=0.45, texture=0.10, edges=0.01, detection=0.01, color=0.00, reflection=0.12, background=0.00, moire=0.12, saturation=0.07
+2025-06-20 22:24:27,496 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:24:27,932 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.34, threshold=0.45, texture=0.10, edges=0.01, detection=0.01, color=0.00, reflection=0.03, background=0.00, moire=0.12, saturation=0.07
+2025-06-20 22:24:29,038 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:24:29,624 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.42, threshold=0.45, texture=0.10, edges=0.00, detection=0.02, color=0.01, reflection=0.12, background=0.00, moire=0.12, saturation=0.04
+2025-06-20 22:24:30,225 - face_recognition - INFO - No match found with insightface, trying deepface
+2025-06-20 22:24:37,682 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 22:24:37,683 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 22:24:37,683 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpb83qyedk.jpg
+2025-06-20 22:24:37,683 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 22:24:38,049 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 22:24:38,049 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 22:24:38,052 - face_recognition - INFO - Face image captured successfully
+2025-06-20 22:24:38,056 - face_recognition - INFO - Match found with alternate model deepface, similarity: 0.98
+2025-06-20 22:27:08,836 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:27:10,818 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:27:11,333 - face_recognition - INFO - High detection confidence 0.83, using adaptive threshold: 0.40
+2025-06-20 22:27:11,334 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.54, threshold=0.40, texture=0.08, edges=0.00, detection=0.01, color=0.00, reflection=0.05, background=0.00, moire=0.25, saturation=0.12, border=0.04, 
+2025-06-20 22:27:11,335 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.5421028822816585), 'details': {'texture_score': np.float64(0.028791742823271863), 'edge_score': np.float64(0.9599032015299956), 'detection_score': 0.8257718086242676, 'color_score': np.float64(0.9765622564779366), 'reflection_score': np.float64(0.7562087035771246), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.22028073476563315), 'border_score': 0.8200000000000001}, 'threshold': 0.4025771808624268, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:27:13,122 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:27:13,575 - face_recognition - INFO - High detection confidence 0.90, using adaptive threshold: 0.41
+2025-06-20 22:27:13,575 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.55, threshold=0.41, texture=0.08, edges=0.00, detection=0.01, color=0.01, reflection=0.05, background=0.00, moire=0.25, saturation=0.12, border=0.04, 
+2025-06-20 22:27:13,576 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.5491714743726755), 'details': {'texture_score': np.float64(0.040054024020421616), 'edge_score': np.float64(0.9470436067997045), 'detection_score': 0.898434042930603, 'color_score': np.float64(0.8888198713532042), 'reflection_score': np.float64(0.7560975609756098), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.2049929554693274), 'border_score': 0.8}, 'threshold': 0.4098434042930603, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:27:15,228 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:27:15,622 - face_recognition - INFO - High detection confidence 0.87, using adaptive threshold: 0.41
+2025-06-20 22:27:15,622 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.52, threshold=0.41, texture=0.08, edges=0.00, detection=0.01, color=0.01, reflection=0.04, background=0.00, moire=0.25, saturation=0.12, border=0.02, 
+2025-06-20 22:27:15,623 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.5220889131529146), 'details': {'texture_score': np.float64(0.03654287183178688), 'edge_score': np.float64(0.9503602386581109), 'detection_score': 0.8741263151168823, 'color_score': np.float64(0.8833961176037494), 'reflection_score': np.float64(0.789935832489024), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.19066101507092204), 'border_score': 0.92}, 'threshold': 0.4074126315116883, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:27:16,879 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:27:17,286 - face_recognition - INFO - High detection confidence 0.85, using adaptive threshold: 0.41
+2025-06-20 22:27:17,286 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.54, threshold=0.41, texture=0.08, edges=0.00, detection=0.01, color=0.01, reflection=0.04, background=0.00, moire=0.25, saturation=0.12, border=0.04, 
+2025-06-20 22:27:17,287 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.5379975603689), 'details': {'texture_score': np.float64(0.03626911394491876), 'edge_score': np.float64(0.9491869918699187), 'detection_score': 0.8549262285232544, 'color_score': np.float64(0.8701974680851681), 'reflection_score': np.float64(0.8228255867464336), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.18557679269936234), 'border_score': 0.8200000000000001}, 'threshold': 0.40549262285232546, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:27:18,280 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:27:18,759 - face_recognition - INFO - High detection confidence 0.86, using adaptive threshold: 0.41
+2025-06-20 22:27:18,759 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.54, threshold=0.41, texture=0.08, edges=0.00, detection=0.01, color=0.01, reflection=0.03, background=0.00, moire=0.25, saturation=0.12, border=0.04, 
+2025-06-20 22:27:18,760 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.5358657698197266), 'details': {'texture_score': np.float64(0.030350527477575998), 'edge_score': np.float64(0.9529530338798521), 'detection_score': 0.8573096394538879, 'color_score': np.float64(0.8989980562275152), 'reflection_score': np.float64(0.8357209843805582), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.17359929300197263), 'border_score': 0.8200000000000001}, 'threshold': 0.4057309639453888, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:27:19,533 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:27:19,948 - face_recognition - INFO - High detection confidence 0.88, using adaptive threshold: 0.41
+2025-06-20 22:27:19,948 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.54, threshold=0.41, texture=0.08, edges=0.00, detection=0.01, color=0.00, reflection=0.04, background=0.00, moire=0.25, saturation=0.12, border=0.04, 
+2025-06-20 22:27:19,948 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.5373412012869475), 'details': {'texture_score': np.float64(0.034458775242574555), 'edge_score': np.float64(0.9513242339329296), 'detection_score': 0.8834883570671082, 'color_score': np.float64(0.9286837856099447), 'reflection_score': np.float64(0.8065624152580675), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.182588734219169), 'border_score': 0.8200000000000001}, 'threshold': 0.4083488357067108, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:27:22,050 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:27:22,416 - face_recognition - INFO - High detection confidence 0.89, using adaptive threshold: 0.41
+2025-06-20 22:27:22,416 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.55, threshold=0.41, texture=0.08, edges=0.00, detection=0.01, color=0.01, reflection=0.06, background=0.00, moire=0.25, saturation=0.12, border=0.03, 
+2025-06-20 22:27:22,416 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.5476720885849927), 'details': {'texture_score': np.float64(0.041061307685285715), 'edge_score': np.float64(0.9476937482903015), 'detection_score': 0.888837456703186, 'color_score': np.float64(0.8918039940717705), 'reflection_score': np.float64(0.7197146644782526), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.19819625990309953), 'border_score': 0.85}, 'threshold': 0.4088837456703186, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:27:23,921 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:27:24,365 - face_recognition - INFO - High detection confidence 0.89, using adaptive threshold: 0.41
+2025-06-20 22:27:24,365 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.57, threshold=0.41, texture=0.08, edges=0.00, detection=0.01, color=0.01, reflection=0.06, background=0.00, moire=0.25, saturation=0.12, border=0.05, 
+2025-06-20 22:27:24,366 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.57311886758134), 'details': {'texture_score': np.float64(0.04204228892497645), 'edge_score': np.float64(0.9450318793005493), 'detection_score': 0.8865614533424377, 'color_score': np.float64(0.8840814689869393), 'reflection_score': np.float64(0.7146644782526356), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.19489206213307242), 'border_score': 0.7333333333333334}, 'threshold': 0.40865614533424377, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:27:25,351 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:27:25,850 - face_recognition - INFO - High detection confidence 0.89, using adaptive threshold: 0.41
+2025-06-20 22:27:25,850 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.56, threshold=0.41, texture=0.08, edges=0.00, detection=0.01, color=0.01, reflection=0.05, background=0.00, moire=0.25, saturation=0.12, border=0.05, 
+2025-06-20 22:27:25,852 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.5625212136072558), 'details': {'texture_score': np.float64(0.04266781734460997), 'edge_score': np.float64(0.9458823157628619), 'detection_score': 0.8936538696289062, 'color_score': np.float64(0.8717243370473198), 'reflection_score': np.float64(0.7282265200353938), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.19769113516780434), 'border_score': 0.7714285714285715}, 'threshold': 0.40936538696289065, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:27:26,983 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:27:27,450 - face_recognition - INFO - High detection confidence 0.89, using adaptive threshold: 0.41
+2025-06-20 22:27:27,450 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.57, threshold=0.41, texture=0.08, edges=0.00, detection=0.01, color=0.01, reflection=0.06, background=0.00, moire=0.25, saturation=0.12, border=0.05, 
+2025-06-20 22:27:27,451 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.5661947498317657), 'details': {'texture_score': np.float64(0.02840951970821167), 'edge_score': np.float64(0.9503961438004721), 'detection_score': 0.8945949077606201, 'color_score': np.float64(0.8911410127379996), 'reflection_score': np.float64(0.7114393679148059), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.18953392611768172), 'border_score': 0.775}, 'threshold': 0.40945949077606203, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:27:30,532 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:27:30,987 - face_recognition - INFO - High detection confidence 0.90, using adaptive threshold: 0.41
+2025-06-20 22:27:30,987 - face_recognition - INFO - InsightFace enhanced spoof detection: score=0.61, threshold=0.41, texture=0.08, edges=0.00, detection=0.00, color=0.00, reflection=0.06, background=0.00, moire=0.25, saturation=0.12, border=0.08, 
+2025-06-20 22:27:30,988 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': np.True_, 'spoof_score': np.float64(0.6066035171904104), 'details': {'texture_score': np.float64(0.04724080102014931), 'edge_score': np.float64(0.9432490601141623), 'detection_score': 0.9047495126724243, 'color_score': np.float64(0.9061297494723787), 'reflection_score': np.float64(0.6819525405816008), 'background_score': 1.0, 'moire_score': 0.0, 'saturation_score': np.float64(0.18881319975395083), 'border_score': 0.5916666666666666}, 'threshold': 0.4104749512672424, 'method': 'enhanced_screen_detection'}
+2025-06-20 22:32:19,954 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:32:21,999 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:32:31,572 - face_recognition - INFO - Downloading Silent Face anti-spoofing model...
+2025-06-20 22:32:31,630 - face_recognition - ERROR - Error in Silent Face anti-spoofing: <urlopen error [Errno 8] nodename nor servname provided, or not known>
+2025-06-20 22:32:31,634 - face_recognition - ERROR - Traceback: Traceback (most recent call last):
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/urllib/request.py", line 1348, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/http/client.py", line 1286, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/http/client.py", line 1332, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/http/client.py", line 1281, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/http/client.py", line 1041, in _send_output
+    self.send(msg)
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/http/client.py", line 979, in send
+    self.connect()
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/http/client.py", line 1451, in connect
+    super().connect()
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/http/client.py", line 945, in connect
+    self.sock = self._create_connection(
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/ritherthemuncher/Desktop/server_facereg/services/face_recognition/insightface_service.py", line 100, in detect_spoofing
+    urllib.request.urlretrieve(model_url, model_path)
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/urllib/request.py", line 241, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/urllib/request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/urllib/request.py", line 519, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/urllib/request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/urllib/request.py", line 496, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/urllib/request.py", line 1391, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ritherthemuncher/anaconda3/lib/python3.11/urllib/request.py", line 1351, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>
+
+2025-06-20 22:52:18,991 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:52:21,713 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:52:21,753 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-20 22:52:22,693 - face_recognition - INFO - Anti-spoofing result: real=1.85, spoof=-1.85 (threshold: 0.5)
+2025-06-20 22:52:34,079 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:52:34,981 - face_recognition - INFO - Anti-spoofing result: real=2.38, spoof=-2.38 (threshold: 0.5)
+2025-06-20 22:53:14,965 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:53:17,823 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:53:17,836 - face_recognition - ERROR - Error in anti-spoofing: This ORT build has ['CoreMLExecutionProvider', 'CPUExecutionProvider'] enabled. Since ORT 1.9, you are required to explicitly set the providers parameter when instantiating InferenceSession. For example, onnxruntime.InferenceSession(..., providers=['CoreMLExecutionProvider', 'CPUExecutionProvider'], ...)
+2025-06-20 22:53:17,837 - face_recognition - ERROR - Traceback: Traceback (most recent call last):
+  File "/Users/ritherthemuncher/Desktop/server_facereg/services/face_recognition/insightface_service.py", line 94, in detect_spoofing
+    self.antispoofing_session = ort.InferenceSession(model_path)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ritherthemuncher/Desktop/server_facereg/facereg_env/lib/python3.11/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 432, in __init__
+    raise e
+  File "/Users/ritherthemuncher/Desktop/server_facereg/facereg_env/lib/python3.11/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 419, in __init__
+    self._create_inference_session(providers, provider_options, disabled_optimizers)
+  File "/Users/ritherthemuncher/Desktop/server_facereg/facereg_env/lib/python3.11/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 451, in _create_inference_session
+    raise ValueError(
+ValueError: This ORT build has ['CoreMLExecutionProvider', 'CPUExecutionProvider'] enabled. Since ORT 1.9, you are required to explicitly set the providers parameter when instantiating InferenceSession. For example, onnxruntime.InferenceSession(..., providers=['CoreMLExecutionProvider', 'CPUExecutionProvider'], ...)
+
+2025-06-20 22:53:57,392 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:54:00,040 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:54:00,057 - face_recognition - ERROR - Error in anti-spoofing: This ORT build has ['CoreMLExecutionProvider', 'CPUExecutionProvider'] enabled. Since ORT 1.9, you are required to explicitly set the providers parameter when instantiating InferenceSession. For example, onnxruntime.InferenceSession(..., providers=['CoreMLExecutionProvider', 'CPUExecutionProvider'], ...)
+2025-06-20 22:54:00,058 - face_recognition - ERROR - Traceback: Traceback (most recent call last):
+  File "/Users/ritherthemuncher/Desktop/server_facereg/services/face_recognition/insightface_service.py", line 94, in detect_spoofing
+    self.antispoofing_session = ort.InferenceSession(model_path)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ritherthemuncher/Desktop/server_facereg/facereg_env/lib/python3.11/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 432, in __init__
+    raise e
+  File "/Users/ritherthemuncher/Desktop/server_facereg/facereg_env/lib/python3.11/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 419, in __init__
+    self._create_inference_session(providers, provider_options, disabled_optimizers)
+  File "/Users/ritherthemuncher/Desktop/server_facereg/facereg_env/lib/python3.11/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 451, in _create_inference_session
+    raise ValueError(
+ValueError: This ORT build has ['CoreMLExecutionProvider', 'CPUExecutionProvider'] enabled. Since ORT 1.9, you are required to explicitly set the providers parameter when instantiating InferenceSession. For example, onnxruntime.InferenceSession(..., providers=['CoreMLExecutionProvider', 'CPUExecutionProvider'], ...)
+
+2025-06-20 22:54:36,276 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:54:38,661 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:54:38,683 - face_recognition - INFO - Available ONNX Runtime providers: ['CoreMLExecutionProvider', 'CPUExecutionProvider']
+2025-06-20 22:54:40,822 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-20 22:54:40,830 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:55:05,227 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:55:07,576 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:55:07,599 - face_recognition - INFO - Available ONNX Runtime providers: ['CoreMLExecutionProvider', 'CPUExecutionProvider']
+2025-06-20 22:55:09,119 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-20 22:55:20,333 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:55:22,517 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:55:22,537 - face_recognition - INFO - Available ONNX Runtime providers: ['CoreMLExecutionProvider', 'CPUExecutionProvider']
+2025-06-20 22:55:23,352 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-20 22:55:33,856 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:55:36,197 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 22:55:36,212 - face_recognition - ERROR - Error in anti-spoofing: This ORT build has ['CoreMLExecutionProvider', 'CPUExecutionProvider'] enabled. Since ORT 1.9, you are required to explicitly set the providers parameter when instantiating InferenceSession. For example, onnxruntime.InferenceSession(..., providers=['CoreMLExecutionProvider', 'CPUExecutionProvider'], ...)
+2025-06-20 22:55:36,212 - face_recognition - ERROR - Traceback: Traceback (most recent call last):
+  File "/Users/ritherthemuncher/Desktop/server_facereg/services/face_recognition/insightface_service.py", line 94, in detect_spoofing
+    self.antispoofing_session = ort.InferenceSession(model_path)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ritherthemuncher/Desktop/server_facereg/facereg_env/lib/python3.11/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 432, in __init__
+    raise e
+  File "/Users/ritherthemuncher/Desktop/server_facereg/facereg_env/lib/python3.11/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 419, in __init__
+    self._create_inference_session(providers, provider_options, disabled_optimizers)
+  File "/Users/ritherthemuncher/Desktop/server_facereg/facereg_env/lib/python3.11/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 451, in _create_inference_session
+    raise ValueError(
+ValueError: This ORT build has ['CoreMLExecutionProvider', 'CPUExecutionProvider'] enabled. Since ORT 1.9, you are required to explicitly set the providers parameter when instantiating InferenceSession. For example, onnxruntime.InferenceSession(..., providers=['CoreMLExecutionProvider', 'CPUExecutionProvider'], ...)
+
+2025-06-20 22:56:04,615 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:56:05,581 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:56:25,045 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:56:29,623 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 22:56:37,230 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:03:05,270 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:03:08,187 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 23:03:08,425 - face_recognition - INFO - Available ONNX Runtime providers: ['CoreMLExecutionProvider', 'CPUExecutionProvider']
+2025-06-20 23:03:11,225 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-20 23:03:12,827 - face_recognition - INFO - Anti-spoofing result: real=1.66, spoof=-1.66 (threshold: 0.5)
+2025-06-20 23:03:13,530 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:13,530 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:13,530 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:13,530 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:13,530 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:13,531 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:13,531 - face_recognition - INFO - No match found with insightface, trying deepface
+2025-06-20 23:03:22,020 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 23:03:22,021 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 23:03:22,022 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpwl434fg0.jpg
+2025-06-20 23:03:22,022 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 23:03:22,486 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 23:03:22,486 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 23:03:22,489 - face_recognition - INFO - Face image captured successfully
+2025-06-20 23:03:22,493 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,494 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,494 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,494 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,494 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,494 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,494 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,494 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,494 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,494 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,495 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,495 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,495 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,495 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,495 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:03:22,495 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:04:49,885 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:04:54,394 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 23:04:54,410 - face_recognition - INFO - Available ONNX Runtime providers: ['CoreMLExecutionProvider', 'CPUExecutionProvider']
+2025-06-20 23:04:55,340 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-20 23:08:51,929 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:08:53,780 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 23:08:53,795 - face_recognition - INFO - Available ONNX Runtime providers: ['CoreMLExecutionProvider', 'CPUExecutionProvider']
+2025-06-20 23:08:55,091 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-20 23:08:55,762 - face_recognition - INFO - Anti-spoofing result: real=3.37, spoof=-3.37 (threshold: 0.5)
+2025-06-20 23:08:56,258 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:08:56,258 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:08:56,258 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:08:56,258 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:08:56,258 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:08:56,258 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:08:56,258 - face_recognition - INFO - No match found with insightface, trying deepface
+2025-06-20 23:09:05,766 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 23:09:05,769 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 23:09:05,770 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpr46yofta.jpg
+2025-06-20 23:09:05,770 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 23:09:06,328 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 23:09:06,328 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 23:09:06,330 - face_recognition - INFO - Face image captured successfully
+2025-06-20 23:09:06,337 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,337 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,337 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,337 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,337 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,337 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,338 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,338 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,338 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,338 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,338 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,338 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,338 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,338 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,338 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:06,338 - face_recognition - ERROR - Error deserializing embedding: No module named 'numpy._core'
+2025-06-20 23:09:55,838 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:09:58,036 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 23:09:58,051 - face_recognition - INFO - Available ONNX Runtime providers: ['CoreMLExecutionProvider', 'CPUExecutionProvider']
+2025-06-20 23:09:58,901 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-20 23:09:59,450 - face_recognition - INFO - Anti-spoofing result: real=2.69, spoof=-2.69 (threshold: 0.5)
+2025-06-20 23:10:07,717 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:10:08,568 - face_recognition - INFO - Anti-spoofing result: real=2.70, spoof=-2.70 (threshold: 0.5)
+2025-06-20 23:10:18,942 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:10:19,458 - face_recognition - INFO - Anti-spoofing result: real=-2.93, spoof=2.93 (threshold: 0.5)
+2025-06-20 23:10:19,459 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': True, 'spoof_score': 2.92578125, 'details': {'real_score': -2.92578125, 'detection_confidence': 0.8219015598297119}, 'method': 'face_antispoofing'}
+2025-06-20 23:10:21,679 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:10:22,056 - face_recognition - INFO - Anti-spoofing result: real=-5.54, spoof=5.54 (threshold: 0.5)
+2025-06-20 23:10:22,056 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': True, 'spoof_score': 5.54296875, 'details': {'real_score': -5.54296875, 'detection_confidence': 0.7086586952209473}, 'method': 'face_antispoofing'}
+2025-06-20 23:10:25,743 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:10:26,474 - face_recognition - INFO - Anti-spoofing result: real=-4.75, spoof=4.75 (threshold: 0.5)
+2025-06-20 23:10:26,477 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': True, 'spoof_score': 4.75390625, 'details': {'real_score': -4.75390625, 'detection_confidence': 0.7972785234451294}, 'method': 'face_antispoofing'}
+2025-06-20 23:10:28,444 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:10:29,180 - face_recognition - INFO - Anti-spoofing result: real=1.23, spoof=-1.23 (threshold: 0.5)
+2025-06-20 23:10:56,384 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:10:58,211 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 23:10:58,223 - face_recognition - INFO - Available ONNX Runtime providers: ['CoreMLExecutionProvider', 'CPUExecutionProvider']
+2025-06-20 23:10:59,037 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-20 23:10:59,422 - face_recognition - INFO - Anti-spoofing result: real=1.72, spoof=-1.72 (threshold: 0.5)
+2025-06-20 23:11:28,306 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:11:31,177 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 23:11:31,196 - face_recognition - INFO - Available ONNX Runtime providers: ['CoreMLExecutionProvider', 'CPUExecutionProvider']
+2025-06-20 23:11:32,128 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-20 23:11:32,701 - face_recognition - INFO - Anti-spoofing result: real=-5.40, spoof=5.40 (threshold: 0.5)
+2025-06-20 23:11:32,702 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': True, 'spoof_score': 5.3984375, 'details': {'real_score': -5.3984375, 'detection_confidence': 0.7781549096107483}, 'method': 'face_antispoofing'}
+2025-06-20 23:11:35,322 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 23:11:35,817 - face_recognition - INFO - Anti-spoofing result: real=3.07, spoof=-3.07 (threshold: 0.5)

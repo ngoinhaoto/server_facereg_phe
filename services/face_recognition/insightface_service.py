@@ -10,11 +10,22 @@ class InsightFaceService(FaceRecognitionBase):
     def __init__(self, det_size=(640, 640)):
         """Initialize InsightFace model"""
         super().__init__("insightface")
-        from insightface.app import FaceAnalysis
-        
-        self.app = FaceAnalysis(name="buffalo_l", root="./models")
-        self.app.prepare(ctx_id=0, det_size=det_size)
-        logger.info("InsightFace model loaded successfully")
+        try:
+            # Try to import with error handling
+            from insightface.app import FaceAnalysis
+            
+            # Explicitly set providers for ONNX Runtime
+            import os
+            os.environ['ONNXRUNTIME_PROVIDERS_PATH'] = ''  # Reset providers path
+            
+            self.app = FaceAnalysis(name="buffalo_l", root="./models")
+            self.app.prepare(ctx_id=0, det_size=det_size)
+            logger.info("InsightFace model loaded successfully")
+        except Exception as e:
+            logger.error(f"Error initializing InsightFace: {str(e)}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            raise RuntimeError(f"Failed to initialize InsightFace: {str(e)}")
     
     def extract_face_embedding(self, image_data: bytes) -> Tuple[Optional[np.ndarray], float, Optional[bytes]]:
         """Extract embedding using InsightFace"""
@@ -67,9 +78,7 @@ class InsightFaceService(FaceRecognitionBase):
                     aligned_face_bytes = buf.tobytes()
             except Exception as e:
                 logger.warning(f"Failed to crop face: {str(e)}")
-                # Continue with the embedding even if cropping fails
     
-            # Return embedding, confidence score, and aligned face
             return face.embedding, float(face.det_score), aligned_face_bytes
             
         except Exception as e:
@@ -77,85 +86,122 @@ class InsightFaceService(FaceRecognitionBase):
             return None, 0.0, None
     
     def detect_spoofing(self, image_data: bytes) -> dict:
-        """Custom anti-spoofing implementation for InsightFace"""
+        """Anti-spoofing using Face-AntiSpoofing ONNX model"""
         try:
-            # Convert image to numpy array
+            import os
+            import numpy as np
+            import cv2
+            import onnxruntime as ort
+            
+            model_path = os.path.join("./models", "AntiSpoofing_bin_1.5_128.onnx")
+            
+            if not os.path.exists(model_path):
+                logger.warning(f"Anti-spoofing model not found at: {model_path}")
+                return self._fallback_spoofing_detection(image_data)
+            
+            if not hasattr(self, 'antispoofing_session'):
+                available_providers = ort.get_available_providers()
+                logger.info(f"Available ONNX Runtime providers: {available_providers}")
+                
+                self.antispoofing_session = ort.InferenceSession(
+                    model_path,
+                    providers=available_providers
+                )
+                
+                self.antispoofing_input_name = self.antispoofing_session.get_inputs()[0].name
+                self.antispoofing_output_name = self.antispoofing_session.get_outputs()[0].name
+                logger.info("Anti-spoofing model loaded successfully")
+            
+            # Preprocess image
             nparr = np.frombuffer(image_data, np.uint8)
             img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
             if img is None:
                 return {"is_spoof": True, "spoof_score": 1.0, "error": "Failed to decode image"}
             
-            # Detect faces first to focus analysis on face region
-            faces = self.app.get(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+            # Detect face first to focus analysis
+            rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            faces = self.app.get(rgb_img)
             if not faces:
                 return {"is_spoof": True, "spoof_score": 1.0, "error": "No face detected"}
             
             # Get the face with highest detection score
             face = max(faces, key=lambda x: x.det_score)
-            
-            # Extract face region for focused analysis
             bbox = face.bbox.astype(int)
             x1, y1, x2, y2 = bbox
             
-            # Ensure coordinates are within image bounds
+            # Add padding
             h, w = img.shape[:2]
-            x1, y1 = max(0, x1), max(0, y1)
-            x2, y2 = min(w, x2), min(h, y2)
+            pad_x = int((x2 - x1) * 0.2)
+            pad_y = int((y2 - y1) * 0.2)
+            x1 = max(0, x1 - pad_x)
+            y1 = max(0, y1 - pad_y)
+            x2 = min(w, x2 + pad_x)
+            y2 = min(h, y2 + pad_y)
             
-            face_region = img[y1:y2, x1:x2]
-            if face_region.size == 0:
-                return {"is_spoof": True, "spoof_score": 1.0, "error": "Invalid face region"}
+            # Crop face region
+            face_img = img[y1:y2, x1:x2]
             
-            # Convert to grayscale for texture analysis
-            gray = cv2.cvtColor(face_region, cv2.COLOR_BGR2GRAY)
+            # Resize to model's expected input (128x128) and convert to RGB
+            face_img = cv2.cvtColor(face_img, cv2.COLOR_BGR2RGB)
+            face_img = cv2.resize(face_img, (128, 128))
             
-            # 1. Texture Analysis
-            texture_var = np.var(gray)
-            # Cap texture score at 1.0 to prevent inflated scores
-            texture_score = min(1.0, texture_var / 2000.0)
+            # Normalize to [0, 1] and convert to the right format (NCHW)
+            face_tensor = face_img.astype(np.float32) / 255.0
+            face_tensor = np.transpose(face_tensor, (2, 0, 1))  # HWC to CHW
+            face_tensor = np.expand_dims(face_tensor, axis=0)  # Add batch dimension
             
-            # 2. Edge density (printed photos often have sharper edges)
-            edges = cv2.Canny(gray, 100, 200)
-            edge_density = np.sum(edges) / (edges.shape[0] * edges.shape[1])
-            edge_score = 1.0 - (edge_density / 255.0)  # Normalize and invert
+            # Run inference
+            outputs = self.antispoofing_session.run([self.antispoofing_output_name], 
+                                                   {self.antispoofing_input_name: face_tensor})
             
-            # 3. Face detection confidence
-            detection_score = float(face.det_score)
+            # Get prediction - outputs should be probabilities for [real, fake]
+            prediction = outputs[0][0]
             
-            # 4. Color variance analysis (screens have different color distributions)
-            b, g, r = cv2.split(face_region)
-            color_vars = [np.var(b), np.var(g), np.var(r)]
-            color_var_ratio = max(color_vars) / (min(color_vars) + 1e-5)
-            color_score = min(1.0, max(0.0, 1.0 - abs(color_var_ratio - 1.5) / 1.5))
+            # Ensure we have a valid prediction array
+            if len(prediction) >= 2:
+                real_score = float(prediction[0])
+                spoof_score = float(prediction[1])
+            else:
+                # If prediction format is different, use first value as spoof score
+                spoof_score = float(prediction[0])
+                real_score = 1.0 - spoof_score
             
-            # Combine scores
-            spoof_indicators = {
-                "texture": 0.35 * (1.0 - texture_score),
-                "edges": 0.25 * (1.0 - edge_score),
-                "detection": 0.20 * (1.0 - detection_score),
-                "color": 0.20 * (1.0 - color_score)
-            }
+            # Set threshold (can be adjusted based on testing)
+            threshold = 0.5
             
-            # Calculate final score (higher = more likely to be spoof)
-            spoof_score = sum(spoof_indicators.values())
-            
-            logger.info(f"InsightFace spoof detection: score={spoof_score:.2f}, " +
-                      f"texture={spoof_indicators['texture']:.2f}, " +
-                      f"edges={spoof_indicators['edges']:.2f}, " +
-                      f"detection={spoof_indicators['detection']:.2f}, " +
-                      f"color={spoof_indicators['color']:.2f}")
+            logger.info(f"Anti-spoofing result: real={real_score:.2f}, spoof={spoof_score:.2f} (threshold: {threshold})")
             
             return {
-                "is_spoof": spoof_score > 0.5,
+                "is_spoof": spoof_score > threshold,
                 "spoof_score": spoof_score,
                 "details": {
-                    "texture_score": texture_score,
-                    "edge_score": edge_score,
-                    "detection_score": detection_score,
-                    "color_score": color_score
+                    "real_score": real_score,
+                    "detection_confidence": float(face.det_score)
                 },
-                "method": "custom_texture_analysis"
+                "method": "face_antispoofing"
             }
         except Exception as e:
-            logger.error(f"Error in custom spoof detection: {str(e)}")
-            return {"is_spoof": True, "spoof_score": 1.0, "error": str(e)}
+            logger.error(f"Error in anti-spoofing: {str(e)}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            
+            # Fall back to simple detection
+            return self._fallback_spoofing_detection(image_data)
+    
+    def _fallback_spoofing_detection(self, image_data: bytes) -> dict:
+        """Fallback method for anti-spoofing detection (basic check)"""
+        try:
+            nparr = np.frombuffer(image_data, np.uint8)
+            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+            if img is None:
+                return {"is_spoof": True, "spoof_score": 1.0, "error": "Failed to decode image"}
+            
+            rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            faces = self.app.get(rgb_img)
+            if not faces:
+                return {"is_spoof": True, "spoof_score": 1.0, "error": "No face detected"}
+            
+            return {"is_spoof": False, "spoof_score": 0.0}
+        except Exception as e:
+            logger.error(f"Error in fallback anti-spoofing detection: {str(e)}")
+            return {"is_spoof": False, "spoof_score": 0.0, "error": str(e)}

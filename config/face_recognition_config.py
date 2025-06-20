@@ -8,7 +8,7 @@ ModelType = Literal["insightface", "deepface"]
 class FaceRecognitionConfig(BaseModel):
     """Configuration settings for face recognition services"""
     
-    DEFAULT_MODEL: ModelType = "deepface"
+    DEFAULT_MODEL: ModelType = "insightface"
     
     REGISTER_FACE_MODEL: Optional[ModelType] = None
     CHECK_IN_MODEL: Optional[ModelType] = None
