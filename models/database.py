@@ -100,12 +100,11 @@ class FaceEmbedding(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"))
-    
     encrypted_embedding = Column(LargeBinary, nullable=False)
-    
     confidence_score = Column(Float)
     device_id = Column(String, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    model_type = Column(String, index=True) 
     
     # Relationships
     user = relationship("User", back_populates="face_embeddings")

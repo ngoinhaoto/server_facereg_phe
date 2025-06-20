@@ -895,3 +895,253 @@
 2025-06-19 23:16:55,866 - face_recognition - INFO - Using default model for check_in: insightface
 2025-06-19 23:16:56,372 - face_recognition - INFO - InsightFace spoof detection: score=0.09, texture=0.00, edges=0.01, detection=0.04, color=0.05
 2025-06-19 23:16:56,373 - face_recognition - INFO - Anti-spoofing check passed using insightface model. Score: 0.09
+2025-06-19 23:17:38,815 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-19 23:17:45,709 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-19 23:17:45,710 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:17:45,710 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:17:45,777 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:17:45,779 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpc834fkpd.jpg
+2025-06-19 23:17:45,779 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:17:46,391 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:17:46,391 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:17:46,395 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:18:20,595 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-19 23:18:20,596 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 23:18:20,599 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:18:20,600 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmppxowkkx8.jpg
+2025-06-19 23:18:20,600 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:18:20,863 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:18:20,863 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:18:20,865 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:18:20,866 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.90
+2025-06-19 23:18:24,019 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-19 23:18:24,019 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 23:18:24,021 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:18:24,022 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpd5a4f53t.jpg
+2025-06-19 23:18:24,022 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:18:24,188 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:18:24,188 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:18:24,190 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:18:24,191 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.90
+2025-06-19 23:18:26,669 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-19 23:18:26,670 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 23:18:26,673 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:18:26,674 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpku6prhr_.jpg
+2025-06-19 23:18:26,674 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:18:26,869 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:18:26,869 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:18:26,871 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:18:26,872 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.90
+2025-06-19 23:18:29,422 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-19 23:18:29,422 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 23:18:29,425 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:18:29,426 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp6rsoljbd.jpg
+2025-06-19 23:18:29,426 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:18:29,612 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:18:29,612 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:18:29,614 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:18:29,615 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.90
+2025-06-19 23:18:31,786 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-19 23:18:31,786 - face_recognition - INFO - Registering new face using deepface model
+2025-06-19 23:18:31,789 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:18:31,790 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpkfr_rfsg.jpg
+2025-06-19 23:18:31,790 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:18:31,962 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:18:31,962 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:18:31,964 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:18:31,965 - face_recognition - INFO - Face embedding extracted successfully with confidence: 0.90
+2025-06-19 23:18:46,089 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-19 23:18:46,091 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:18:46,091 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:18:46,094 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:18:46,095 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpr9z22dq4.jpg
+2025-06-19 23:18:46,095 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:18:46,385 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:18:46,385 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:18:46,390 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:18:47,088 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-19 23:18:47,089 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:18:47,090 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:18:47,092 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:18:47,093 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp5uch6gzy.jpg
+2025-06-19 23:18:47,093 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:18:47,261 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:18:47,261 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:18:47,263 - face_recognition - INFO - Face image captured successfully
+2025-06-19 23:18:47,736 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-19 23:18:47,738 - face_recognition - INFO - Anti-spoofing check disabled for DeepFace - automatically passing
+2025-06-19 23:18:47,739 - face_recognition - INFO - Anti-spoofing check passed using deepface model. Score: 0.00
+2025-06-19 23:18:47,741 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-19 23:18:47,742 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpe_it5kle.jpg
+2025-06-19 23:18:47,742 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-19 23:18:47,983 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-19 23:18:47,983 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-19 23:18:47,985 - face_recognition - INFO - Face image captured successfully
+2025-06-20 16:52:52,745 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 16:52:52,746 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 16:52:59,319 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 16:52:59,335 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 16:52:59,336 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp51qwgzs5.jpg
+2025-06-20 16:52:59,336 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 16:52:59,813 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 16:52:59,813 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 16:52:59,817 - face_recognition - INFO - Face image captured successfully
+2025-06-20 16:52:59,828 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 16:53:00,644 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 16:53:01,061 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 16:53:01,061 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 16:53:03,904 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 16:53:03,905 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 16:53:03,908 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 16:53:03,909 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp9h16_z7j.jpg
+2025-06-20 16:53:03,909 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 16:53:04,160 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 16:53:04,160 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 16:53:04,162 - face_recognition - INFO - Face image captured successfully
+2025-06-20 16:53:04,168 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 16:53:04,538 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 16:53:04,539 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 16:53:17,622 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 16:53:17,622 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 16:53:17,626 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 16:53:17,626 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpufqroqjr.jpg
+2025-06-20 16:53:17,626 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 16:53:17,852 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 16:53:17,852 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 16:53:17,854 - face_recognition - INFO - Face image captured successfully
+2025-06-20 16:53:17,858 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 16:53:18,349 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 16:53:18,350 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 16:53:34,803 - face_recognition - INFO - Using default model for register_face: deepface
+2025-06-20 16:53:34,803 - face_recognition - INFO - Registering face using deepface model with store_both_models=True
+2025-06-20 16:53:34,806 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 16:53:34,807 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpkg5h95zv.jpg
+2025-06-20 16:53:34,807 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 16:53:35,051 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 16:53:35,051 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 16:53:35,053 - face_recognition - INFO - Face image captured successfully
+2025-06-20 16:53:35,056 - face_recognition - INFO - Stored face embedding for user 13 with model deepface
+2025-06-20 16:53:35,453 - face_recognition - INFO - Stored face embedding for user 13 with model insightface
+2025-06-20 16:53:35,454 - face_recognition - INFO - Successfully stored secondary embedding with insightface
+2025-06-20 16:54:08,972 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 16:54:08,976 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 16:54:08,977 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpuckigwei.jpg
+2025-06-20 16:54:08,977 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 16:54:09,221 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 16:54:09,221 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 16:54:09,223 - face_recognition - INFO - Face image captured successfully
+2025-06-20 16:54:09,322 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 16:54:09,329 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 16:54:09,330 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp1kubk3m4.jpg
+2025-06-20 16:54:09,330 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 16:54:09,517 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 16:54:09,517 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 16:54:09,519 - face_recognition - INFO - Face image captured successfully
+2025-06-20 16:54:10,697 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 16:54:10,702 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 16:54:10,702 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpx8q92dk0.jpg
+2025-06-20 16:54:10,703 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 16:54:10,876 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 16:54:10,876 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 16:54:10,878 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:00:43,618 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:00:50,403 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 17:00:50,418 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:00:50,418 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpmu69dwaf.jpg
+2025-06-20 17:00:50,419 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 17:00:50,871 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:00:50,871 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:00:50,873 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:00:52,510 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:00:52,515 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:00:52,516 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpimb67j9i.jpg
+2025-06-20 17:00:52,516 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 17:00:52,715 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:00:52,716 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:00:52,718 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:00:54,850 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:00:54,854 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:00:54,855 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpplqpdebg.jpg
+2025-06-20 17:00:54,855 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 17:00:55,020 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:00:55,020 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:00:55,023 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:03:04,654 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:03:11,265 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 17:03:11,281 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:03:11,282 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpc2ljo337.jpg
+2025-06-20 17:03:11,282 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 17:03:11,717 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:03:11,717 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:03:11,720 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:03:14,252 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:03:14,260 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:03:14,261 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmphv2a0a3u.jpg
+2025-06-20 17:03:14,261 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 17:03:14,578 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:03:14,579 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:03:14,582 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:03:33,073 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 17:03:35,430 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-20 17:03:37,786 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 17:03:45,171 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-20 17:03:53,232 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:04:02,570 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 17:04:02,631 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:04:02,632 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp7ij63uza.jpg
+2025-06-20 17:04:02,633 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 17:04:03,100 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:04:03,100 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:04:03,105 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:05:54,968 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:06:03,206 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 17:06:03,228 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:06:03,229 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpzn1uedwb.jpg
+2025-06-20 17:06:03,229 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 17:06:03,865 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:06:03,866 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:06:03,870 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:06:11,588 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:06:11,593 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:06:11,593 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpjlhdwqvh.jpg
+2025-06-20 17:06:11,593 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 17:06:11,925 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:06:11,925 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:06:11,928 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:08:29,679 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:08:36,907 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 17:08:36,927 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:08:36,928 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmps0zdvh0g.jpg
+2025-06-20 17:08:36,928 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=retinaface
+2025-06-20 17:08:42,986 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:08:42,987 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:08:42,992 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:08:45,127 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:08:45,131 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:08:45,132 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpq7ykof2_.jpg
+2025-06-20 17:08:45,132 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=retinaface
+2025-06-20 17:08:48,391 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:08:48,391 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:08:48,395 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:08:50,224 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:08:50,228 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:08:50,229 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpfnj54bi5.jpg
+2025-06-20 17:08:50,229 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=retinaface
+2025-06-20 17:08:53,573 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:08:53,574 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:08:53,577 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:09:00,121 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:09:07,319 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-20 17:09:07,337 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:09:07,338 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp1gdtpk16.jpg
+2025-06-20 17:09:07,338 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 17:09:07,809 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:09:07,809 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:09:07,812 - face_recognition - INFO - Face image captured successfully
+2025-06-20 17:09:09,773 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-20 17:09:09,777 - face_recognition - INFO - Starting DeepFace embedding extraction
+2025-06-20 17:09:09,778 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpd8ovvszu.jpg
+2025-06-20 17:09:09,778 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-20 17:09:09,966 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-20 17:09:09,966 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-20 17:09:09,970 - face_recognition - INFO - Face image captured successfully

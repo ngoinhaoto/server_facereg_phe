@@ -8,7 +8,7 @@ ModelType = Literal["insightface", "deepface"]
 class FaceRecognitionConfig(BaseModel):
     """Configuration settings for face recognition services"""
     
-    DEFAULT_MODEL: ModelType = "insightface"
+    DEFAULT_MODEL: ModelType = "deepface"
     
     REGISTER_FACE_MODEL: Optional[ModelType] = None
     CHECK_IN_MODEL: Optional[ModelType] = None
@@ -21,26 +21,14 @@ class FaceRecognitionConfig(BaseModel):
     SIMILARITY_THRESHOLD: float = 0.5
     
     def get_model_for_operation(self, operation: str) -> ModelType:
-        """
-        Get the appropriate model for a specific operation,
-        falling back to the default if no override exists
-        
-        Args:
-            operation: The operation name (e.g. "check_in", "register_face")
-            
-        Returns:
-            The model to use for this operation
-        """
         operation_upper = operation.upper()
         override_attr = f"{operation_upper}_MODEL"
         
-        # Check if there's a specific override for this operation
         if hasattr(self, override_attr) and getattr(self, override_attr) is not None:
             model = getattr(self, override_attr)
             logger.info(f"Using operation-specific model for {operation}: {model}")
             return model
         
-        # Otherwise use the default
         logger.info(f"Using default model for {operation}: {self.DEFAULT_MODEL}")
         return self.DEFAULT_MODEL
     

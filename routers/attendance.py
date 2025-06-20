@@ -18,12 +18,13 @@ router = APIRouter(prefix="/attendance", tags=["Attendance"])
 async def check_in(
     session_id: int,
     file: UploadFile = File(...),
-    model: str = None,  # Make this optional
+    model: str = None,
+    try_both_models: bool = True,  # Add this parameter
     background_tasks: BackgroundTasks = None,
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_active_user)
 ):
-    # If model is not specified in the request, get it from config
+    # Use configuration if parameters aren't provided
     if model is None:
         model = face_recognition_config.get_model_for_operation("check_in")
     
@@ -52,30 +53,12 @@ async def check_in(
     
     image_data = await file.read()
     
+    # Extract face embedding with the primary model
     face_service = FaceRecognitionService.get_instance(model_type=model)
-    
-    # Use config for anti-spoofing feature flag
-    if face_recognition_config.ENABLE_ANTISPOOFING:
-        spoof_result = await run_in_threadpool(
-            lambda: face_service.detect_spoofing(image_data)
-        )
-        
-        if spoof_result["is_spoof"]:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Possible photo/screen attack detected. Please use your real face for check-in. (Score: {spoof_result['spoof_score']:.2f})"
-            )
-        
-        logger.info(f"Anti-spoofing check passed using {model} model. Score: {spoof_result['spoof_score']:.2f}")
-    else:
-        logger.info(f"Anti-spoofing check skipped (disabled in config)")
-    
-    # Continue with regular face recognition process
     processed_image = await run_in_threadpool(
         lambda: face_service.preprocess_image(image_data)
     )
     
-    # Extract face embedding
     embedding, confidence, aligned_face = await run_in_threadpool(
         lambda: face_service.extract_face_embedding(processed_image)
     )
@@ -86,10 +69,35 @@ async def check_in(
             detail="No face detected in the image. Please try with a clearer photo."
         )
     
-    # Match against ALL stored face embeddings, not just the current user's
+    # First try matching with the current model
     match, matched_user_id, similarity = await run_in_threadpool(
-        lambda: face_service.compare_face(embedding, db, user_id=None, threshold=face_recognition_config.SIMILARITY_THRESHOLD)
+        lambda: face_service.compare_face(embedding, db, user_id=None, 
+                                         threshold=face_recognition_config.SIMILARITY_THRESHOLD)
     )
+    
+    # If no match found and try_both_models is enabled, try with the other model
+    if not match and try_both_models:
+        other_model = "insightface" if model == "deepface" else "deepface"
+        logger.info(f"No match found with {model}, trying {other_model}")
+        
+        other_service = FaceRecognitionService.get_instance(model_type=other_model)
+        other_embedding, other_confidence, _ = await run_in_threadpool(
+            lambda: other_service.extract_face_embedding(processed_image)
+        )
+        
+        if other_embedding is not None:
+            match, matched_user_id, similarity = await run_in_threadpool(
+                lambda: other_service.compare_face(other_embedding, db, user_id=None,
+                                                 threshold=face_recognition_config.SIMILARITY_THRESHOLD)
+            )
+            
+            if match:
+                logger.info(f"Match found with alternate model {other_model}, similarity: {similarity:.2f}")
+                # Update the active model and embedding for the rest of the function
+                model = other_model
+                face_service = other_service
+                embedding = other_embedding
+                confidence = other_confidence
     
     # If no match found and current user has no embeddings, allow first-time registration
     if not match and current_user.role == "student":
@@ -288,17 +296,13 @@ async def get_session_attendance(
 async def register_face(
     file: UploadFile = File(...),
     device_id: str = "web",
-    model: str = None,  # Make this optional
-    fallback_if_failed: bool = None,  # Make this optional
+    model: str = None,
+    store_both_models: bool = True,  # Add this parameter
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_active_user)
 ):
-    # Use configuration if parameters aren't provided
     if model is None:
         model = face_recognition_config.get_model_for_operation("register_face")
-    
-    if fallback_if_failed is None:
-        fallback_if_failed = face_recognition_config.ENABLE_FALLBACK
     
     if model not in ["insightface", "deepface"]:
         raise HTTPException(
@@ -306,94 +310,87 @@ async def register_face(
             detail="Invalid model selection. Choose 'insightface' or 'deepface'"
         )
     
-
-    if model == "deepface":
-        try:
-            import deepface
-        except ImportError:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="DeepFace model is not installed on the server. Please contact administrator."
-            )
-    
-    # Use the singleton pattern with specified model
-    face_service = FaceRecognitionService.get_instance(model_type=model)
-    
     image_data = await file.read()
     
-    # Log which model we're using
-    logger.info(f"Registering new face using {model} model")
+    logger.info(f"Registering face using {model} model with store_both_models={store_both_models}")
     
+    face_service = FaceRecognitionService.get_instance(model_type=model)
     processed_image = await run_in_threadpool(
         lambda: face_service.preprocess_image(image_data)
     )
     
-    embedding, confidence, aligned_face = await run_in_threadpool(
+    embedding_primary, confidence_primary, aligned_face_primary = await run_in_threadpool(
         lambda: face_service.extract_face_embedding(processed_image)
     )
     
-    # If DeepFace fails and fallback is enabled, try with InsightFace
-    if embedding is None and fallback_if_failed and model == "deepface":
-        logger.warning("DeepFace face extraction failed - falling back to InsightFace")
-        
-        fallback_service = FaceRecognitionService.get_instance(model_type="insightface")
-        embedding, confidence, aligned_face = await run_in_threadpool(
-            lambda: fallback_service.extract_face_embedding(processed_image)
-        )
-        
-        if embedding is not None:
-            logger.info("InsightFace fallback succeeded")
-    
-    # Add more detailed logging for debugging
-    if embedding is None:
-        logger.error("Face extraction failed - no embedding returned")
+    if embedding_primary is None:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="No face detected in the image. Please try with a clearer photo."
         )
-    else:
-        logger.info(f"Face embedding extracted successfully with confidence: {confidence:.2f}")
     
-    embeddings_count = await run_in_threadpool(
-        lambda: face_service.get_user_embeddings_count(db, current_user.id)
-    )
-    
-    embedding_id = await run_in_threadpool(
+    # Store the primary model embedding
+    embedding_id_primary = await run_in_threadpool(
         lambda: face_service.store_face_embedding(
-            db, current_user.id, embedding, confidence, device_id
+            db, current_user.id, embedding_primary, confidence_primary, device_id, model
         )
     )
-    
-    if not embedding_id:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to store face embedding"
-        )
     
     # Store the aligned face image if available
-    if aligned_face:
+    if aligned_face_primary and embedding_id_primary:
         try:
             face_image = FaceImage(
-                embedding_id=embedding_id,
-                image_data=aligned_face
+                embedding_id=embedding_id_primary,
+                image_data=aligned_face_primary
             )
             db.add(face_image)
             db.commit()
         except Exception as e:
             logger.error(f"Error storing face image: {str(e)}")
-            # Continue even if image storage fails
     
-    # Return response with aligned face preview if available
+    # If requested, also store with the secondary model
+    embedding_id_secondary = None
+    if store_both_models:
+        # Get the other model
+        other_model = "insightface" if model == "deepface" else "deepface"
+        
+        try:
+            # Process with secondary model
+            secondary_service = FaceRecognitionService.get_instance(model_type=other_model)
+            embedding_secondary, confidence_secondary, _ = await run_in_threadpool(
+                lambda: secondary_service.extract_face_embedding(processed_image)
+            )
+            
+            if embedding_secondary is not None:
+                # Store the secondary embedding
+                embedding_id_secondary = await run_in_threadpool(
+                    lambda: secondary_service.store_face_embedding(
+                        db, current_user.id, embedding_secondary, confidence_secondary, 
+                        f"{device_id}_auto_{other_model}", other_model
+                    )
+                )
+                logger.info(f"Successfully stored secondary embedding with {other_model}")
+        except Exception as e:
+            logger.error(f"Error processing with secondary model {other_model}: {str(e)}")
+    
+    # Get total embeddings count
+    embeddings_count = await run_in_threadpool(
+        lambda: face_service.get_user_embeddings_count(db, current_user.id)
+    )
+    
+    # Return response
     response = {
         "message": "Face registered successfully",
-        "embeddings_count": embeddings_count + 1,
-        "confidence": confidence,
-        "face_id": embedding_id
+        "embeddings_count": embeddings_count,
+        "confidence": confidence_primary,
+        "face_id": embedding_id_primary,
+        "dual_models": store_both_models,
+        "secondary_model_success": embedding_id_secondary is not None if store_both_models else None
     }
     
-    if aligned_face:
-        response["aligned_face"] = base64.b64encode(aligned_face).decode('utf-8')
-
+    if aligned_face_primary:
+        response["aligned_face"] = base64.b64encode(aligned_face_primary).decode('utf-8')
+    
     return response
 
 @router.get("/my-faces", response_model=Dict)
