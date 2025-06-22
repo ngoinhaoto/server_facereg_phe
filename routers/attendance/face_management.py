@@ -40,9 +40,14 @@ async def register_face(
         lambda: face_service.preprocess_image(image_data)
     )
     
-    embedding_primary, confidence_primary, aligned_face_primary = await run_in_threadpool(
+    result = await run_in_threadpool(
         lambda: face_service.extract_face_embedding(processed_image)
     )
+    
+    if len(result) == 3:
+        embedding_primary, confidence_primary, aligned_face_primary = result
+    else:
+        embedding_primary, confidence_primary, aligned_face_primary, _ = result
     
     if embedding_primary is None:
         raise HTTPException(
@@ -50,11 +55,9 @@ async def register_face(
             detail="No face detected in the image. Please try with a clearer photo."
         )
     
-    # Generate a unique registration group ID for this face registration
     import uuid
     registration_group_id = str(uuid.uuid4())
     
-    # Store the primary model embedding with the group ID
     embedding_id_primary = await run_in_threadpool(
         lambda: face_service.store_face_embedding(
             db, current_user.id, embedding_primary, confidence_primary, 
@@ -62,7 +65,6 @@ async def register_face(
         )
     )
     
-    # Store the aligned face image if available
     if aligned_face_primary and embedding_id_primary:
         try:
             face_image = FaceImage(
@@ -83,9 +85,15 @@ async def register_face(
         try:
             # Process with secondary model
             secondary_service = FaceRecognitionService.get_instance(model_type=other_model)
-            embedding_secondary, confidence_secondary, _ = await run_in_threadpool(
+            result = await run_in_threadpool(
                 lambda: secondary_service.extract_face_embedding(processed_image)
             )
+            
+            # Handle different return formats
+            if len(result) == 3:
+                embedding_secondary, confidence_secondary, _ = result
+            else:
+                embedding_secondary, confidence_secondary, _, _ = result
             
             if embedding_secondary is not None:
                 # Store the secondary embedding with the same group ID

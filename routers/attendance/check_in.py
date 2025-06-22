@@ -59,6 +59,7 @@ async def check_in(
     
     # Anti-spoofing check
     if face_recognition_config.ENABLE_ANTISPOOFING:
+        # Option 1: Keep separate calls
         spoof_result = await run_in_threadpool(
             lambda: face_service.detect_spoofing(processed_image)
         )
@@ -69,10 +70,17 @@ async def check_in(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Spoofing detected. Please use a real face for authentication. Score: {spoof_result.get('spoof_score', 0):.2f}"
             )
-    
-    embedding, confidence, aligned_face = await run_in_threadpool(
+
+    # Extract face embedding - need to handle the additional return value
+    result = await run_in_threadpool(
         lambda: face_service.extract_face_embedding(processed_image)
     )
+    
+    # Check if we got 3 or 4 values (for backward compatibility)
+    if len(result) == 3:
+        embedding, confidence, aligned_face = result
+    else:
+        embedding, confidence, aligned_face, _ = result  # Ignore the spoof result here
     
     if embedding is None:
         raise HTTPException(
@@ -92,9 +100,15 @@ async def check_in(
         logger.info(f"No match found with {model}, trying {other_model}")
         
         other_service = FaceRecognitionService.get_instance(model_type=other_model)
-        other_embedding, other_confidence, _ = await run_in_threadpool(
+        result = await run_in_threadpool(
             lambda: other_service.extract_face_embedding(processed_image)
         )
+        
+        # Handle different return formats
+        if len(result) == 3:
+            other_embedding, other_confidence, _ = result
+        else:
+            other_embedding, other_confidence, _, _ = result
         
         if other_embedding is not None:
             match, matched_user_id, similarity = await run_in_threadpool(

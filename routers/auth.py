@@ -89,10 +89,8 @@ async def verify_current_password(
     """
     Verify if the provided password matches the current user's password
     """
-    # Get the full user record with hashed_password
     user = get_user(db, user_id=current_user.id)
 
-    # Verify the password
     is_valid = verify_password(verify_data.password, user.hashed_password)
 
     return {"valid": is_valid}

@@ -27,15 +27,23 @@ class InsightFaceService(FaceRecognitionBase):
             logger.error(f"Traceback: {traceback.format_exc()}")
             raise RuntimeError(f"Failed to initialize InsightFace: {str(e)}")
     
-    def extract_face_embedding(self, image_data: bytes) -> Tuple[Optional[np.ndarray], float, Optional[bytes]]:
-        """Extract embedding using InsightFace"""
+    def extract_face_embedding(self, image_data: bytes, check_spoofing=False) -> Tuple[Optional[np.ndarray], float, Optional[bytes], Optional[dict]]:
+        """Extract embedding using InsightFace with optional anti-spoofing check"""
         try:
-            # Convert bytes to numpy array
+            # Optionally perform anti-spoofing check first
+            spoof_result = None
+            if check_spoofing:
+                spoof_result = self.detect_spoofing(image_data)
+                
+                if spoof_result.get("is_spoof", False):
+                    logger.warning("Spoofing detected in InsightFace, skipping embedding extraction")
+                    return None, 0.0, None, spoof_result
+        
             nparr = np.frombuffer(image_data, np.uint8)
             img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
             if img is None:
                 logger.error("Failed to decode image")
-                return None, 0.0, None
+                return None, 0.0, None, spoof_result
                 
             # RGB conversion (InsightFace expects RGB)
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -45,7 +53,7 @@ class InsightFaceService(FaceRecognitionBase):
             
             if not faces:
                 logger.warning("No face detected in the image")
-                return None, 0.0, None
+                return None, 0.0, None, spoof_result
             
             # Get the face with highest detection score
             face = max(faces, key=lambda x: x.det_score)
@@ -78,13 +86,13 @@ class InsightFaceService(FaceRecognitionBase):
                     aligned_face_bytes = buf.tobytes()
             except Exception as e:
                 logger.warning(f"Failed to crop face: {str(e)}")
-    
-            return face.embedding, float(face.det_score), aligned_face_bytes
+
+            return face.embedding, float(face.det_score), aligned_face_bytes, spoof_result
             
         except Exception as e:
             logger.error(f"Error extracting face embedding: {str(e)}")
-            return None, 0.0, None
-    
+            return None, 0.0, None, None
+        
     def detect_spoofing(self, image_data: bytes) -> dict:
         """Anti-spoofing using Face-AntiSpoofing ONNX model"""
         try:
@@ -138,7 +146,6 @@ class InsightFaceService(FaceRecognitionBase):
             x2 = min(w, x2 + pad_x)
             y2 = min(h, y2 + pad_y)
             
-            # Crop face region
             face_img = img[y1:y2, x1:x2]
             
             # Resize to model's expected input (128x128) and convert to RGB
@@ -157,17 +164,14 @@ class InsightFaceService(FaceRecognitionBase):
             # Get prediction - outputs should be probabilities for [real, fake]
             prediction = outputs[0][0]
             
-            # Ensure we have a valid prediction array
             if len(prediction) >= 2:
                 real_score = float(prediction[0])
                 spoof_score = float(prediction[1])
             else:
-                # If prediction format is different, use first value as spoof score
                 spoof_score = float(prediction[0])
                 real_score = 1.0 - spoof_score
             
-            # Set threshold (can be adjusted based on testing)
-            threshold = 0.5
+            threshold = 0
             
             logger.info(f"Anti-spoofing result: real={real_score:.2f}, spoof={spoof_score:.2f} (threshold: {threshold})")
             
