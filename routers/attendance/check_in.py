@@ -57,35 +57,36 @@ async def check_in(
         lambda: face_service.preprocess_image(image_data)
     )
     
-    # Anti-spoofing check
-    if face_recognition_config.ENABLE_ANTISPOOFING:
-        # Option 1: Keep separate calls
-        spoof_result = await run_in_threadpool(
-            lambda: face_service.detect_spoofing(processed_image)
-        )
-        
-        if spoof_result.get("is_spoof", False):
-            logger.warning(f"Spoofing attempt detected: {spoof_result}")
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Spoofing detected. Please use a real face for authentication. Score: {spoof_result.get('spoof_score', 0):.2f}"
-            )
-
-    # Extract face embedding - need to handle the additional return value
+    # Combine anti-spoofing and face extraction in one call
+    # This also checks for face completeness
     result = await run_in_threadpool(
-        lambda: face_service.extract_face_embedding(processed_image)
+        lambda: face_service.extract_face_embedding(processed_image, check_spoofing=face_recognition_config.ENABLE_ANTISPOOFING)
     )
     
     # Check if we got 3 or 4 values (for backward compatibility)
     if len(result) == 3:
         embedding, confidence, aligned_face = result
+        spoof_result = None
     else:
-        embedding, confidence, aligned_face, _ = result  # Ignore the spoof result here
+        embedding, confidence, aligned_face, spoof_result = result
+    
+    if spoof_result:
+        if spoof_result.get("is_spoof", False):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Spoofing detected. Please use a real face for authentication. Score: {spoof_result.get('spoof_score', 0):.2f}"
+            )
+            
+        if spoof_result.get("incomplete_face", False):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Incomplete face detected: {spoof_result.get('error', 'Please ensure your entire face is visible in the frame.')}"
+            )
     
     if embedding is None:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="No face detected in the image. Please try with a clearer photo."
+            detail="No face detected in the image. Please try with a clearer photo showing your full face."
         )
     
     # First try matching with the current model

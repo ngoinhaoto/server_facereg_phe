@@ -40,19 +40,37 @@ async def register_face(
         lambda: face_service.preprocess_image(image_data)
     )
     
+    # First perform face extraction with anti-spoofing check
+    # This will also check for face completeness
     result = await run_in_threadpool(
-        lambda: face_service.extract_face_embedding(processed_image)
+        lambda: face_service.extract_face_embedding(processed_image, check_spoofing=True)
     )
     
+    # Handle both 3-value and 4-value returns for backward compatibility
     if len(result) == 3:
         embedding_primary, confidence_primary, aligned_face_primary = result
+        spoof_result = None
     else:
-        embedding_primary, confidence_primary, aligned_face_primary, _ = result
+        embedding_primary, confidence_primary, aligned_face_primary, spoof_result = result
+    
+    # Check for spoofing or incomplete face
+    if spoof_result:
+        if spoof_result.get("is_spoof", False):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Spoofing detected. Please use a real face for registration."
+            )
+        
+        if spoof_result.get("incomplete_face", False):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Incomplete face detected: {spoof_result.get('error', 'Please ensure your entire face is visible in the frame.')}"
+            )
     
     if embedding_primary is None:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="No face detected in the image. Please try with a clearer photo."
+            detail="No face detected in the image. Please try with a clearer photo showing your full face."
         )
     
     import uuid

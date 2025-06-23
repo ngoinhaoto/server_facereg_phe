@@ -2872,3 +2872,692 @@ ValueError: This ORT build has ['CoreMLExecutionProvider', 'CPUExecutionProvider
 2025-06-22 21:46:07,119 - face_recognition - INFO - Using default model for check_in: insightface
 2025-06-22 21:46:07,561 - face_recognition - INFO - Anti-spoofing result: real=-3.69, spoof=3.69 (threshold: 0)
 2025-06-22 21:46:07,561 - face_recognition - WARNING - Spoofing attempt detected: {'is_spoof': True, 'spoof_score': 3.69140625, 'details': {'real_score': -3.69140625, 'detection_confidence': 0.88160240650177}, 'method': 'face_antispoofing'}
+2025-06-23 17:10:06,259 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:10:09,860 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-23 17:10:09,918 - face_recognition - INFO - Available ONNX Runtime providers: ['CoreMLExecutionProvider', 'CPUExecutionProvider']
+2025-06-23 17:10:10,875 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-23 17:10:11,858 - face_recognition - INFO - Anti-spoofing result: real=0.39, spoof=-0.39 (threshold: 0)
+2025-06-23 17:10:16,297 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:10:16,970 - face_recognition - INFO - Anti-spoofing result: real=2.18, spoof=-2.18 (threshold: 0)
+2025-06-23 17:10:17,423 - face_recognition - WARNING - Incomplete face detected: Face too small (width)
+2025-06-23 17:10:22,390 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:10:22,765 - face_recognition - INFO - Anti-spoofing result: real=-0.84, spoof=0.84 (threshold: 0)
+2025-06-23 17:10:22,765 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:10:24,797 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:10:25,222 - face_recognition - INFO - Anti-spoofing result: real=-1.78, spoof=1.78 (threshold: 0)
+2025-06-23 17:10:25,222 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:10:27,653 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:10:28,031 - face_recognition - INFO - Anti-spoofing result: real=-0.29, spoof=0.29 (threshold: 0)
+2025-06-23 17:10:28,031 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:10:30,155 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:10:30,529 - face_recognition - INFO - Anti-spoofing result: real=0.74, spoof=-0.74 (threshold: 0)
+2025-06-23 17:10:32,755 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:10:33,120 - face_recognition - INFO - Anti-spoofing result: real=-1.91, spoof=1.91 (threshold: 0)
+2025-06-23 17:10:33,120 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:10:34,902 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:10:35,280 - face_recognition - INFO - Anti-spoofing result: real=-1.86, spoof=1.86 (threshold: 0)
+2025-06-23 17:10:35,280 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:10:37,067 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:10:37,464 - face_recognition - INFO - Anti-spoofing result: real=-1.42, spoof=1.42 (threshold: 0)
+2025-06-23 17:10:37,464 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:10:56,922 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:10:59,985 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-23 17:10:59,995 - face_recognition - INFO - Available ONNX Runtime providers: ['CoreMLExecutionProvider', 'CPUExecutionProvider']
+2025-06-23 17:11:00,817 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-23 17:11:01,605 - face_recognition - INFO - Anti-spoofing result: real=-1.72, spoof=1.72 (threshold: 0)
+2025-06-23 17:11:01,605 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:11:03,611 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:11:04,075 - face_recognition - INFO - Anti-spoofing result: real=-0.83, spoof=0.83 (threshold: 0)
+2025-06-23 17:11:04,076 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:11:06,283 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:11:06,858 - face_recognition - INFO - Anti-spoofing result: real=-0.84, spoof=0.84 (threshold: 0)
+2025-06-23 17:11:06,858 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:11:13,823 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:11:14,465 - face_recognition - INFO - Anti-spoofing result: real=-0.70, spoof=0.70 (threshold: 0)
+2025-06-23 17:11:14,466 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:11:17,654 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:11:18,062 - face_recognition - INFO - Anti-spoofing result: real=0.47, spoof=-0.47 (threshold: 0)
+2025-06-23 17:11:20,766 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:11:21,167 - face_recognition - INFO - Anti-spoofing result: real=1.15, spoof=-1.15 (threshold: 0)
+2025-06-23 17:11:23,698 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:11:24,067 - face_recognition - INFO - Anti-spoofing result: real=-0.45, spoof=0.45 (threshold: 0)
+2025-06-23 17:11:24,067 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:11:25,981 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:11:26,363 - face_recognition - INFO - Anti-spoofing result: real=-0.26, spoof=0.26 (threshold: 0)
+2025-06-23 17:11:26,363 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:11:28,988 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:11:29,378 - face_recognition - INFO - Anti-spoofing result: real=-1.01, spoof=1.01 (threshold: 0)
+2025-06-23 17:11:29,378 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:11:30,522 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:11:30,873 - face_recognition - INFO - Anti-spoofing result: real=-0.44, spoof=0.44 (threshold: 0)
+2025-06-23 17:11:30,873 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:11:31,706 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:11:32,146 - face_recognition - INFO - Anti-spoofing result: real=-0.94, spoof=0.94 (threshold: 0)
+2025-06-23 17:11:32,146 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:11:37,597 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:11:37,984 - face_recognition - INFO - Anti-spoofing result: real=-0.91, spoof=0.91 (threshold: 0)
+2025-06-23 17:11:37,984 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:12:06,740 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:12:07,228 - face_recognition - INFO - Anti-spoofing result: real=1.62, spoof=-1.62 (threshold: 0)
+2025-06-23 17:12:11,246 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:12:11,656 - face_recognition - INFO - Anti-spoofing result: real=-2.37, spoof=2.37 (threshold: 0)
+2025-06-23 17:12:11,656 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:12:13,296 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:12:13,685 - face_recognition - INFO - Anti-spoofing result: real=-0.73, spoof=0.73 (threshold: 0)
+2025-06-23 17:12:13,686 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:12:18,131 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:12:18,528 - face_recognition - INFO - Anti-spoofing result: real=-1.23, spoof=1.23 (threshold: 0)
+2025-06-23 17:12:18,528 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:12:52,413 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:12:53,328 - face_recognition - INFO - Anti-spoofing result: real=3.44, spoof=-3.44 (threshold: 0)
+2025-06-23 17:12:54,141 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:12:56,538 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:12:57,115 - face_recognition - INFO - Anti-spoofing result: real=1.75, spoof=-1.75 (threshold: 0)
+2025-06-23 17:12:57,739 - face_recognition - WARNING - Incomplete face detected: Face too small (width)
+2025-06-23 17:12:59,921 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:00,433 - face_recognition - INFO - Anti-spoofing result: real=0.46, spoof=-0.46 (threshold: 0)
+2025-06-23 17:13:03,548 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:03,875 - face_recognition - INFO - Anti-spoofing result: real=-0.18, spoof=0.18 (threshold: 0)
+2025-06-23 17:13:03,875 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:05,223 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:05,640 - face_recognition - INFO - Anti-spoofing result: real=0.34, spoof=-0.34 (threshold: 0)
+2025-06-23 17:13:07,423 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:07,797 - face_recognition - INFO - Anti-spoofing result: real=-0.26, spoof=0.26 (threshold: 0)
+2025-06-23 17:13:07,797 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:08,741 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:09,076 - face_recognition - INFO - Anti-spoofing result: real=0.08, spoof=-0.08 (threshold: 0)
+2025-06-23 17:13:10,114 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:10,526 - face_recognition - INFO - Anti-spoofing result: real=0.64, spoof=-0.64 (threshold: 0)
+2025-06-23 17:13:11,441 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:11,816 - face_recognition - INFO - Anti-spoofing result: real=-0.19, spoof=0.19 (threshold: 0)
+2025-06-23 17:13:11,816 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:13,889 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:14,286 - face_recognition - INFO - Anti-spoofing result: real=-0.10, spoof=0.10 (threshold: 0)
+2025-06-23 17:13:14,286 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:17,375 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:17,783 - face_recognition - INFO - Anti-spoofing result: real=-0.85, spoof=0.85 (threshold: 0)
+2025-06-23 17:13:17,783 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:18,907 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:19,314 - face_recognition - INFO - Anti-spoofing result: real=-0.62, spoof=0.62 (threshold: 0)
+2025-06-23 17:13:19,314 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:20,013 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:20,394 - face_recognition - INFO - Anti-spoofing result: real=-1.46, spoof=1.46 (threshold: 0)
+2025-06-23 17:13:20,394 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:20,940 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:21,340 - face_recognition - INFO - Anti-spoofing result: real=-1.16, spoof=1.16 (threshold: 0)
+2025-06-23 17:13:21,340 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:25,921 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:26,379 - face_recognition - INFO - Anti-spoofing result: real=-1.25, spoof=1.25 (threshold: 0)
+2025-06-23 17:13:26,380 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:27,163 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:27,560 - face_recognition - INFO - Anti-spoofing result: real=0.20, spoof=-0.20 (threshold: 0)
+2025-06-23 17:13:29,288 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:29,711 - face_recognition - INFO - Anti-spoofing result: real=0.66, spoof=-0.66 (threshold: 0)
+2025-06-23 17:13:30,872 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:31,181 - face_recognition - INFO - Anti-spoofing result: real=-1.80, spoof=1.80 (threshold: 0)
+2025-06-23 17:13:31,182 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:32,122 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:32,536 - face_recognition - INFO - Anti-spoofing result: real=-1.29, spoof=1.29 (threshold: 0)
+2025-06-23 17:13:32,536 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:34,223 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:34,636 - face_recognition - INFO - Anti-spoofing result: real=-1.44, spoof=1.44 (threshold: 0)
+2025-06-23 17:13:34,637 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:35,757 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:36,183 - face_recognition - INFO - Anti-spoofing result: real=0.45, spoof=-0.45 (threshold: 0)
+2025-06-23 17:13:37,857 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:38,316 - face_recognition - INFO - Anti-spoofing result: real=0.29, spoof=-0.29 (threshold: 0)
+2025-06-23 17:13:40,905 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:41,286 - face_recognition - INFO - Anti-spoofing result: real=1.40, spoof=-1.40 (threshold: 0)
+2025-06-23 17:13:42,889 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:43,350 - face_recognition - INFO - Anti-spoofing result: real=-0.73, spoof=0.73 (threshold: 0)
+2025-06-23 17:13:43,350 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:44,357 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:44,736 - face_recognition - INFO - Anti-spoofing result: real=-0.08, spoof=0.08 (threshold: 0)
+2025-06-23 17:13:44,736 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:45,894 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:46,292 - face_recognition - INFO - Anti-spoofing result: real=-2.36, spoof=2.36 (threshold: 0)
+2025-06-23 17:13:46,292 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:46,957 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:47,334 - face_recognition - INFO - Anti-spoofing result: real=-2.46, spoof=2.46 (threshold: 0)
+2025-06-23 17:13:47,334 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:48,570 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:48,946 - face_recognition - INFO - Anti-spoofing result: real=-2.22, spoof=2.22 (threshold: 0)
+2025-06-23 17:13:48,946 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:49,969 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:50,266 - face_recognition - INFO - Anti-spoofing result: real=-3.30, spoof=3.30 (threshold: 0)
+2025-06-23 17:13:50,266 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:51,487 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:51,858 - face_recognition - INFO - Anti-spoofing result: real=-2.69, spoof=2.69 (threshold: 0)
+2025-06-23 17:13:51,858 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:52,743 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:53,163 - face_recognition - INFO - Anti-spoofing result: real=-1.60, spoof=1.60 (threshold: 0)
+2025-06-23 17:13:53,163 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:13:53,991 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:13:54,376 - face_recognition - INFO - Anti-spoofing result: real=-1.74, spoof=1.74 (threshold: 0)
+2025-06-23 17:13:54,376 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:14:05,220 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:14:05,747 - face_recognition - INFO - Anti-spoofing result: real=-0.34, spoof=0.34 (threshold: 0)
+2025-06-23 17:14:05,747 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:14:20,218 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:14:20,880 - face_recognition - INFO - Anti-spoofing result: real=-0.28, spoof=0.28 (threshold: 0)
+2025-06-23 17:14:20,881 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:14:21,873 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:14:22,252 - face_recognition - INFO - Anti-spoofing result: real=-0.50, spoof=0.50 (threshold: 0)
+2025-06-23 17:14:22,252 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:14:48,339 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:14:51,819 - face_recognition - INFO - InsightFace model loaded successfully
+2025-06-23 17:14:51,881 - face_recognition - INFO - Available ONNX Runtime providers: ['CoreMLExecutionProvider', 'CPUExecutionProvider']
+2025-06-23 17:14:52,905 - face_recognition - INFO - Anti-spoofing model loaded successfully
+2025-06-23 17:14:53,560 - face_recognition - INFO - Anti-spoofing result: real=-0.32, spoof=0.32 (threshold: 0.5)
+2025-06-23 17:14:58,048 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:14:58,468 - face_recognition - INFO - Anti-spoofing result: real=-1.36, spoof=1.36 (threshold: 0.5)
+2025-06-23 17:14:58,468 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:14:59,393 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:14:59,747 - face_recognition - INFO - Anti-spoofing result: real=-1.58, spoof=1.58 (threshold: 0.5)
+2025-06-23 17:14:59,747 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:00,632 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:01,077 - face_recognition - INFO - Anti-spoofing result: real=-0.93, spoof=0.93 (threshold: 0.5)
+2025-06-23 17:15:01,077 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:10,707 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:11,307 - face_recognition - INFO - Anti-spoofing result: real=-2.45, spoof=2.45 (threshold: 0.5)
+2025-06-23 17:15:11,307 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:12,179 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:12,512 - face_recognition - INFO - Anti-spoofing result: real=-1.72, spoof=1.72 (threshold: 0.5)
+2025-06-23 17:15:12,512 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:13,517 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:13,905 - face_recognition - INFO - Anti-spoofing result: real=-1.44, spoof=1.44 (threshold: 0.5)
+2025-06-23 17:15:13,905 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:14,532 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:14,995 - face_recognition - INFO - Anti-spoofing result: real=-1.65, spoof=1.65 (threshold: 0.5)
+2025-06-23 17:15:14,995 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:16,917 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:17,316 - face_recognition - INFO - Anti-spoofing result: real=-0.67, spoof=0.67 (threshold: 0.5)
+2025-06-23 17:15:17,317 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:18,961 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:19,387 - face_recognition - INFO - Anti-spoofing result: real=-1.43, spoof=1.43 (threshold: 0.5)
+2025-06-23 17:15:19,387 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:22,531 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:22,874 - face_recognition - INFO - Anti-spoofing result: real=0.09, spoof=-0.09 (threshold: 0.5)
+2025-06-23 17:15:24,481 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:24,875 - face_recognition - INFO - Anti-spoofing result: real=0.28, spoof=-0.28 (threshold: 0.5)
+2025-06-23 17:15:28,398 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:28,775 - face_recognition - INFO - Anti-spoofing result: real=-1.39, spoof=1.38 (threshold: 0.5)
+2025-06-23 17:15:28,776 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:29,664 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:30,057 - face_recognition - INFO - Anti-spoofing result: real=0.13, spoof=-0.13 (threshold: 0.5)
+2025-06-23 17:15:31,544 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:31,906 - face_recognition - INFO - Anti-spoofing result: real=-1.94, spoof=1.93 (threshold: 0.5)
+2025-06-23 17:15:31,906 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:33,328 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:33,737 - face_recognition - INFO - Anti-spoofing result: real=-1.89, spoof=1.89 (threshold: 0.5)
+2025-06-23 17:15:33,737 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:36,462 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:36,876 - face_recognition - INFO - Anti-spoofing result: real=-2.35, spoof=2.35 (threshold: 0.5)
+2025-06-23 17:15:36,876 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:38,281 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:38,744 - face_recognition - INFO - Anti-spoofing result: real=-1.46, spoof=1.46 (threshold: 0.5)
+2025-06-23 17:15:38,744 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:40,962 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:41,346 - face_recognition - INFO - Anti-spoofing result: real=-0.68, spoof=0.68 (threshold: 0.5)
+2025-06-23 17:15:41,346 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:42,797 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:43,245 - face_recognition - INFO - Anti-spoofing result: real=-1.26, spoof=1.26 (threshold: 0.5)
+2025-06-23 17:15:43,245 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:46,532 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:46,933 - face_recognition - INFO - Anti-spoofing result: real=-1.83, spoof=1.83 (threshold: 0.5)
+2025-06-23 17:15:46,933 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:47,866 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:48,337 - face_recognition - INFO - Anti-spoofing result: real=-2.10, spoof=2.10 (threshold: 0.5)
+2025-06-23 17:15:48,337 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:53,744 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:54,292 - face_recognition - INFO - Anti-spoofing result: real=-0.85, spoof=0.85 (threshold: 0.5)
+2025-06-23 17:15:54,292 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:55,208 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:55,598 - face_recognition - INFO - Anti-spoofing result: real=-0.89, spoof=0.89 (threshold: 0.5)
+2025-06-23 17:15:55,598 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:56,167 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:56,591 - face_recognition - INFO - Anti-spoofing result: real=-0.51, spoof=0.51 (threshold: 0.5)
+2025-06-23 17:15:56,591 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:15:57,515 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:58,006 - face_recognition - INFO - Anti-spoofing result: real=-0.29, spoof=0.29 (threshold: 0.5)
+2025-06-23 17:15:59,566 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:15:59,960 - face_recognition - INFO - Anti-spoofing result: real=-0.26, spoof=0.26 (threshold: 0.5)
+2025-06-23 17:16:18,785 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:16:19,369 - face_recognition - INFO - Anti-spoofing result: real=-0.25, spoof=0.25 (threshold: 0.5)
+2025-06-23 17:16:19,770 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:16:23,776 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:16:23,973 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:16:25,629 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:16:26,157 - face_recognition - INFO - Anti-spoofing result: real=-2.22, spoof=2.22 (threshold: 0.5)
+2025-06-23 17:16:26,158 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:16:26,976 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:16:27,434 - face_recognition - INFO - Anti-spoofing result: real=-1.77, spoof=1.77 (threshold: 0.5)
+2025-06-23 17:16:27,434 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:16:28,561 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:16:28,770 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:16:31,658 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:16:32,186 - face_recognition - INFO - Anti-spoofing result: real=-0.71, spoof=0.71 (threshold: 0.5)
+2025-06-23 17:16:32,186 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:16:33,375 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:16:33,757 - face_recognition - INFO - Anti-spoofing result: real=-0.79, spoof=0.79 (threshold: 0.5)
+2025-06-23 17:16:33,757 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:16:34,592 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:16:34,991 - face_recognition - INFO - Anti-spoofing result: real=-0.29, spoof=0.29 (threshold: 0.5)
+2025-06-23 17:16:36,411 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:16:36,719 - face_recognition - INFO - Anti-spoofing result: real=-0.44, spoof=0.44 (threshold: 0.5)
+2025-06-23 17:17:23,587 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:24,095 - face_recognition - INFO - Anti-spoofing result: real=-0.89, spoof=0.89 (threshold: 0.5)
+2025-06-23 17:17:24,095 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:17:25,690 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:25,967 - face_recognition - INFO - Anti-spoofing result: real=-1.05, spoof=1.05 (threshold: 0.5)
+2025-06-23 17:17:25,968 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:17:28,893 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:29,185 - face_recognition - INFO - Anti-spoofing result: real=1.50, spoof=-1.50 (threshold: 0.5)
+2025-06-23 17:17:29,547 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:17:30,621 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:31,019 - face_recognition - INFO - Anti-spoofing result: real=1.36, spoof=-1.36 (threshold: 0.5)
+2025-06-23 17:17:31,446 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:17:33,824 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:34,198 - face_recognition - INFO - Anti-spoofing result: real=-0.91, spoof=0.91 (threshold: 0.5)
+2025-06-23 17:17:34,198 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:17:38,166 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:38,578 - face_recognition - INFO - Anti-spoofing result: real=-0.97, spoof=0.97 (threshold: 0.5)
+2025-06-23 17:17:38,578 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:17:40,241 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:40,695 - face_recognition - INFO - Anti-spoofing result: real=0.08, spoof=-0.08 (threshold: 0.5)
+2025-06-23 17:17:42,153 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:42,516 - face_recognition - INFO - Anti-spoofing result: real=-0.36, spoof=0.36 (threshold: 0.5)
+2025-06-23 17:17:44,086 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:44,465 - face_recognition - INFO - Anti-spoofing result: real=-0.39, spoof=0.39 (threshold: 0.5)
+2025-06-23 17:17:45,660 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:46,045 - face_recognition - INFO - Anti-spoofing result: real=-0.69, spoof=0.69 (threshold: 0.5)
+2025-06-23 17:17:46,046 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:17:49,492 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:50,015 - face_recognition - INFO - Anti-spoofing result: real=-0.98, spoof=0.98 (threshold: 0.5)
+2025-06-23 17:17:50,016 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:17:50,899 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:51,290 - face_recognition - INFO - Anti-spoofing result: real=-0.82, spoof=0.82 (threshold: 0.5)
+2025-06-23 17:17:51,291 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:17:54,349 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:54,795 - face_recognition - INFO - Anti-spoofing result: real=0.48, spoof=-0.48 (threshold: 0.5)
+2025-06-23 17:17:56,384 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:56,770 - face_recognition - INFO - Anti-spoofing result: real=-1.10, spoof=1.10 (threshold: 0.5)
+2025-06-23 17:17:56,771 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:17:57,786 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:58,146 - face_recognition - INFO - Anti-spoofing result: real=-0.74, spoof=0.74 (threshold: 0.5)
+2025-06-23 17:17:58,146 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:17:59,028 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:17:59,484 - face_recognition - INFO - Anti-spoofing result: real=-0.45, spoof=0.45 (threshold: 0.5)
+2025-06-23 17:18:00,825 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:01,236 - face_recognition - INFO - Anti-spoofing result: real=-0.06, spoof=0.06 (threshold: 0.5)
+2025-06-23 17:18:05,673 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:06,066 - face_recognition - INFO - Anti-spoofing result: real=0.82, spoof=-0.82 (threshold: 0.5)
+2025-06-23 17:18:07,363 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:07,678 - face_recognition - INFO - Anti-spoofing result: real=0.65, spoof=-0.65 (threshold: 0.5)
+2025-06-23 17:18:09,068 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:09,456 - face_recognition - INFO - Anti-spoofing result: real=0.69, spoof=-0.69 (threshold: 0.5)
+2025-06-23 17:18:13,553 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:14,190 - face_recognition - INFO - Anti-spoofing result: real=0.68, spoof=-0.68 (threshold: 0.5)
+2025-06-23 17:18:22,290 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:22,730 - face_recognition - INFO - Anti-spoofing result: real=-1.94, spoof=1.94 (threshold: 0.5)
+2025-06-23 17:18:22,730 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:18:23,901 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:24,270 - face_recognition - INFO - Anti-spoofing result: real=-1.87, spoof=1.87 (threshold: 0.5)
+2025-06-23 17:18:24,270 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:18:25,201 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:25,579 - face_recognition - INFO - Anti-spoofing result: real=-0.81, spoof=0.81 (threshold: 0.5)
+2025-06-23 17:18:25,579 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:18:26,551 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:26,945 - face_recognition - INFO - Anti-spoofing result: real=-0.57, spoof=0.57 (threshold: 0.5)
+2025-06-23 17:18:26,945 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:18:28,221 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:28,691 - face_recognition - INFO - Anti-spoofing result: real=-0.41, spoof=0.41 (threshold: 0.5)
+2025-06-23 17:18:30,299 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:30,694 - face_recognition - INFO - Anti-spoofing result: real=-0.81, spoof=0.81 (threshold: 0.5)
+2025-06-23 17:18:30,694 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:18:33,247 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:33,625 - face_recognition - INFO - Anti-spoofing result: real=-1.25, spoof=1.25 (threshold: 0.5)
+2025-06-23 17:18:33,625 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:18:34,301 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:34,718 - face_recognition - INFO - Anti-spoofing result: real=-1.06, spoof=1.06 (threshold: 0.5)
+2025-06-23 17:18:34,718 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:18:36,833 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:37,145 - face_recognition - INFO - Anti-spoofing result: real=-1.38, spoof=1.38 (threshold: 0.5)
+2025-06-23 17:18:37,145 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:18:38,135 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:38,563 - face_recognition - INFO - Anti-spoofing result: real=-0.68, spoof=0.68 (threshold: 0.5)
+2025-06-23 17:18:38,563 - face_recognition - WARNING - Spoofing detected in InsightFace, skipping embedding extraction
+2025-06-23 17:18:42,651 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:43,089 - face_recognition - INFO - Anti-spoofing result: real=0.87, spoof=-0.87 (threshold: 0.5)
+2025-06-23 17:18:44,363 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:44,737 - face_recognition - INFO - Anti-spoofing result: real=0.85, spoof=-0.85 (threshold: 0.5)
+2025-06-23 17:18:45,766 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:46,156 - face_recognition - INFO - Anti-spoofing result: real=1.04, spoof=-1.04 (threshold: 0.5)
+2025-06-23 17:18:47,100 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:47,558 - face_recognition - INFO - Anti-spoofing result: real=0.59, spoof=-0.59 (threshold: 0.5)
+2025-06-23 17:18:49,416 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:49,834 - face_recognition - INFO - Anti-spoofing result: real=-0.31, spoof=0.31 (threshold: 0.5)
+2025-06-23 17:18:50,637 - face_recognition - INFO - Using default model for check_in: insightface
+2025-06-23 17:18:51,018 - face_recognition - INFO - Anti-spoofing result: real=0.85, spoof=-0.85 (threshold: 0.5)
+2025-06-23 17:19:14,754 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:21,526 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-23 17:19:21,540 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:21,541 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp7ay4j741.jpg
+2025-06-23 17:19:23,303 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:23,303 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:19:23,350 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-23 17:19:23,545 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-23 17:19:23,545 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-23 17:19:23,547 - face_recognition - INFO - Face image captured successfully
+2025-06-23 17:19:25,381 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:25,386 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:25,387 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp4si8e2yz.jpg
+2025-06-23 17:19:25,484 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:25,484 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:19:25,542 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-23 17:19:25,762 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-23 17:19:25,762 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-23 17:19:25,764 - face_recognition - INFO - Face image captured successfully
+2025-06-23 17:19:28,247 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:28,253 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:28,254 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpjlzabqgk.jpg
+2025-06-23 17:19:28,363 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:28,363 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:19:28,410 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:19:30,579 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:30,589 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:30,589 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpo8zs27ie.jpg
+2025-06-23 17:19:30,700 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:30,700 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:19:30,746 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:19:32,962 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:32,965 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:32,966 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp5cu3k9jj.jpg
+2025-06-23 17:19:33,090 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:33,090 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:19:33,138 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:19:39,159 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:39,163 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:39,164 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp955qexbu.jpg
+2025-06-23 17:19:39,325 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:39,325 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:19:39,325 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:19:41,118 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:41,122 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:41,122 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpbq85v3xa.jpg
+2025-06-23 17:19:41,272 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:41,273 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:19:41,273 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:19:44,597 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:44,602 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:44,603 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmph7j77sl9.jpg
+2025-06-23 17:19:44,809 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:44,809 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:19:44,809 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:19:46,680 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:46,683 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:46,684 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpb2qv6d24.jpg
+2025-06-23 17:19:46,860 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:46,860 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:19:46,860 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:19:49,026 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:49,029 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:49,029 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpped3f5n7.jpg
+2025-06-23 17:19:49,198 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:49,198 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:19:49,198 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:19:51,661 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:51,663 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:51,664 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpgbq8vkmc.jpg
+2025-06-23 17:19:51,830 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:51,830 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:19:51,830 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:19:53,730 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:53,734 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:53,734 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp902hbdu3.jpg
+2025-06-23 17:19:53,927 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:53,928 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:19:53,928 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:19:55,462 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:55,466 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:55,467 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmponcculxj.jpg
+2025-06-23 17:19:55,648 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:55,649 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:19:55,649 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:19:57,726 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:19:57,729 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:19:57,729 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpeurzasmk.jpg
+2025-06-23 17:19:57,896 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:19:57,897 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:19:57,897 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:20:05,807 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:20:05,814 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:20:05,815 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpr_zg4x13.jpg
+2025-06-23 17:20:05,922 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:20:05,922 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:20:05,922 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:20:07,514 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:20:07,521 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:20:07,523 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpstpvdgzg.jpg
+2025-06-23 17:20:07,642 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:20:07,642 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:20:07,642 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:20:08,878 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:20:08,881 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:20:08,882 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpotnw2nuz.jpg
+2025-06-23 17:20:08,997 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:20:08,997 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:20:08,998 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:20:12,328 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:20:12,334 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:20:12,334 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp0c80r2hc.jpg
+2025-06-23 17:20:12,499 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:20:12,499 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:20:12,499 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:20:14,028 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:20:14,033 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:20:14,034 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpimabjc1q.jpg
+2025-06-23 17:20:14,173 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:20:14,173 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:20:14,173 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:20:15,375 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:20:15,378 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:20:15,378 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpzu44y65b.jpg
+2025-06-23 17:20:15,551 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:20:15,551 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:20:15,551 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:20:16,475 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:20:16,478 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:20:16,479 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpzmr3touo.jpg
+2025-06-23 17:20:16,647 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:20:16,647 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:20:16,647 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:24:18,177 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:24,594 - face_recognition - INFO - DeepFace model loaded successfully (model: ArcFace, detector: retinaface)
+2025-06-23 17:24:24,617 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:24,618 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpisospc1a.jpg
+2025-06-23 17:24:24,796 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:24:26,559 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:26,564 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:26,565 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp4l704htu.jpg
+2025-06-23 17:24:26,690 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:24:28,423 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:24:28,423 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:24:28,423 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-23 17:24:28,726 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-23 17:24:28,726 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-23 17:24:28,729 - face_recognition - INFO - Face image captured successfully
+2025-06-23 17:24:30,002 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:30,005 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:30,005 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp12_gbhvy.jpg
+2025-06-23 17:24:30,086 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:24:30,195 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:24:30,195 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:24:30,195 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-23 17:24:30,378 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-23 17:24:30,378 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-23 17:24:30,381 - face_recognition - INFO - Face image captured successfully
+2025-06-23 17:24:31,765 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:31,771 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:31,772 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpqwxayb00.jpg
+2025-06-23 17:24:31,819 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:24:33,419 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:33,438 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:33,438 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmptr0ibva7.jpg
+2025-06-23 17:24:33,543 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:24:33,764 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:24:33,764 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:24:33,765 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-23 17:24:34,076 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-23 17:24:34,076 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-23 17:24:34,079 - face_recognition - INFO - Face image captured successfully
+2025-06-23 17:24:34,821 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:34,824 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:34,826 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpqdpg6sd8.jpg
+2025-06-23 17:24:34,882 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:24:35,000 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:24:35,000 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:24:35,000 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-23 17:24:35,161 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-23 17:24:35,161 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-23 17:24:35,164 - face_recognition - INFO - Face image captured successfully
+2025-06-23 17:24:36,275 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:36,279 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:36,279 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpk0ks5f9m.jpg
+2025-06-23 17:24:36,330 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:24:37,674 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:37,679 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:37,680 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp4nzfp974.jpg
+2025-06-23 17:24:37,736 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:24:38,773 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:38,776 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:38,777 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmphzwh8jut.jpg
+2025-06-23 17:24:38,825 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:24:40,873 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:40,877 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:40,877 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpgp37n1w2.jpg
+2025-06-23 17:24:40,994 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:24:41,152 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:24:41,152 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:24:41,152 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-23 17:24:41,383 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-23 17:24:41,384 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-23 17:24:41,386 - face_recognition - INFO - Face image captured successfully
+2025-06-23 17:24:42,811 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:42,815 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:42,815 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpp6xbo7do.jpg
+2025-06-23 17:24:42,853 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:24:45,208 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:45,213 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:45,214 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpm1kp7o80.jpg
+2025-06-23 17:24:45,256 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:24:46,704 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:46,706 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:46,707 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpeprldnz8.jpg
+2025-06-23 17:24:46,747 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:24:49,823 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:49,829 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:49,829 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp0dnpqeuk.jpg
+2025-06-23 17:24:49,947 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:24:51,133 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:51,139 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:51,140 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpp_x2f24q.jpg
+2025-06-23 17:24:51,259 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:24:51,413 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:24:51,413 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:24:51,413 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-23 17:24:51,676 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-23 17:24:51,677 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-23 17:24:51,679 - face_recognition - INFO - Face image captured successfully
+2025-06-23 17:24:54,456 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:54,463 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:54,463 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpxvtgp80n.jpg
+2025-06-23 17:24:54,584 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:24:55,572 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:55,576 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:55,576 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpl2o_aw4y.jpg
+2025-06-23 17:24:55,627 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:24:58,374 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:24:58,378 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:24:58,379 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp0za_nx8u.jpg
+2025-06-23 17:24:58,429 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:25:00,082 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:25:00,086 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:25:00,086 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp39le4baq.jpg
+2025-06-23 17:25:00,144 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:25:00,264 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:25:00,264 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:25:00,264 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-23 17:25:00,568 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-23 17:25:00,568 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-23 17:25:00,570 - face_recognition - INFO - Face image captured successfully
+2025-06-23 17:25:01,673 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:25:01,678 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:25:01,678 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpk1qcd685.jpg
+2025-06-23 17:25:01,739 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:25:01,854 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:25:01,854 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:25:01,854 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-23 17:25:02,104 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-23 17:25:02,104 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-23 17:25:02,107 - face_recognition - INFO - Face image captured successfully
+2025-06-23 17:25:03,037 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:25:03,041 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:25:03,041 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp3y8_e3cv.jpg
+2025-06-23 17:25:03,088 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:25:04,186 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:25:04,190 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:25:04,190 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpzxasa6t5.jpg
+2025-06-23 17:25:04,242 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:25:04,335 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:25:04,335 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:25:04,335 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-23 17:25:04,521 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-23 17:25:04,521 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-23 17:25:04,523 - face_recognition - INFO - Face image captured successfully
+2025-06-23 17:25:05,454 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:25:05,458 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:25:05,459 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp9fwwikki.jpg
+2025-06-23 17:25:05,564 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:25:05,714 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:25:05,714 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=True
+2025-06-23 17:25:05,714 - face_recognition - INFO - Calling DeepFace.represent with model=ArcFace, detector=opencv
+2025-06-23 17:25:05,914 - face_recognition - INFO - DeepFace returned 1 embeddings
+2025-06-23 17:25:05,914 - face_recognition - INFO - Embedding extracted with shape: (512,)
+2025-06-23 17:25:05,916 - face_recognition - INFO - Face image captured successfully
+2025-06-23 17:25:11,927 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:25:11,933 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:25:11,933 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp4lrnldjs.jpg
+2025-06-23 17:25:12,057 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:25:12,245 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:25:12,245 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:25:12,246 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:25:13,345 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:25:13,352 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:25:13,352 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp6jaotros.jpg
+2025-06-23 17:25:13,454 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:25:13,629 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:25:13,629 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:25:13,629 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:25:14,734 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:25:14,740 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:25:14,740 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp52yd9i93.jpg
+2025-06-23 17:25:14,851 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:25:14,997 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:25:14,997 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:25:14,997 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction
+2025-06-23 17:25:18,936 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:25:18,940 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:25:18,941 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmper20tu7v.jpg
+2025-06-23 17:25:19,048 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:25:19,953 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:25:19,956 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:25:19,956 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmpp8s00usd.jpg
+2025-06-23 17:25:19,997 - face_recognition - WARNING - Incomplete face detected: Face too close to image edge
+2025-06-23 17:25:21,126 - face_recognition - INFO - Using default model for check_in: deepface
+2025-06-23 17:25:21,130 - face_recognition - INFO - Starting DeepFace embedding extraction with anti_spoofing=True
+2025-06-23 17:25:21,131 - face_recognition - INFO - Image saved to temporary file: /var/folders/c9/8rc_zy1n66b9fv9658s4z6g00000gn/T/tmp4gj1fbi2.jpg
+2025-06-23 17:25:21,283 - face_recognition - INFO - Face completeness check passed
+2025-06-23 17:25:21,486 - face_recognition - INFO - Anti-spoofing check completed, found 1 faces
+2025-06-23 17:25:21,487 - face_recognition - INFO - DeepFace anti-spoofing result: is_real=False
+2025-06-23 17:25:21,487 - face_recognition - WARNING - Spoofing detected, skipping embedding extraction

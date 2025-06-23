@@ -1,8 +1,9 @@
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Dict, Any
 import numpy as np
 import cv2
 from utils.logging import logger
 from services.face_recognition.base import FaceRecognitionBase
+from config.face_recognition_config import face_recognition_config
 
 class InsightFaceService(FaceRecognitionBase):
     """InsightFace implementation of face recognition service"""
@@ -27,11 +28,110 @@ class InsightFaceService(FaceRecognitionBase):
             logger.error(f"Traceback: {traceback.format_exc()}")
             raise RuntimeError(f"Failed to initialize InsightFace: {str(e)}")
     
+    def check_face_completeness(self, face, image) -> Tuple[bool, Optional[str]]:
+        """
+        Check if the face is complete (entire face is visible in the frame).
+        
+        Args:
+            face: The face object from InsightFace
+            image: The original image as numpy array
+            
+        Returns:
+            Tuple of (is_complete, error_message)
+        """
+        try:
+            # Get image dimensions
+            img_height, img_width = image.shape[:2]
+            
+            # Check face detection confidence
+            if face.det_score < face_recognition_config.FACE_DETECTION_CONFIDENCE:
+                return False, "Face detection confidence too low"
+            
+            # Get face bounding box
+            bbox = face.bbox.astype(int)
+            x1, y1, x2, y2 = bbox
+            
+            # Calculate face dimensions
+            face_width = x2 - x1
+            face_height = y2 - y1
+            
+            # Check face size relative to image (ensures face is not too small)
+            width_ratio = face_width / img_width
+            height_ratio = face_height / img_height
+            
+            if width_ratio < face_recognition_config.FACE_MIN_WIDTH_RATIO:
+                return False, "Face too small (width)"
+                
+            if height_ratio < face_recognition_config.FACE_MIN_HEIGHT_RATIO:
+                return False, "Face too small (height)"
+            
+            # Check if face is too close to the edge of the frame
+            margin_ratio = face_recognition_config.FACE_MARGIN_RATIO
+            margin_x = img_width * margin_ratio
+            margin_y = img_height * margin_ratio
+            
+            if x1 < margin_x or x2 > (img_width - margin_x) or y1 < margin_y or y2 > (img_height - margin_y):
+                return False, "Face too close to image edge"
+            
+            # Check for key facial landmarks visibility
+            # InsightFace provides landmarks as part of the face object
+            if hasattr(face, 'kps') and face.kps is not None:
+                landmarks = face.kps
+                
+                # Typical 5-point landmarks are: left eye, right eye, nose, left mouth corner, right mouth corner
+                # Check if any landmark is outside the image or too close to the edge
+                for landmark_idx, (x, y) in enumerate(landmarks):
+                    if x < margin_x or x > (img_width - margin_x) or y < margin_y or y > (img_height - margin_y):
+                        landmark_names = ["left eye", "right eye", "nose", "left mouth corner", "right mouth corner"]
+                        landmark_name = landmark_names[landmark_idx] if landmark_idx < len(landmark_names) else f"landmark {landmark_idx}"
+                        return False, f"Facial {landmark_name} not fully visible"
+            else:
+                logger.warning("Face landmarks not available for completeness check")
+            
+            # All checks passed
+            return True, None
+            
+        except Exception as e:
+            logger.error(f"Error checking face completeness: {str(e)}")
+            return False, f"Error checking face completeness: {str(e)}"
+    
     def extract_face_embedding(self, image_data: bytes, check_spoofing=False) -> Tuple[Optional[np.ndarray], float, Optional[bytes], Optional[dict]]:
         """Extract embedding using InsightFace with optional anti-spoofing check"""
         try:
-            # Optionally perform anti-spoofing check first
             spoof_result = None
+            
+            # Decode the image first (needed for both face detection and anti-spoofing)
+            nparr = np.frombuffer(image_data, np.uint8)
+            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+            if img is None:
+                logger.error("Failed to decode image")
+                return None, 0.0, None, {"error": "Failed to decode image"}
+                
+            # RGB conversion (InsightFace expects RGB)
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            
+            # Detect faces first - needed for both completeness check and anti-spoofing
+            faces = self.app.get(img)
+            
+            if not faces:
+                logger.warning("No face detected in the image")
+                return None, 0.0, None, {"error": "No face detected in the image"}
+            
+            # Get the face with highest detection score
+            face = max(faces, key=lambda x: x.det_score)
+            
+            # Check face completeness FIRST - no point doing anti-spoofing if face is incomplete
+            is_complete, error_message = self.check_face_completeness(face, img)
+            if not is_complete:
+                logger.warning(f"Incomplete face detected: {error_message}")
+                face_completeness_result = {
+                    "is_spoof": False,  # Not spoofing, but still an error
+                    "error": f"Incomplete face: {error_message}",
+                    "incomplete_face": True
+                }
+                return None, 0.0, None, face_completeness_result
+            
+            # Only perform anti-spoofing after verifying the face is complete
             if check_spoofing:
                 spoof_result = self.detect_spoofing(image_data)
                 
@@ -39,25 +139,6 @@ class InsightFaceService(FaceRecognitionBase):
                     logger.warning("Spoofing detected in InsightFace, skipping embedding extraction")
                     return None, 0.0, None, spoof_result
         
-            nparr = np.frombuffer(image_data, np.uint8)
-            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-            if img is None:
-                logger.error("Failed to decode image")
-                return None, 0.0, None, spoof_result
-                
-            # RGB conversion (InsightFace expects RGB)
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            
-            # Detect faces
-            faces = self.app.get(img)
-            
-            if not faces:
-                logger.warning("No face detected in the image")
-                return None, 0.0, None, spoof_result
-            
-            # Get the face with highest detection score
-            face = max(faces, key=lambda x: x.det_score)
-            
             # Get aligned face image for storage (optional)
             aligned_face_bytes = None
             try:
@@ -91,8 +172,8 @@ class InsightFaceService(FaceRecognitionBase):
             
         except Exception as e:
             logger.error(f"Error extracting face embedding: {str(e)}")
-            return None, 0.0, None, None
-        
+            return None, 0.0, None, {"error": str(e)}
+    
     def detect_spoofing(self, image_data: bytes) -> dict:
         """Anti-spoofing using Face-AntiSpoofing ONNX model"""
         try:
@@ -171,7 +252,7 @@ class InsightFaceService(FaceRecognitionBase):
                 spoof_score = float(prediction[0])
                 real_score = 1.0 - spoof_score
             
-            threshold = 0
+            threshold = 0.5
             
             logger.info(f"Anti-spoofing result: real={real_score:.2f}, spoof={spoof_score:.2f} (threshold: {threshold})")
             

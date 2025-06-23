@@ -5,6 +5,7 @@ import os
 import tempfile
 from utils.logging import logger
 from services.face_recognition.base import FaceRecognitionBase
+from config.face_recognition_config import face_recognition_config
 
 class DeepFaceService(FaceRecognitionBase):
     """DeepFace implementation of face recognition service"""
@@ -61,12 +62,50 @@ class DeepFaceService(FaceRecognitionBase):
                 
                 detector_to_use = "opencv"  # More reliable than retinaface
                 
-                # First, if anti-spoofing is requested, check for spoofing
+                # First extract faces to check completeness
+                img = cv2.imread(temp_path)
+                
+                if img is None:
+                    logger.error("Failed to read image")
+                    return None, 0.0, None, {"error": "Failed to read image"}
+                
+                # Extract faces first for completeness check
+                try:
+                    face_objs = self.deepface.extract_faces(
+                        img_path=temp_path,
+                        detector_backend=detector_to_use,
+                        enforce_detection=False,
+                        align=True
+                    )
+                    
+                    # Check if we found faces
+                    if not face_objs or len(face_objs) == 0:
+                        logger.warning("No faces detected in image")
+                        return None, 0.0, None, {"error": "No face detected in the image"}
+                    
+                    # Check face completeness FIRST
+                    is_complete, error_message = self.check_face_completeness(face_objs[0], img)
+                    if not is_complete:
+                        logger.warning(f"Incomplete face detected: {error_message}")
+                        face_completeness_result = {
+                            "is_spoof": False,  # Not spoofing, but still an error
+                            "error": f"Incomplete face: {error_message}",
+                            "incomplete_face": True
+                        }
+                        return None, 0.0, None, face_completeness_result
+                    
+                    logger.info("Face completeness check passed")
+                    
+                except Exception as face_e:
+                    logger.error(f"Error during face detection or completeness check: {str(face_e)}")
+                    return None, 0.0, None, {"error": f"Error detecting face: {str(face_e)}"}
+                
+                # Only perform anti-spoofing after verifying face is complete
                 spoof_result = None
                 if check_spoofing:
                     try:
                         # Use extract_faces with anti_spoofing=True
-                        face_objs = self.deepface.extract_faces(
+                        anti_spoof_faces = self.deepface.extract_faces(
                             img_path=temp_path,
                             detector_backend=detector_to_use,
                             enforce_detection=False,
@@ -74,15 +113,15 @@ class DeepFaceService(FaceRecognitionBase):
                             anti_spoofing=True
                         )
                         
-                        logger.info(f"Anti-spoofing check completed, found {len(face_objs) if face_objs else 0} faces")
+                        logger.info(f"Anti-spoofing check completed, found {len(anti_spoof_faces) if anti_spoof_faces else 0} faces")
                         
                         # Process anti-spoofing results
                         is_spoof = True  # Default to spoof if no faces found
                         spoof_details = {"message": "No faces detected"}
                         spoof_score = 0.5 
                         
-                        if face_objs and len(face_objs) > 0:
-                            face_obj = face_objs[0]
+                        if anti_spoof_faces and len(anti_spoof_faces) > 0:
+                            face_obj = anti_spoof_faces[0]
                             is_real = face_obj.get("is_real", False)
                             
                             is_spoof = not is_real
@@ -93,7 +132,7 @@ class DeepFaceService(FaceRecognitionBase):
                                 "message": "DeepFace anti-spoofing check",
                                 "face_region": face_obj.get("facial_area", {}),
                                 "confidence": face_obj.get("confidence", 0.0),
-                                "all_faces_real": all(face.get("is_real", False) for face in face_objs)
+                                "all_faces_real": all(face.get("is_real", False) for face in anti_spoof_faces)
                             }
                             
                             logger.info(f"DeepFace anti-spoofing result: is_real={is_real}")
@@ -125,21 +164,21 @@ class DeepFaceService(FaceRecognitionBase):
                             },
                             "method": "deepface_fallback"
                         }
-                
-                # Now extract the embedding
-                logger.info(f"Calling DeepFace.represent with model={self.deepface_model_name}, detector={detector_to_use}")
-                try:
-                    embedding_obj = self.deepface.represent(
-                        img_path=temp_path,
-                        model_name=self.deepface_model_name,
-                        detector_backend=detector_to_use,
-                        enforce_detection=False,
-                        align=True
-                    )
-                except Exception as deep_error:
-                    logger.error(f"DeepFace.represent failed: {str(deep_error)}")
-                    fallback_embedding, fallback_confidence, fallback_face = self._fallback_extraction(temp_path)
-                    return fallback_embedding, fallback_confidence, fallback_face, spoof_result
+            
+            # Now extract the embedding
+            logger.info(f"Calling DeepFace.represent with model={self.deepface_model_name}, detector={detector_to_use}")
+            try:
+                embedding_obj = self.deepface.represent(
+                    img_path=temp_path,
+                    model_name=self.deepface_model_name,
+                    detector_backend=detector_to_use,
+                    enforce_detection=False,
+                    align=True
+                )
+            except Exception as deep_error:
+                logger.error(f"DeepFace.represent failed: {str(deep_error)}")
+                fallback_embedding, fallback_confidence, fallback_face = self._fallback_extraction(temp_path)
+                return fallback_embedding, fallback_confidence, fallback_face, spoof_result
             
             # DeepFace returns a list of embedding objects
             if not embedding_obj or len(embedding_obj) == 0:
@@ -250,3 +289,85 @@ class DeepFaceService(FaceRecognitionBase):
                 },
                 "method": "deepface_fallback"
             }
+    
+    def check_face_completeness(self, face_obj, img=None) -> Tuple[bool, Optional[str]]:
+        """
+        Check if the face is complete (entire face is visible in the frame).
+        
+        Args:
+            face_obj: The face object from DeepFace extract_faces
+            img: Original image (numpy array) if available
+            
+        Returns:
+            Tuple of (is_complete, error_message)
+        """
+        try:
+            # Check if we have a face object
+            if not face_obj:
+                return False, "No face detected"
+                
+            # If it's a list, use the first face
+            if isinstance(face_obj, list) and len(face_obj) > 0:
+                face_obj = face_obj[0]
+            
+            # Get image dimensions if available
+            img_width, img_height = 0, 0
+            if img is not None:
+                img_height, img_width = img.shape[:2]
+            
+            # Get face region (facial_area) from DeepFace
+            if "facial_area" not in face_obj:
+                return False, "No facial area information available"
+                
+            facial_area = face_obj["facial_area"]
+            
+            # Get face coordinates
+            x = facial_area.get("x", 0)
+            y = facial_area.get("y", 0)
+            w = facial_area.get("w", 0)
+            h = facial_area.get("h", 0)
+            
+            # If we couldn't determine image dimensions earlier, try to infer from face
+            if img_width == 0 and "img" in face_obj:
+                face_img = face_obj["img"]
+                if face_img is not None:
+                    img_height, img_width = face_img.shape[:2]
+                    # Since this is the face crop, we need to adjust based on known coordinates
+                    img_width = max(img_width, x + w)
+                    img_height = max(img_height, y + h)
+            
+            # If we still don't have image dimensions, use detection confidence only
+            if img_width == 0:
+                # Check confidence only
+                if "confidence" in face_obj and face_obj["confidence"] < face_recognition_config.FACE_DETECTION_CONFIDENCE:
+                    return False, "Face detection confidence too low"
+                return True, None
+            
+            # Check face size relative to image
+            width_ratio = w / img_width
+            height_ratio = h / img_height
+            
+            if width_ratio < face_recognition_config.FACE_MIN_WIDTH_RATIO:
+                return False, "Face too small (width)"
+                
+            if height_ratio < face_recognition_config.FACE_MIN_HEIGHT_RATIO:
+                return False, "Face too small (height)"
+            
+            # Check if face is too close to the edge
+            margin_ratio = face_recognition_config.FACE_MARGIN_RATIO
+            margin_x = img_width * margin_ratio
+            margin_y = img_height * margin_ratio
+            
+            if x < margin_x or (x + w) > (img_width - margin_x) or y < margin_y or (y + h) > (img_height - margin_y):
+                return False, "Face too close to image edge"
+            
+            # Check confidence if available
+            if "confidence" in face_obj and face_obj["confidence"] < face_recognition_config.FACE_DETECTION_CONFIDENCE:
+                return False, "Face detection confidence too low"
+            
+            # All checks passed
+            return True, None
+            
+        except Exception as e:
+            logger.error(f"Error checking face completeness in DeepFace: {str(e)}")
+            return False, f"Error checking face completeness: {str(e)}"
