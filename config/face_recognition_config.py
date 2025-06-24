@@ -16,6 +16,15 @@ class FaceRecognitionConfig(BaseModel):
     ENABLE_ANTISPOOFING: bool = True
     ENABLE_FALLBACK: bool = True
     
+    # Add anti-spoofing configuration for registration
+    ANTI_SPOOFING_THRESHOLD: float = 0.5  # Default threshold for check-in
+    REGISTRATION_ANTI_SPOOFING_THRESHOLD: float = 0.7  # Stricter threshold for registration
+    ENABLE_REGISTRATION_ANTISPOOFING: bool = True  # Enable anti-spoofing for registration
+    
+    # Add duplicate detection configuration
+    ENABLE_DUPLICATE_DETECTION: bool = True  # Enable duplicate face detection
+    DUPLICATE_DETECTION_THRESHOLD: float = 0.6  # Similarity threshold to consider a face duplicate
+    
     SIMILARITY_THRESHOLD: float = 0.5
     
     FACE_MIN_WIDTH_RATIO: float = 0.25  
@@ -34,6 +43,20 @@ class FaceRecognitionConfig(BaseModel):
         
         logger.info(f"Using default model for {operation}: {self.DEFAULT_MODEL}")
         return self.DEFAULT_MODEL
+    
+    def get_anti_spoofing_threshold(self, is_registration: bool = False) -> float:
+        """
+        Get the appropriate anti-spoofing threshold based on operation
+        
+        Args:
+            is_registration: Whether this is for registration (True) or check-in (False)
+            
+        Returns:
+            The threshold value to use
+        """
+        if is_registration and self.ENABLE_REGISTRATION_ANTISPOOFING:
+            return self.REGISTRATION_ANTI_SPOOFING_THRESHOLD
+        return self.ANTI_SPOOFING_THRESHOLD
     
     def update_default_model(self, model: ModelType):
         """

@@ -133,8 +133,8 @@ class InsightFaceService(FaceRecognitionBase):
             
             # Only perform anti-spoofing after verifying the face is complete
             if check_spoofing:
-                spoof_result = self.detect_spoofing(image_data)
-                
+                spoof_result = self.detect_spoofing(img, face)  # Pass the image and face
+    
                 if spoof_result.get("is_spoof", False):
                     logger.warning("Spoofing detected in InsightFace, skipping embedding extraction")
                     return None, 0.0, None, spoof_result
@@ -174,8 +174,18 @@ class InsightFaceService(FaceRecognitionBase):
             logger.error(f"Error extracting face embedding: {str(e)}")
             return None, 0.0, None, {"error": str(e)}
     
-    def detect_spoofing(self, image_data: bytes) -> dict:
-        """Anti-spoofing using Face-AntiSpoofing ONNX model"""
+    def detect_spoofing(self, image, face) -> dict:
+        """
+        Anti-spoofing using Face-AntiSpoofing ONNX model.
+        Implementation follows the reference video_predict.py script exactly.
+        
+        Args:
+            image: RGB image as numpy array
+            face: Face object from InsightFace detector
+            
+        Returns:
+            Dictionary with spoofing detection result
+        """
         try:
             import os
             import numpy as np
@@ -186,7 +196,7 @@ class InsightFaceService(FaceRecognitionBase):
             
             if not os.path.exists(model_path):
                 logger.warning(f"Anti-spoofing model not found at: {model_path}")
-                return self._fallback_spoofing_detection(image_data)
+                return self._fallback_spoofing_detection(face)
             
             if not hasattr(self, 'antispoofing_session'):
                 available_providers = ort.get_available_providers()
@@ -200,37 +210,18 @@ class InsightFaceService(FaceRecognitionBase):
                 self.antispoofing_input_name = self.antispoofing_session.get_inputs()[0].name
                 self.antispoofing_output_name = self.antispoofing_session.get_outputs()[0].name
                 logger.info("Anti-spoofing model loaded successfully")
-            
-            # Preprocess image
-            nparr = np.frombuffer(image_data, np.uint8)
-            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-            if img is None:
-                return {"is_spoof": True, "spoof_score": 1.0, "error": "Failed to decode image"}
-            
-            # Detect face first to focus analysis
-            rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            faces = self.app.get(rgb_img)
-            if not faces:
-                return {"is_spoof": True, "spoof_score": 1.0, "error": "No face detected"}
-            
-            # Get the face with highest detection score
-            face = max(faces, key=lambda x: x.det_score)
+        
+            # Get face bounding box
             bbox = face.bbox.astype(int)
             x1, y1, x2, y2 = bbox
             
-            # Add padding
-            h, w = img.shape[:2]
-            pad_x = int((x2 - x1) * 0.2)
-            pad_y = int((y2 - y1) * 0.2)
-            x1 = max(0, x1 - pad_x)
-            y1 = max(0, y1 - pad_y)
-            x2 = min(w, x2 + pad_x)
-            y2 = min(h, y2 + pad_y)
+            # Convert to format for increased_crop function
+            bbox_xywh = (x1, y1, x2, y2)
             
-            face_img = img[y1:y2, x1:x2]
+            # Get increased crop around face - matching reference implementation
+            face_img = self._increased_crop(image, bbox_xywh, bbox_inc=1.5)
             
-            # Resize to model's expected input (128x128) and convert to RGB
-            face_img = cv2.cvtColor(face_img, cv2.COLOR_BGR2RGB)
+            # Resize to model's expected input (128x128)
             face_img = cv2.resize(face_img, (128, 128))
             
             # Normalize to [0, 1] and convert to the right format (NCHW)
@@ -241,52 +232,67 @@ class InsightFaceService(FaceRecognitionBase):
             # Run inference
             outputs = self.antispoofing_session.run([self.antispoofing_output_name], 
                                                    {self.antispoofing_input_name: face_tensor})
+
+            pred = outputs[0]
+            score = float(pred[0][0])
+            label = int(np.argmax(pred))
+        
+            threshold = face_recognition_config.ANTI_SPOOFING_THRESHOLD if hasattr(face_recognition_config, 'ANTI_SPOOFING_THRESHOLD') else 0.5
             
-            # Get prediction - outputs should be probabilities for [real, fake]
-            prediction = outputs[0][0]
+            if label == 0: 
+                is_spoof = not (score > threshold)  # Only not spoof if score > threshold
+                status = "REAL" if score > threshold else "UNKNOWN"
+            else:  # Predicted as fake
+                is_spoof = True
+                status = "FAKE"
             
-            if len(prediction) >= 2:
-                real_score = float(prediction[0])
-                spoof_score = float(prediction[1])
-            else:
-                spoof_score = float(prediction[0])
-                real_score = 1.0 - spoof_score
+            logger.info(f"Anti-spoofing result: score={score:.2f}, label={label} (threshold: {threshold}) → {status}")
             
-            threshold = 0.5
+            result = {"is_spoof": is_spoof}
             
-            logger.info(f"Anti-spoofing result: real={real_score:.2f}, spoof={spoof_score:.2f} (threshold: {threshold})")
-            
-            return {
-                "is_spoof": spoof_score > threshold,
-                "spoof_score": spoof_score,
-                "details": {
-                    "real_score": real_score,
-                    "detection_confidence": float(face.det_score)
-                },
-                "method": "face_antispoofing"
-            }
+            if label == 1:  
+                result["score"] = score
+    
+            return result
         except Exception as e:
             logger.error(f"Error in anti-spoofing: {str(e)}")
             import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
             
-            # Fall back to simple detection
-            return self._fallback_spoofing_detection(image_data)
+            return self._fallback_spoofing_detection(face)
+
+    def _increased_crop(self, img, bbox, bbox_inc=1.5):
+        """
+        Create an expanded crop around a face, exactly matching the reference implementation.
+        """
+        real_h, real_w = img.shape[:2]
+        
+        x, y, x2, y2 = bbox
+        w, h = x2 - x, y2 - y
+        l = max(w, h)
+        
+        xc, yc = x + w/2, y + h/2
+        x, y = int(xc - l*bbox_inc/2), int(yc - l*bbox_inc/2)
+        x1 = 0 if x < 0 else x 
+        y1 = 0 if y < 0 else y
+        x2 = real_w if x + l*bbox_inc > real_w else x + int(l*bbox_inc)
+        y2 = real_h if y + l*bbox_inc > real_h else y + int(l*bbox_inc)
+        
+        img = img[y1:y2, x1:x2, :]
+        img = cv2.copyMakeBorder(img, 
+                             y1-y, int(l*bbox_inc-y2+y), 
+                             x1-x, int(l*bbox_inc)-x2+x, 
+                             cv2.BORDER_CONSTANT, value=[0, 0, 0])
+        return img
     
-    def _fallback_spoofing_detection(self, image_data: bytes) -> dict:
+    def _fallback_spoofing_detection(self, face) -> dict:
         """Fallback method for anti-spoofing detection (basic check)"""
         try:
-            nparr = np.frombuffer(image_data, np.uint8)
-            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-            if img is None:
-                return {"is_spoof": True, "spoof_score": 1.0, "error": "Failed to decode image"}
-            
-            rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            faces = self.app.get(rgb_img)
-            if not faces:
-                return {"is_spoof": True, "spoof_score": 1.0, "error": "No face detected"}
-            
-            return {"is_spoof": False, "spoof_score": 0.0}
+            # Simple check - if we have a valid face with good confidence, assume it's not a spoof
+            if face is not None and hasattr(face, 'det_score') and face.det_score > face_recognition_config.FACE_DETECTION_CONFIDENCE:
+                return {"is_spoof": False}
+            else:
+                return {"is_spoof": True, "error": "Face detection confidence too low"}
         except Exception as e:
             logger.error(f"Error in fallback anti-spoofing detection: {str(e)}")
-            return {"is_spoof": False, "spoof_score": 0.0, "error": str(e)}
+            return {"is_spoof": False, "error": str(e)}

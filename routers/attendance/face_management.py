@@ -4,12 +4,15 @@ from database.db import get_db
 from services.face_recognition import FaceRecognitionService
 from schemas.user import UserResponse
 from security.auth import get_current_active_user
-from models.database import FaceEmbedding, FaceImage
+from models.database import FaceEmbedding, FaceImage, User
 from starlette.concurrency import run_in_threadpool
 import base64
-from typing import Dict
+from typing import Dict, List, Optional, Tuple
+import numpy as np
 from utils.logging import logger
 from config.face_recognition_config import face_recognition_config
+from services.face_recognition.duplicate_detection import DuplicateFaceDetector
+import uuid
 
 router = APIRouter()
 
@@ -43,7 +46,10 @@ async def register_face(
     # First perform face extraction with anti-spoofing check
     # This will also check for face completeness
     result = await run_in_threadpool(
-        lambda: face_service.extract_face_embedding(processed_image, check_spoofing=True)
+        lambda: face_service.extract_face_embedding(
+            processed_image, 
+            check_spoofing=face_recognition_config.ENABLE_REGISTRATION_ANTISPOOFING
+        )
     )
     
     # Handle both 3-value and 4-value returns for backward compatibility
@@ -73,7 +79,19 @@ async def register_face(
             detail="No face detected in the image. Please try with a clearer photo showing your full face."
         )
     
-    import uuid
+    if face_recognition_config.ENABLE_DUPLICATE_DETECTION:
+        is_duplicate, duplicate_info = await DuplicateFaceDetector.check_for_duplicates(
+            embedding_primary, 
+            current_user_id=current_user.id
+        )
+        
+        if is_duplicate:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"This face appears to be already registered to another user: {duplicate_info.get('duplicate_user_name', 'Unknown')}"
+            )
+    
+    # Continue with the registration process
     registration_group_id = str(uuid.uuid4())
     
     embedding_id_primary = await run_in_threadpool(
@@ -150,7 +168,9 @@ async def register_face(
         "confidence": confidence_primary,
         "face_id": embedding_id_primary,
         "dual_models": store_both_models,
-        "secondary_model_success": embedding_id_secondary is not None if store_both_models else None
+        "secondary_model_success": embedding_id_secondary is not None if store_both_models else None,
+        "anti_spoofing_passed": True,
+        "duplicate_check_passed": True
     }
     
     if aligned_face_primary:
@@ -337,3 +357,4 @@ async def get_face_recognition_settings(
             "dlib": "Limited" if dlib_available else "Not installed"
         }
     }
+
