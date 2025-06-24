@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models.database import Class, ClassSession, User
+from models.database import Class, ClassSession, User, Attendance, AttendanceStatus
 from schemas.class_schema import ClassCreate, ClassUpdate, ClassSessionCreate, ClassSessionUpdate
 from typing import Optional, List
 
@@ -65,8 +65,28 @@ def register_student_to_class(db: Session, class_id: int, student_id: int):
     if db_student in db_class.students:
         return True
     
+    # Add student to class
     db_class.students.append(db_student)
     db.commit()
+    
+    # Create attendance records for all existing sessions
+    existing_sessions = db.query(ClassSession).filter(ClassSession.class_id == class_id).all()
+    if existing_sessions:
+        attendance_records = [
+            Attendance(
+                student_id=student_id,
+                session_id=session.id,
+                status=AttendanceStatus.ABSENT.value,
+                check_in_time=None,
+                late_minutes=0
+            )
+            for session in existing_sessions
+        ]
+        
+        if attendance_records:
+            db.bulk_save_objects(attendance_records)
+            db.commit()
+    
     return True
 
 def remove_student_from_class(db: Session, class_id: int, student_id: int):
@@ -98,18 +118,41 @@ def get_class_sessions(db: Session, class_id: int):
     return db.query(ClassSession).filter(ClassSession.class_id == class_id).all()
 
 def create_class_session(db: Session, session: ClassSessionCreate) -> ClassSession:
-    db_session = ClassSession(
-        class_id=session.class_id,
-        session_date=session.session_date,
-        start_time=session.start_time,
-        end_time=session.end_time,
-        notes=session.notes
-    )
-    db.add(db_session)
-    db.commit()
-    db.refresh(db_session)
-    return db_session
-
+    try:
+        db_session = ClassSession(
+            class_id=session.class_id,
+            session_date=session.session_date,
+            start_time=session.start_time,
+            end_time=session.end_time,
+            notes=session.notes
+        )
+        db.add(db_session)
+        db.commit()
+        db.refresh(db_session)
+        
+        class_obj = db.query(Class).filter(Class.id == session.class_id).first()
+        if class_obj and class_obj.students:
+            attendance_records = [
+                Attendance(
+                    student_id=student.id,
+                    session_id=db_session.id,
+                    status=AttendanceStatus.ABSENT.value,
+                    check_in_time=None,
+                    late_minutes=0
+                )
+                for student in class_obj.students
+            ]
+            
+            if attendance_records:
+                db.bulk_save_objects(attendance_records)
+                db.commit()
+        
+        return db_session
+    except Exception as e:
+        db.rollback()
+        # Log the error
+        print(f"Error creating class session: {str(e)}")
+        raise
 
 def update_class_session(db: Session, session_id: int, session: ClassSessionUpdate):
     db_session = db.query(ClassSession).filter(ClassSession.id == session_id).first()
