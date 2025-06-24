@@ -200,14 +200,148 @@ class DeepFaceService(FaceRecognitionBase):
             # Get the aligned face image if available
             aligned_face_bytes = None
             try:
-                # Read the original image for a fallback
+                # Get the facial area from the extracted face
+                facial_area = face_objs[0]["facial_area"]
+                x = facial_area.get("x", 0)
+                y = facial_area.get("y", 0)
+                w = facial_area.get("w", 0)
+                h = facial_area.get("h", 0)
+                
+                # Read original image
                 img = cv2.imread(temp_path)
-                _, buf = cv2.imencode('.jpg', img)
+                
+                # Try to get landmarks for better face alignment similar to InsightFace
+                face_landmarks = None
+                if "landmarks" in face_objs[0]:
+                    face_landmarks = face_objs[0]["landmarks"]
+                
+                # Modified approach to better match InsightFace's tighter cropping
+                if face_landmarks and isinstance(face_landmarks, dict):
+                    # Use eye positions to better center the face like InsightFace does
+                    left_eye = face_landmarks.get("left_eye")
+                    right_eye = face_landmarks.get("right_eye")
+                    nose = face_landmarks.get("nose")
+                    mouth = face_landmarks.get("mouth_right") or face_landmarks.get("mouth_left")
+                    
+                    if left_eye and right_eye:
+                        # Calculate eye center
+                        eye_center_x = (left_eye[0] + right_eye[0]) // 2
+                        eye_center_y = (left_eye[1] + right_eye[1]) // 2
+                        
+                        # Calculate distance between eyes as reference for face size
+                        eye_distance = abs(right_eye[0] - left_eye[0])
+                        
+                        # Get vertical positioning using nose or mouth if available
+                        y_reference = None
+                        if nose:
+                            y_reference = nose[1]
+                        elif mouth:
+                            y_reference = mouth[1]
+                        
+                        # Make a tighter crop - reduce the width multiplier
+                        # InsightFace crops tend to be about 1.8-2.0x the eye distance horizontally
+                        face_width = int(eye_distance * 2.0)  # More narrow than before (was 2.3)
+                        face_height = int(eye_distance * 2.5)  # Keep vertical size similar
+                        
+                        # Position the crop to place eyes about 40% from the top
+                        y_offset = int(face_height * 0.4)
+                        
+                        # Calculate crop coordinates
+                        img_h, img_w = img.shape[:2]
+                        x1 = max(0, eye_center_x - (face_width // 2))
+                        y1 = max(0, eye_center_y - y_offset)
+                        x2 = min(img_w, x1 + face_width)
+                        y2 = min(img_h, y1 + face_height)
+                        
+                        # Extract the face
+                        face_img = img[y1:y2, x1:x2]
+                        logger.info(f"DeepFace: using tighter landmark-based crop ({face_img.shape[:2]})")
+                    else:
+                        # Fall back to a tighter margin-based crop if we don't have both eyes
+                        # Make the crop narrower horizontally to match InsightFace better
+                        center_x = x + (w // 2)
+                        center_y = y + (h // 2)
+                        
+                        # Make horizontal crop narrower than vertical
+                        # InsightFace crops tend to be tighter horizontally
+                        vertical_size = int(h * 1.15)
+                        horizontal_size = int(w * 0.95)  # Much tighter horizontally
+                        
+                        # Adjust center point to place eyes in upper portion
+                        center_y = center_y - int(h * 0.05)  # Slight upward shift
+                        
+                        # Calculate crop coordinates
+                        img_h, img_w = img.shape[:2]
+                        x1 = max(0, center_x - (horizontal_size // 2))
+                        y1 = max(0, center_y - (vertical_size // 2))
+                        x2 = min(img_w, x1 + horizontal_size)
+                        y2 = min(img_h, y1 + vertical_size)
+                        
+                        face_img = img[y1:y2, x1:x2]
+                        logger.info(f"DeepFace: using narrower center-based crop ({face_img.shape[:2]})")
+                else:
+                    # If no landmarks available, use a tighter fixed margin
+                    # Make the crop narrower horizontally
+                    center_x = x + (w // 2)
+                    center_y = y + (h // 2)
+                    
+                    # Different scaling for width and height
+                    # InsightFace crops tend to be narrower horizontally
+                    vertical_size = int(h * 1.15)  
+                    horizontal_size = int(w * 0.95)  # Much narrower horizontally
+                    
+                    # Adjust the center point to move eyes into the upper part of the image
+                    center_y = center_y - int(h * 0.05)  # Shift up slightly
+                    
+                    # Calculate crop coordinates
+                    img_h, img_w = img.shape[:2]
+                    x1 = max(0, center_x - (horizontal_size // 2))
+                    y1 = max(0, center_y - (vertical_size // 2))
+                    x2 = min(img_w, x1 + horizontal_size)
+                    y2 = min(img_h, y1 + vertical_size)
+                    
+                    face_img = img[y1:y2, x1:x2]
+                    logger.info(f"DeepFace: using narrower standard crop ({face_img.shape[:2]})")
+                
+                # Convert to bytes
+                _, buf = cv2.imencode('.jpg', face_img)
                 aligned_face_bytes = buf.tobytes()
                 
-                logger.info("Face image captured successfully")
+                logger.info(f"Aligned face image extracted, size: {len(aligned_face_bytes)} bytes")
             except Exception as e:
-                logger.warning(f"Failed to get aligned face from DeepFace: {str(e)}")
+                logger.warning(f"Failed to crop face from DeepFace: {str(e)}")
+                # Fallback to the approach in _fallback_extraction if we couldn't crop
+                try:
+                    # Use OpenCV's face detector as fallback
+                    img = cv2.imread(temp_path)
+                    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+                    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                    faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+                    
+                    if len(faces) > 0:
+                        x, y, w, h = faces[0]
+                        # Add margin
+                        margin_x = int(w * 0.1)
+                        margin_y = int(h * 0.1)
+                        img_h, img_w = img.shape[:2]
+                        x1 = max(0, x - margin_x)
+                        y1 = max(0, y - margin_y)
+                        x2 = min(img_w, x + w + margin_x)
+                        y2 = min(img_h, y + h + margin_y)
+                        face_img = img[y1:y2, x1:x2]
+                        _, buf = cv2.imencode('.jpg', face_img)
+                        aligned_face_bytes = buf.tobytes()
+                        logger.info("Face cropped using fallback method")
+                    else:
+                        logger.warning("Could not detect face for cropping - using whole image as fallback")
+                        _, buf = cv2.imencode('.jpg', img)
+                        aligned_face_bytes = buf.tobytes()
+                except Exception as fallback_e:
+                    logger.error(f"Fallback face cropping failed: {str(fallback_e)}")
+                    # Last resort: use the whole image
+                    img = cv2.imread(temp_path)
+                    _, buf = cv2.imencode('.jpg', img)
+                    aligned_face_bytes = buf.tobytes()
             
             # Clean up temporary file
             if os.path.exists(temp_path):
@@ -241,7 +375,27 @@ class DeepFaceService(FaceRecognitionBase):
                 
             # Use the first face
             x, y, w, h = faces[0]
-            face_img = img[y:y+h, x:x+w]
+            
+            # Use narrower cropping to match InsightFace better
+            # Calculate face center
+            center_x = x + (w // 2)
+            center_y = y + (h // 2)
+            
+            # Create a tighter crop horizontally
+            vertical_size = int(h * 1.15)  
+            horizontal_size = int(w * 0.95)  # Much narrower horizontally
+            
+            # Adjust center point to place eyes in upper portion
+            center_y = center_y - int(h * 0.05)  # Slight upward shift
+            
+            # Calculate crop coordinates
+            img_h, img_w = img.shape[:2]
+            x1 = max(0, center_x - (horizontal_size // 2))
+            y1 = max(0, center_y - (vertical_size // 2))
+            x2 = min(img_w, x1 + horizontal_size)
+            y2 = min(img_h, y1 + vertical_size)
+            
+            face_img = img[y1:y2, x1:x2]
             
             # Create a simple embedding (this is just a placeholder - not ideal)
             simple_embedding = cv2.resize(face_img, (128, 128)).flatten() / 255.0
@@ -250,7 +404,7 @@ class DeepFaceService(FaceRecognitionBase):
             _, buf = cv2.imencode('.jpg', face_img)
             aligned_face_bytes = buf.tobytes()
             
-            logger.warning("Used fallback face detection - embedding will be less accurate")
+            logger.warning("Used fallback face detection with narrower cropping - embedding will be less accurate")
             return simple_embedding, 0.5, aligned_face_bytes
         except Exception as e:
             logger.error(f"Fallback extraction failed: {str(e)}")

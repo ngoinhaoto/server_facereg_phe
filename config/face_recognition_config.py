@@ -16,14 +16,13 @@ class FaceRecognitionConfig(BaseModel):
     ENABLE_ANTISPOOFING: bool = True
     ENABLE_FALLBACK: bool = True
     
-    # Add anti-spoofing configuration for registration
-    ANTI_SPOOFING_THRESHOLD: float = 0.5  # Default threshold for check-in
-    REGISTRATION_ANTI_SPOOFING_THRESHOLD: float = 0.7  # Stricter threshold for registration
-    ENABLE_REGISTRATION_ANTISPOOFING: bool = True  # Enable anti-spoofing for registration
+    ANTI_SPOOFING_THRESHOLD: float = 0.5 
+    REGISTRATION_ANTI_SPOOFING_THRESHOLD: float = 0.7  
+    ENABLE_REGISTRATION_ANTISPOOFING: bool = True  
     
-    # Add duplicate detection configuration
-    ENABLE_DUPLICATE_DETECTION: bool = True  # Enable duplicate face detection
-    DUPLICATE_DETECTION_THRESHOLD: float = 0.6  # Similarity threshold to consider a face duplicate
+
+    ENABLE_DUPLICATE_DETECTION: bool = True 
+    DUPLICATE_DETECTION_THRESHOLD: float = 0.45 
     
     SIMILARITY_THRESHOLD: float = 0.5
     
