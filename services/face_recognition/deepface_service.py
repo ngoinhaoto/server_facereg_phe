@@ -1,44 +1,143 @@
-from typing import Optional, Tuple
+from typing import List, Optional, Tuple
 import numpy as np
 import cv2
 import os
 import tempfile
+from concurrent.futures import ThreadPoolExecutor
+import functools
 from utils.logging import logger
 from services.face_recognition.base import FaceRecognitionBase
 from config.face_recognition_config import face_recognition_config
+
+def process_batch_embeddings(self, image_data_list: List[bytes]) -> List[Tuple[Optional[np.ndarray], float, Optional[bytes]]]:
+    results = []
+    
+    if not image_data_list:
+        return results
+    
+    max_workers = 4
+    if self.device and 'cuda' in str(self.device):
+        max_workers = 8
+    
+    try:
+        # Process images in parallel using hardware-optimized thread pool
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            # Submit all tasks
+            futures = [executor.submit(self.extract_face_embedding, img_data, False) 
+                      for img_data in image_data_list]
+            
+            # Collect results as they complete
+            for future in futures:
+                embedding, confidence, face_img, _ = future.result()
+                results.append((embedding, confidence, face_img))
+    
+    except Exception as e:
+        logger.error(f"Error in GPU-optimized batch processing: {str(e)}")
+    
+    # Run memory cleanup after batch processing
+    self._manage_memory()
+    
+    return results
 
 class DeepFaceService(FaceRecognitionBase):
     """DeepFace implementation of face recognition service"""
     
     def __init__(self):
-        """Initialize DeepFace model"""
+        """Initialize DeepFace model with GPU support for both M1 and CUDA"""
         super().__init__("deepface")
         try:
-            # Import DeepFace here to avoid dependency if not used
             from deepface import DeepFace
             
-            # Pre-load models to avoid first-call delay
-            # We'll store these as instance variables
+            self.device = self._setup_gpu_acceleration()
+            
             self.deepface = DeepFace
             
             # Specify which model to use for face recognition
             # Options: "VGG-Face", "Facenet", "Facenet512", "OpenFace", "DeepFace", "ArcFace", "SFace"
-            self.deepface_model_name = "ArcFace"  # ArcFace is close to InsightFace in approach
+            # ArcFace works well with GPU acceleration on both platforms
+            self.deepface_model_name = "ArcFace"
             
-            # Specify which detector to use
-            # Options: "opencv", "ssd", "mtcnn", "retinaface", "mediapipe"
-            self.detector_backend = "retinaface"  # RetinaFace is similar to InsightFace's detector
+            # For GPU-accelerated systems, choose detector based on available hardware
+            if self.device and 'cuda' in str(self.device):
+                self.detector_backend = "retinaface"
+                logger.info(f"Using retinaface detector with CUDA acceleration")
+            else:
+                self.detector_backend = "opencv"
+                logger.info(f"Using opencv detector for Apple Silicon/CPU")
             
-            # Force a model load to cache it
-            _ = DeepFace.build_model(self.deepface_model_name)
+            # Force model load with optimizations for the detected hardware
+            self._load_optimized_model()
             
-            logger.info(f"DeepFace model loaded successfully (model: {self.deepface_model_name}, detector: {self.detector_backend})")
+            logger.info(f"DeepFace model loaded successfully (model: {self.deepface_model_name}, detector: {self.detector_backend}, device: {self.device})")
         except ImportError:
             logger.error("DeepFace not installed. Please install with: pip install deepface")
             raise ImportError("DeepFace not installed. Please install with: pip install deepface")
         except Exception as e:
             logger.error(f"Error initializing DeepFace: {str(e)}")
             raise
+    
+    def _setup_gpu_acceleration(self):
+        """Set up the best available GPU acceleration (CUDA or Metal)"""
+        device = None
+        try:
+            import torch
+            
+            if torch.cuda.is_available():
+                device = torch.device("cuda")
+                cuda_device = torch.cuda.get_device_properties(0)
+                logger.info(f"CUDA acceleration enabled: {cuda_device.name} with {cuda_device.total_memory/1024**3:.1f}GB memory")
+                torch.set_default_tensor_type('torch.cuda.FloatTensor')
+                os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+                os.environ["TF_FORCE_GPU_ALLOW_GROWTH"] = "true"
+            
+            elif hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+                device = torch.device("mps")
+                logger.info("Apple Metal Performance Shaders (MPS) acceleration enabled")
+                os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
+            else:
+                device = torch.device("cpu")
+                logger.info("GPU acceleration not available, using CPU")
+        except ImportError:
+            logger.info("PyTorch not available, using CPU acceleration")
+        
+        return device
+
+    def _load_optimized_model(self):
+        try:
+            _ = self.deepface.build_model(self.deepface_model_name)
+            
+            if self.device:
+                if 'cuda' in str(self.device):
+                    os.environ["OMP_NUM_THREADS"] = "8"  # For NVIDIA GPUs, higher thread count is fine
+                    os.environ["TF_GPU_ALLOCATOR"] = "cuda_malloc_async"  # Better CUDA memory allocation
+                    
+                    # Try to enable TensorRT if available (for NVIDIA GPUs)
+                    try:
+                        import tensorflow as tf
+                        if hasattr(tf, 'config') and hasattr(tf.config, 'optimizer'):
+                            tf.config.optimizer.set_jit(True)
+                            logger.info("TensorFlow JIT optimization enabled for CUDA")
+                    except:
+                        pass
+                        
+                elif 'mps' in str(self.device):
+                    os.environ["OMP_NUM_THREADS"] = "4" 
+                    os.environ["MKL_NUM_THREADS"] = "4"
+                    
+                    try:
+                        import subprocess
+                        result = subprocess.run(['pmset', '-g', 'batt'], 
+                                              capture_output=True, text=True)
+                        if 'discharging' in result.stdout:
+                            logger.info("Running on battery, enabling power-saving mode")
+                            os.environ["PYTORCH_MPS_LOW_PRECISION"] = "1"
+                    except Exception as e:
+                        logger.debug(f"Could not check battery status: {e}")
+                else:
+                    os.environ["OMP_NUM_THREADS"] = str(os.cpu_count() or 4)
+                    os.environ["MKL_NUM_THREADS"] = str(os.cpu_count() or 4)
+        except Exception as e:
+            logger.warning(f"Error during optimized model loading: {e}")
     
     def extract_face_embedding(self, image_data: bytes, check_spoofing=False) -> Tuple[Optional[np.ndarray], float, Optional[bytes], Optional[dict]]:
         """
@@ -60,16 +159,14 @@ class DeepFaceService(FaceRecognitionBase):
                 temp_path = temp.name
                 logger.info(f"Image saved to temporary file: {temp_path}")
                 
-                detector_to_use = "opencv"  # More reliable than retinaface
+                detector_to_use = "opencv"
                 
-                # First extract faces to check completeness
                 img = cv2.imread(temp_path)
                 
                 if img is None:
                     logger.error("Failed to read image")
                     return None, 0.0, None, {"error": "Failed to read image"}
                 
-                # Extract faces first for completeness check
                 try:
                     face_objs = self.deepface.extract_faces(
                         img_path=temp_path,
@@ -78,12 +175,10 @@ class DeepFaceService(FaceRecognitionBase):
                         align=True
                     )
                     
-                    # Check if we found faces
                     if not face_objs or len(face_objs) == 0:
                         logger.warning("No faces detected in image")
                         return None, 0.0, None, {"error": "No face detected in the image"}
                     
-                    # Check face completeness FIRST
                     is_complete, error_message = self.check_face_completeness(face_objs[0], img)
                     if not is_complete:
                         logger.warning(f"Incomplete face detected: {error_message}")
@@ -137,7 +232,6 @@ class DeepFaceService(FaceRecognitionBase):
                             
                             logger.info(f"DeepFace anti-spoofing result: is_real={is_real}")
                         
-                        # Store result for return
                         spoof_result = {
                             "is_spoof": is_spoof,
                             "spoof_score": spoof_score,
@@ -145,7 +239,6 @@ class DeepFaceService(FaceRecognitionBase):
                             "method": "deepface_native"
                         }
                         
-                        # If it's a spoof and we don't need to continue with embedding, return early
                         if is_spoof:
                             logger.warning("Spoofing detected, skipping embedding extraction")
                             if os.path.exists(temp_path):
@@ -154,7 +247,7 @@ class DeepFaceService(FaceRecognitionBase):
                             
                     except Exception as spoof_e:
                         logger.error(f"Error during anti-spoofing check: {str(spoof_e)}")
-                        # Continue with embedding extraction even if spoofing check fails
+
                         spoof_result = {
                             "is_spoof": False,
                             "spoof_score": 0.0,
@@ -443,6 +536,52 @@ class DeepFaceService(FaceRecognitionBase):
                 },
                 "method": "deepface_fallback"
             }
+    
+    def _manage_memory(self):
+        """Optimize memory usage based on detected hardware"""
+        try:
+            # Import memory management utilities
+            import gc
+            gc.collect()
+            
+            # Device-specific memory management
+            if self.device:
+                if 'cuda' in str(self.device):
+                    # CUDA-specific memory management
+                    try:
+                        import torch
+                        if torch.cuda.is_available():
+                            # Clear CUDA cache
+                            torch.cuda.empty_cache()
+                            
+                            # Log GPU memory usage if debug level
+                            if logger.level <= 10:  # DEBUG level
+                                free_mem = torch.cuda.memory_reserved(0) - torch.cuda.memory_allocated(0)
+                                total_mem = torch.cuda.get_device_properties(0).total_memory
+                                logger.debug(f"CUDA memory: {free_mem/1024**2:.1f}MB free / {total_mem/1024**2:.1f}MB total")
+                    except Exception as e:
+                        logger.debug(f"Error in CUDA memory management: {e}")
+                        
+                elif 'mps' in str(self.device):
+                    # M1-specific memory management
+                    try:
+                        import torch
+                        
+                        # For MPS, we force a garbage collection
+                        gc.collect()
+                        
+                        # Try to get memory info for M1
+                        try:
+                            import psutil
+                            process = psutil.Process(os.getpid())
+                            memory_info = process.memory_info()
+                            logger.debug(f"Process memory: {memory_info.rss/1024**2:.1f}MB")
+                        except:
+                            pass
+                    except Exception as e:
+                        logger.debug(f"Error in M1 memory management: {e}")
+        except Exception as e:
+            logger.error(f"Error in memory management: {str(e)}")
     
     def check_face_completeness(self, face_obj, img=None) -> Tuple[bool, Optional[str]]:
         """
