@@ -52,14 +52,12 @@ class DeepFaceService(FaceRecognitionBase):
             
             self.deepface = DeepFace
             
-            # Specify which model to use for face recognition
             # Options: "VGG-Face", "Facenet", "Facenet512", "OpenFace", "DeepFace", "ArcFace", "SFace"
-            # ArcFace works well with GPU acceleration on both platforms
-            self.deepface_model_name = "ArcFace"
+            self.deepface_model_name = "Facenet512"
             
             # For GPU-accelerated systems, choose detector based on available hardware
             if self.device and 'cuda' in str(self.device):
-                self.detector_backend = "retinaface"
+                self.detector_backend = "opencv"
                 logger.info(f"Using retinaface detector with CUDA acceleration")
             else:
                 self.detector_backend = "opencv"
