@@ -53,7 +53,7 @@ class DeepFaceService(FaceRecognitionBase):
             # Options: "VGG-Face", "Facenet", "Facenet512", "OpenFace", "DeepFace", "ArcFace", "SFace"
             self.deepface_model_name = "Facenet512"
 
-            self.detector_backend = "yunet" #other options: "opencv", "ssd", "dlib", "mtcnn", "retinaface", "centerface"
+            self.detector_backend = "yunet" #other options: "opencv", "ssd", "mtcnn", "retinaface", "centerface"
             
             # Force model load with optimizations for the detected hardware
             self._load_optimized_model()
@@ -326,13 +326,11 @@ class DeepFaceService(FaceRecognitionBase):
     def _fallback_extraction(self, temp_path: str) -> Tuple[Optional[np.ndarray], float, Optional[bytes]]:
         """Fallback face extraction using OpenCV if DeepFace fails"""
         try:
-            # Fall back to OpenCV
             img = cv2.imread(temp_path)
             if img is None:
                 logger.error("Failed to read image for fallback processing")
                 return None, 0.0, None
                 
-            # Use OpenCV's face detector as fallback
             face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             faces = face_cascade.detectMultiScale(gray, 1.1, 4)
@@ -341,10 +339,8 @@ class DeepFaceService(FaceRecognitionBase):
                 logger.error("No face detected in fallback processing")
                 return None, 0.0, None
                 
-            # Use the first face exactly as detected
             x, y, w, h = faces[0]
             
-            # Ensure coordinates are within bounds
             img_h, img_w = img.shape[:2]
             x = max(0, x)
             y = max(0, y)
