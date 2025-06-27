@@ -1,3 +1,5 @@
 facereg_env/
 .env
 models/
+data/
+sample_images/

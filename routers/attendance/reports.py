@@ -4,6 +4,7 @@ from database.db import get_db
 from schemas.user import UserResponse
 from security.auth import get_current_active_user
 from models.database import ClassSession, Attendance, User
+from typing import List
 
 router = APIRouter()
 
@@ -107,5 +108,50 @@ async def get_student_attendance(
     
     # Sort by session date, most recent first
     result.sort(key=lambda x: x["session_date"], reverse=True)
+    
+    return result
+
+@router.post("/sessions/batch/students")
+async def get_multiple_sessions_attendance(
+    session_ids: List[int],
+    db: Session = Depends(get_db),
+    current_user: UserResponse = Depends(get_current_active_user)
+):
+    """Get attendance records for multiple class sessions in one request."""
+    if current_user.role != "admin" and current_user.role != "teacher":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not enough permissions"
+        )
+    
+    result = {}
+    
+    for session_id in session_ids:
+        session = db.query(ClassSession).filter(ClassSession.id == session_id).first()
+        if not session:
+            result[session_id] = {"error": "Session not found"}
+            continue
+            
+        # Check permissions
+        class_obj = session.class_obj
+        if current_user.role == "teacher" and class_obj.teacher_id != current_user.id:
+            result[session_id] = {"error": "Not enough permissions"}
+            continue
+        
+        # Get attendance records
+        attendances = session.attendances
+        session_result = []
+        
+        for attendance in attendances:
+            session_result.append({
+                "student_id": attendance.student_id,
+                "username": attendance.student.username,
+                "full_name": attendance.student.full_name,
+                "status": attendance.status,
+                "check_in_time": attendance.check_in_time,
+                "late_minutes": attendance.late_minutes
+            })
+        
+        result[session_id] = session_result
     
     return result

@@ -5,7 +5,8 @@ from security.auth import oauth2_scheme  # Import the OAuth2 scheme
 from sqlalchemy.orm import Session
 from database.db import get_db
 import uvicorn
-from routers import auth, users, classes, attendance  
+from routers import auth, users, classes, attendance
+from routers.admin import dashboard  # Import the admin dashboard router
 
 # Create your FastAPI instance with security scheme
 app = FastAPI(
@@ -17,6 +18,7 @@ app = FastAPI(
         {"name": "Users", "description": "User management operations"},
         {"name": "Classes", "description": "Class management operations"},
         {"name": "Attendance", "description": "Attendance tracking operations"},
+        {"name": "Admin", "description": "Admin dashboard operations"},
     ],
 )
 
@@ -34,6 +36,11 @@ app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(classes.router)
 app.include_router(attendance.router)
+app.include_router(
+    dashboard.router,
+    prefix="/admin",
+    tags=["Admin"]
+)
 
 @app.get("/")
 def read_root():
