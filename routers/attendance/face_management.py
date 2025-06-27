@@ -21,7 +21,7 @@ async def register_face(
     file: UploadFile = File(...),
     device_id: str = "web",
     model: str = None,
-    store_both_models: bool = True,
+    store_both_models: bool = False,
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_active_user)
 ):
@@ -43,8 +43,6 @@ async def register_face(
         lambda: face_service.preprocess_image(image_data)
     )
     
-    # First perform face extraction with anti-spoofing check
-    # This will also check for face completeness
     result = await run_in_threadpool(
         lambda: face_service.extract_face_embedding(
             processed_image, 
@@ -114,6 +112,7 @@ async def register_face(
     
     # If requested, also store with the secondary model (with the same group ID)
     embedding_id_secondary = None
+    
     if store_both_models:
         # Get the other model
         other_model = "insightface" if model == "deepface" else "deepface"
@@ -240,7 +239,7 @@ async def delete_face(
     current_user: UserResponse = Depends(get_current_active_user)
 ):
     """Delete all face embeddings from the same registration group."""
-    # First get the embedding to find its group ID
+
     embedding = db.query(FaceEmbedding).filter(
         FaceEmbedding.id == embedding_id,
         FaceEmbedding.user_id == current_user.id
@@ -252,10 +251,8 @@ async def delete_face(
             detail="Face embedding not found"
         )
     
-    # Check if the attribute exists before using it
     has_group_id = hasattr(embedding, 'registration_group_id') and embedding.registration_group_id
     
-    # If this embedding has a group ID, delete all embeddings in that group
     if has_group_id:
         embeddings_to_delete = db.query(FaceEmbedding).filter(
             FaceEmbedding.registration_group_id == embedding.registration_group_id,

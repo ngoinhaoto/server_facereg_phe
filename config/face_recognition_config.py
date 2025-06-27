@@ -8,7 +8,7 @@ ModelType = Literal["insightface", "deepface"]
 class FaceRecognitionConfig(BaseModel):
     """Configuration settings for face recognition services"""
     
-    DEFAULT_MODEL: ModelType = "insightface"
+    DEFAULT_MODEL: ModelType = "deepface"
     
     REGISTER_FACE_MODEL: Optional[ModelType] = None
     CHECK_IN_MODEL: Optional[ModelType] = None
@@ -28,7 +28,7 @@ class FaceRecognitionConfig(BaseModel):
     
     FACE_MIN_WIDTH_RATIO: float = 0.25  
     FACE_MIN_HEIGHT_RATIO: float = 0.25 
-    FACE_MARGIN_RATIO: float = 0.05  
+    FACE_MARGIN_RATIO: float = 0.05
     FACE_DETECTION_CONFIDENCE: float = 0.7 
     
     def get_model_for_operation(self, operation: str) -> ModelType:
