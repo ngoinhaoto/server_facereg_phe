@@ -4,7 +4,7 @@ from database.db import get_db
 from schemas.user import UserResponse
 from security.auth import get_current_active_user
 from models.database import Class, ClassSession, Attendance, User
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import List, Dict, Any
 
 router = APIRouter()
@@ -24,8 +24,13 @@ async def get_dashboard_data(
         )
     
     # Convert string dates to datetime objects
-    start_date = datetime.fromisoformat(startDate.replace('Z', '+00:00')) if startDate else None
-    end_date = datetime.fromisoformat(endDate.replace('Z', '+00:00')) if endDate else None
+    try:
+        start_date = datetime.fromisoformat(startDate.replace('Z', '+00:00')) if startDate else None
+        end_date = datetime.fromisoformat(endDate.replace('Z', '+00:00')) if endDate else None
+    except Exception as e:
+        print(f"Error parsing dates: {str(e)}")
+        start_date = datetime.now() - timedelta(days=150)  # Default to past 5 months
+        end_date = datetime.now()
     
     # Get users data
     users = db.query(User).all()
@@ -63,12 +68,39 @@ async def get_dashboard_data(
     
     # Get attendance data for the activity chart
     attendance_data = {}
+    activity_data = []
     
+    # Generate months for the date range
+    months = []
+    current = start_date
+    while current <= end_date:
+        month_key = current.strftime("%Y-%m")
+        months.append({
+            "month_key": month_key,
+            "date": current.strftime("%b"),
+            "year": current.strftime("%Y")
+        })
+        # Move to next month
+        if current.month == 12:
+            current = current.replace(year=current.year + 1, month=1)
+        else:
+            current = current.replace(month=current.month + 1)
+    
+    # Initialize data for each month
+    for month in months:
+        attendance_data[month["month_key"]] = {
+            "present": 0, 
+            "late": 0, 
+            "absent": 0,
+            "date": month["date"],
+            "year": month["year"]
+        }
+    
+    # Process actual attendance data
     for cls in classes:
         sessions = db.query(ClassSession).filter(ClassSession.class_id == cls.id).all()
         
         for session in sessions:
-            # Only include sessions within date range
             session_date = session.session_date
             if start_date and session_date < start_date:
                 continue
@@ -76,55 +108,32 @@ async def get_dashboard_data(
                 continue
                 
             attendance_records = session.attendances
-            
-            # Process attendance for the session
             month_key = session_date.strftime("%Y-%m")
-            if month_key not in attendance_data:
-                attendance_data[month_key] = {
-                    "present": 0, 
-                    "late": 0, 
-                    "absent": 0,
-                    "date": session_date.strftime("%b %Y")
-                }
-                
-            for record in attendance_records:
-                status = record.status.lower()
-                if status in attendance_data[month_key]:
-                    attendance_data[month_key][status] += 1
+            
+            if month_key in attendance_data:
+                for record in attendance_records:
+                    status = record.status.lower()
+                    if status in ["present", "late", "absent"]:
+                        attendance_data[month_key][status] += 1
     
-    # Convert attendance data to list for frontend
-    activity_data = []
-    for month, data in attendance_data.items():
+    for month_key, data in attendance_data.items():
+
+        students_count = len([u for u in users if u.role == "student"])
+        
         activity_data.append({
-            "month": month,
+            "month": month_key,
             "date": data["date"],
+            "year": data["year"],
             "present": data["present"],
             "late": data["late"],
             "absent": data["absent"],
             "total": data["present"] + data["late"] + data["absent"],
-            "students": 0,  # Will fill this in later
-            "attendance": data["present"] + data["late"]  # Count of students who attended
+            "students": students_count,
+            "attendance": data["present"] + data["late"]
         })
     
-    # Sort by month
     activity_data.sort(key=lambda x: x["month"])
-    
-    # Add student count to each month's data
-    for data in activity_data:
-        month = data["month"]
-        year, month_num = month.split("-")
-        
-        # Count students that existed by this month
-        student_count = 0
-        for user in users:
-            if user.role == "student" and user.created_at:
-                user_created_date = user.created_at
-                if user_created_date.strftime("%Y-%m") <= month:
-                    student_count += 1
-        
-        data["students"] = student_count
-    
-    # Return all dashboard data in a single response
+
     return {
         "users": users_data,
         "classes": classes_with_students,

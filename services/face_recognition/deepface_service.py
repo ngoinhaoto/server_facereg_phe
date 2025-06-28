@@ -323,6 +323,7 @@ class DeepFaceService(FaceRecognitionBase):
                 os.unlink(temp_path)
             return None, 0.0, None, {"is_spoof": False, "spoof_score": 0.0, "error": str(e), "method": "error"}
     
+
     def _fallback_extraction(self, temp_path: str) -> Tuple[Optional[np.ndarray], float, Optional[bytes]]:
         """Fallback face extraction using OpenCV if DeepFace fails"""
         try:
@@ -331,14 +332,40 @@ class DeepFaceService(FaceRecognitionBase):
                 logger.error("Failed to read image for fallback processing")
                 return None, 0.0, None
                 
+            # Check if image is too small for cascade detection
+            if img.shape[0] < 30 or img.shape[1] < 30:
+                logger.error("Image too small for cascade detection")
+                # Just return the whole image as fallback
+                _, buf = cv2.imencode('.jpg', img)
+                aligned_face_bytes = buf.tobytes()
+                simple_embedding = cv2.resize(img, (128, 128)).flatten() / 255.0
+                return simple_embedding, 0.3, aligned_face_bytes
+                
+            # Use a more robust detection method with better parameters
             face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+            
+            # Add error handling around the detectMultiScale call
+            try:
+                # Use more conservative parameters that are less likely to cause errors
+                faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5, minSize=(30, 30))
+            except cv2.error as e:
+                logger.error(f"OpenCV error in cascade detection: {str(e)}")
+                # Return whole image as a fallback
+                _, buf = cv2.imencode('.jpg', img)
+                aligned_face_bytes = buf.tobytes()
+                simple_embedding = cv2.resize(img, (128, 128)).flatten() / 255.0
+                return simple_embedding, 0.3, aligned_face_bytes
             
             if len(faces) == 0:
                 logger.error("No face detected in fallback processing")
-                return None, 0.0, None
+                # Return whole image as fallback
+                _, buf = cv2.imencode('.jpg', img)
+                aligned_face_bytes = buf.tobytes()
+                simple_embedding = cv2.resize(img, (128, 128)).flatten() / 255.0
+                return simple_embedding, 0.3, aligned_face_bytes
                 
+            # Rest of the function remains the same
             x, y, w, h = faces[0]
             
             img_h, img_w = img.shape[:2]
@@ -366,7 +393,7 @@ class DeepFaceService(FaceRecognitionBase):
             # Clean up
             if os.path.exists(temp_path):
                 os.unlink(temp_path)
-    
+
     def detect_spoofing(self, image_data: bytes) -> dict:
         """DeepFace-specific anti-spoofing implementation using the combined extraction method"""
         try:
