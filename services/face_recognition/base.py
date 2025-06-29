@@ -126,7 +126,9 @@ class FaceRecognitionBase:
     
     def calculate_similarity(self, embedding1: np.ndarray, embedding2: np.ndarray) -> float:
         """Calculate cosine similarity between two embeddings"""
-        # DeepFace uses L2 distance, InsightFace uses cosine similarity
+
+        # insightface model uses cosine similarity
+        # deepface model (facenet512)
         # We'll standardize on cosine similarity for both
         
         norm1 = np.linalg.norm(embedding1)
