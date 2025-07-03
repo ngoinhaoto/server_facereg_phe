@@ -214,22 +214,8 @@ def create_sample_data():
                 )
                 db.add(attendance)
         
-        # Create dummy face embeddings (normally these would be encrypted vectors)
-        for student in students:
-            # Create a properly pickled embedding (random 512-dim vector)
-            embedding_vector = np.random.rand(512).astype(np.float32)  # Use correct dimensions
-            pickled_embedding = pickle.dumps(embedding_vector)
-            
-            embedding = FaceEmbedding(
-                user_id=student.id,
-                encrypted_embedding=pickled_embedding,
-                confidence_score=0.95,
-                device_id="test_device_001"
-            )
-            db.add(embedding)
-        
         db.commit()
-        print("Sample data created successfully!")
+        print("Sample data created successfully (without face embeddings)!")
         
     except Exception as e:
         db.rollback()

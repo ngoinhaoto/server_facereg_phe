@@ -17,7 +17,6 @@ ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "admin123"
 
 def load_sample_image(filename):
-    """Load a sample image as binary data (not base64)"""
     try:
         with open(os.path.join(SAMPLE_IMAGES_DIR, filename), "rb") as f:
             return f.read()

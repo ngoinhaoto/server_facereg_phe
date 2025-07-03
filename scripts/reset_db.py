@@ -5,52 +5,36 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from sqlalchemy_utils import database_exists, drop_database, create_database
 from config.database import DATABASE_URL
-from models.database import Base
-from database.db import engine
+from config.app import settings
 
-def reset_database():
-    print("Starting database reset process...")
+def reset_db():
+    """Reset the database by dropping and recreating it (no tables created here)"""
+    print(f"Database URL: {DATABASE_URL}")
     
-    # Step 1: Drop the database if it exists
+    # Drop the database if it exists
     if database_exists(DATABASE_URL):
-        print(f"Dropping database: {DATABASE_URL}")
+        print(f"Dropping database: {settings.DB_NAME}")
         drop_database(DATABASE_URL)
+        print(f"Database {settings.DB_NAME} dropped successfully!")
     
-    # Step 2: Create a fresh database
-    print(f"Creating new database: {DATABASE_URL}")
+    # Create a fresh database
+    print(f"Creating database: {settings.DB_NAME}")
     create_database(DATABASE_URL)
+    print(f"Database {settings.DB_NAME} created successfully!")
     
-    # Step 3: Create all tables directly using SQLAlchemy
-    print("Creating database tables...")
-    Base.metadata.create_all(bind=engine)
-    print("Database tables created successfully!")
-    
-    # Step 4: Mark migrations as completed (optional)
-    try:
-        # This will mark the migrations as completed without running them
-        alembic_result = subprocess.run(
-            ["alembic", "stamp", "head"],
-            cwd=os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-            capture_output=True,
-            text=True
-        )
-        
-        if alembic_result.returncode != 0:
-            print("Warning: Could not mark migrations as completed:")
-            print(alembic_result.stderr)
-    except Exception as e:
-        print(f"Warning: Could not mark migrations as completed: {str(e)}")
-    
-    # Step 5: Seed the database with sample data
-    print("Seeding database with sample data...")
-    try:
-        from scripts.seed_db import create_sample_data
-        create_sample_data()
-        print("Database reset and seeding completed successfully!")
-        return True
-    except Exception as e:
-        print(f"Error seeding database: {str(e)}")
+    # Run Alembic migrations
+    print("Running Alembic migrations (alembic upgrade head)...")
+    result = subprocess.run(["alembic", "upgrade", "head"], capture_output=True, text=True)
+    if result.returncode == 0:
+        print("Alembic migrations applied successfully!")
+    else:
+        print("Alembic migration failed:")
+        print(result.stdout)
+        print(result.stderr)
         return False
+
+    print("Database reset complete!")
+    return True
 
 if __name__ == "__main__":
     try:
@@ -58,9 +42,28 @@ if __name__ == "__main__":
     except ImportError:
         print("Installing sqlalchemy-utils...")
         os.system("pip install sqlalchemy-utils")
+        from sqlalchemy_utils import database_exists, drop_database, create_database
+    
+    try:
+        import psycopg2
+    except ImportError:
+        print("Installing psycopg2...")
+        os.system("pip install psycopg2-binary")
     
     confirmation = input("⚠️  WARNING: This will DELETE all data in the database. Are you sure? (yes/no): ")
-    if confirmation.lower() == "yes" or confirmation.lower() == "y":
-        reset_database()
+    if confirmation.lower() in ["yes", "y"]:
+        if reset_db():
+            # Optionally, seed the database after migrations
+            seed_confirmation = input("Do you want to seed the database with sample data? (yes/no): ")
+            if seed_confirmation.lower() in ["yes", "y"]:
+                try:
+                    from scripts.seed_db import create_sample_data
+                    print("Seeding database with sample data...")
+                    create_sample_data()
+                    print("Database seeded successfully!")
+                except Exception as e:
+                    print(f"Error seeding database: {str(e)}")
+        else:
+            print("Database reset failed!")
     else:
-        print("Operation cancelled.")
+        print("Database reset cancelled.")

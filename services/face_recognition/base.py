@@ -4,7 +4,8 @@ from sqlalchemy.orm import Session
 import os
 from utils.logging import logger
 
-ModelType = Literal["insightface", "deepface"]
+# Change this to only include "deepface"
+ModelType = Literal["deepface"]
 
 class FaceRecognitionBase:
     _instances: ClassVar[Dict[str, 'FaceRecognitionBase']] = {}
@@ -12,19 +13,16 @@ class FaceRecognitionBase:
     @classmethod
     def get_instance(cls, model_type: ModelType = "deepface", det_size=(640, 640)):
         """Factory method to get or create an instance of the appropriate face recognition service"""
-        from services.face_recognition.insightface_service import InsightFaceService
         from services.face_recognition.deepface_service import DeepFaceService
         
         key = f"{model_type}_{det_size[0]}_{det_size[1]}"
         if key not in cls._instances:
-            if model_type == "insightface":
-                cls._instances[key] = InsightFaceService(det_size)
-            elif model_type == "deepface":
+            if model_type == "deepface":
                 cls._instances[key] = DeepFaceService()
             else:
-                logger.error(f"Unsupported model type: {model_type}")
-                raise ValueError(f"Unsupported model type: {model_type}")
-        
+                logger.error(f"Unsupported model type: {model_type}. Using DeepFace instead.")
+                cls._instances[key] = DeepFaceService()
+    
         return cls._instances[key]
     
     def __init__(self, model_type: ModelType):
@@ -40,30 +38,54 @@ class FaceRecognitionBase:
         raise NotImplementedError("Subclass must implement this method")
     
     def store_face_embedding(self, db: Session, user_id: int, embedding: np.ndarray, 
-                 confidence: float, device_id: str = "web", model_type: str = None,
-                 registration_group_id: str = None) -> int:
-        """Store a face embedding in the database"""
+         confidence: float, device_id: str = "web", model_type: str = None,
+         registration_group_id: str = None, is_phe_encrypted: bool = False) -> int:
         from models.database import FaceEmbedding
         import pickle
+        from main import phe_instance
         
         try:
             model_to_use = model_type if model_type else self.model_type
+            embedding_size = len(embedding)
             
-            binary_embedding = pickle.dumps(embedding)
+            # If the embedding is not already PHE encrypted, encrypt it now
+            if not is_phe_encrypted and phe_instance:
+                logger.info(f"Encrypting face embedding with PHE before storage")
+                try:
+                    # Check for negative values which can't be encrypted with PHE
+                    if np.any(embedding < 0):
+                        embedding = np.abs(embedding)
+                        logger.warning("Converted negative embedding values to positive for PHE encryption")
+                    
+                    embedding_list = embedding.tolist()
+                    
+                    encrypted = phe_instance.encrypt(embedding_list)
+                    binary_data = pickle.dumps(encrypted)
+                    embedding_type = 'phe'
+                except Exception as e:
+                    logger.error(f"PHE encryption failed: {str(e)}. Falling back to plaintext storage.")
+                    binary_data = pickle.dumps(embedding)
+                    embedding_type = 'plaintext'
+            else:
+                # If it's already PHE encrypted or PHE is not available
+                binary_data = pickle.dumps(embedding)
+                embedding_type = 'phe' if is_phe_encrypted else 'plaintext'
             
             db_embedding = FaceEmbedding(
                 user_id=user_id,
-                encrypted_embedding=binary_embedding,
+                embedding=binary_data,  # Store in the single field
+                embedding_type=embedding_type,
                 confidence_score=confidence,
                 device_id=device_id,
                 model_type=model_to_use,
-                registration_group_id=registration_group_id
+                registration_group_id=registration_group_id,
+                embedding_size=embedding_size
             )
             
             db.add(db_embedding)
             db.commit()
             db.refresh(db_embedding)
-            logger.info(f"Stored face embedding for user {user_id} with model {model_to_use}")
+            logger.info(f"Stored {embedding_type} embedding for user {user_id} with model {model_to_use}")
             return db_embedding.id
         except Exception as e:
             logger.error(f"Error storing face embedding: {str(e)}")
@@ -126,9 +148,6 @@ class FaceRecognitionBase:
     
     def calculate_similarity(self, embedding1: np.ndarray, embedding2: np.ndarray) -> float:
         """Calculate cosine similarity between two embeddings"""
-
-        # insightface model uses cosine similarity
-        # deepface model (facenet512)
         # We'll standardize on cosine similarity for both
         
         norm1 = np.linalg.norm(embedding1)

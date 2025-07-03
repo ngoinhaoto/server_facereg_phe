@@ -1,14 +1,14 @@
 from datetime import datetime, timedelta
 from typing import Optional, Union
 from jose import JWTError, jwt
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Request
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from database.db import get_db
 from models.database import User
+from schemas.user import UserResponse
 from config.app import settings
-
 
 # Secret key and algorithm configuration
 SECRET_KEY = settings.SECRET_KEY
@@ -23,6 +23,7 @@ class Token(BaseModel):
     token_type: str
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
+
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
@@ -91,3 +92,26 @@ def get_current_teacher_or_admin(current_user: User = Depends(get_current_active
             detail="Not enough permissions, teacher or admin role required"
         )
     return current_user
+
+async def get_current_user_or_none(
+    token: Optional[str] = Depends(oauth2_scheme),
+    db: Session = Depends(get_db)
+) -> Optional[UserResponse]:
+    """Get the current user from token, or return None if no valid token"""
+    if not token:
+        return None
+        
+    try:
+        # Use ALGORITHM constant instead of settings.ALGORITHM
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            return None
+            
+        user = db.query(User).filter(User.username == username).first()
+        if user is None:
+            return None
+            
+        return UserResponse.from_orm(user)
+    except (JWTError, ValueError):
+        return None

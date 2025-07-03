@@ -1,5 +1,4 @@
 from services.face_recognition.base import FaceRecognitionBase
-from services.face_recognition.insightface_service import InsightFaceService
 from services.face_recognition.deepface_service import DeepFaceService
 
 # Re-export the FaceRecognitionBase class with factory method for backward compatibility

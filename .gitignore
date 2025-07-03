@@ -1,5 +1,10 @@
-facereg_env/
 .env
 models/
 data/
 sample_images/
+phe_server_env/
+database/__pycache__/
+__pycache__/
+*.pyc
+*.pyo
+config/__pycache__/

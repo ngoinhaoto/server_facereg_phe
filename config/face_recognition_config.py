@@ -3,7 +3,8 @@ import os
 from pydantic import BaseModel
 from utils.logging import logger
 
-ModelType = Literal["insightface", "deepface"]
+# Update to only include "deepface"
+ModelType = Literal["deepface"]
 
 class FaceRecognitionConfig(BaseModel):
     """Configuration settings for face recognition services"""

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, LargeBinary, DateTime, ForeignKey, Boolean, Float, Table
+from sqlalchemy import Column, Integer, String, LargeBinary, DateTime, ForeignKey, Boolean, Float, Table, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
@@ -13,7 +13,10 @@ class AttendanceStatus(enum.Enum):
     LATE = "late" 
     ABSENT = "absent"
     
-# Many-to-many relationship table between students and classes
+class EmbeddingType(enum.Enum):
+    PLAINTEXT = "plaintext"  
+    PHE = "phe"             
+    
 student_class_association = Table(
     'student_class_association',
     Base.metadata,
@@ -31,16 +34,16 @@ class User(Base):
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
     role = Column(String, default="student")
-    full_name = Column(String, nullable=True)  # Add this line
+    full_name = Column(String, nullable=True)
 
-    # Add these new fields
+
     student_id = Column(String, unique=True, index=True, nullable=True)
     staff_id = Column(String, unique=True, index=True, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())    
-    # Relationships
+
     face_embeddings = relationship("FaceEmbedding", back_populates="user", cascade="all, delete")
-    # New relationships
+
     classes = relationship("Class", secondary=student_class_association, back_populates="students")
     attendances = relationship("Attendance", back_populates="student")
     taught_classes = relationship("Class", back_populates="teacher")
@@ -90,6 +93,7 @@ class Attendance(Base):
     check_in_time = Column(DateTime(timezone=True))
     late_minutes = Column(Integer, default=0)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    verification_method = Column(String, default="phe") 
     
     # Relationships
     student = relationship("User", back_populates="attendances")
@@ -100,35 +104,15 @@ class FaceEmbedding(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"))
-    encrypted_embedding = Column(LargeBinary, nullable=False)
+    embedding = Column(LargeBinary, nullable=False)  
+    embedding_type = Column(String, default=EmbeddingType.PHE.value, index=True)
     confidence_score = Column(Float)
     device_id = Column(String, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     model_type = Column(String, index=True)
-    registration_group_id = Column(String, index=True)  # Add this column
+    registration_group_id = Column(String, index=True)
+    embedding_size = Column(Integer, nullable=True) 
 
     # Relationships
     user = relationship("User", back_populates="face_embeddings")
-    face_image = relationship("FaceImage", back_populates="embedding", uselist=False, cascade="all, delete")
-
-class FaceImage(Base):
-    __tablename__ = "face_images"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    embedding_id = Column(Integer, ForeignKey("face_embeddings.id", ondelete="CASCADE"), unique=True)
-    image_data = Column(LargeBinary, nullable=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    
-    # Relationship to face embedding
-    embedding = relationship("FaceEmbedding", back_populates="face_image")
-
-class AuthLog(Base):
-    __tablename__ = "auth_logs"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"))
-    device_id = Column(String, index=True)
-    success = Column(Boolean, default=False)
-    timestamp = Column(DateTime(timezone=True), server_default=func.now())
-    ip_address = Column(String)
 

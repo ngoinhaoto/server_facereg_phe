@@ -6,6 +6,7 @@ from security.auth import get_current_active_user
 from models.database import Class, ClassSession, Attendance, User
 from datetime import datetime, timedelta
 from typing import List, Dict, Any
+from dateutil.relativedelta import relativedelta  # Add this import
 
 router = APIRouter()
 
@@ -80,11 +81,8 @@ async def get_dashboard_data(
             "date": current.strftime("%b"),
             "year": current.strftime("%Y")
         })
-        # Move to next month
-        if current.month == 12:
-            current = current.replace(year=current.year + 1, month=1)
-        else:
-            current = current.replace(month=current.month + 1)
+        # Move to next month - FIX: Use relativedelta instead of replace
+        current = current + relativedelta(months=1)
     
     # Initialize data for each month
     for month in months:
@@ -117,7 +115,6 @@ async def get_dashboard_data(
                         attendance_data[month_key][status] += 1
     
     for month_key, data in attendance_data.items():
-
         students_count = len([u for u in users if u.role == "student"])
         
         activity_data.append({

@@ -1,37 +1,53 @@
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
-from security.auth import oauth2_scheme  # Import the OAuth2 scheme
+from security.auth import oauth2_scheme
 from sqlalchemy.orm import Session
 from database.db import get_db
 import uvicorn
 from routers import auth, users, classes, attendance
-from routers.admin import dashboard  # Import the admin dashboard router
+from routers.admin import dashboard
+from config.app import settings
 
-# Create your FastAPI instance with security scheme
+from utils.phe_helper import ensure_phe_public_key_exists, get_phe_instance
+import logging
+
+logger = logging.getLogger("phe-system")
+logging.basicConfig(level=logging.INFO)
+
+try:
+    # Try both possible locations
+    try:
+        from routers.phe_face_management import router as phe_face_router
+        phe_router_available = True
+    except ImportError:
+        from routers.attendance.phe_face_management import router as phe_face_router
+        phe_router_available = True
+except ImportError:
+    phe_router_available = False
+
 app = FastAPI(
-    title="Face Recognition System",
-    description="API for face recognition attendance system",
-    version="0.1.0",
+    title="Face Recognition System with PHE",
+    description="API for face recognition attendance system with Private Homomorphic Encryption",
+    version="0.2.0",
     openapi_tags=[
         {"name": "Authentication", "description": "Authentication operations"},
         {"name": "Users", "description": "User management operations"},
         {"name": "Classes", "description": "Class management operations"},
         {"name": "Attendance", "description": "Attendance tracking operations"},
         {"name": "Admin", "description": "Admin dashboard operations"},
+        {"name": "PHE Face Management", "description": "Face operations with Private Homomorphic Encryption"},
     ],
 )
 
-# Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include routers
 app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(classes.router)
@@ -42,13 +58,32 @@ app.include_router(
     tags=["Admin"]
 )
 
+if settings.ENABLE_PHE and phe_router_available:
+    app.include_router(phe_face_router)
+
+phe_instance = None
+
+@app.on_event("startup")
+async def startup_event():
+    global phe_instance
+    if ensure_phe_public_key_exists():
+        phe_instance = get_phe_instance()
+        if phe_instance:
+            logger.info("PHE initialized successfully with public key")
+        else:
+            logger.warning("Failed to initialize PHE with public key")
+
 @app.get("/")
 def read_root():
-    return {"message": "Face Recognition API running"}
+    return {
+        "message": "Welcome to Face Recognition API with PHE support",
+        "docs": "/docs",
+        "phe_enabled": settings.ENABLE_PHE
+    }
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok"}
+    return {"status": "healthy", "phe_enabled": settings.ENABLE_PHE}
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

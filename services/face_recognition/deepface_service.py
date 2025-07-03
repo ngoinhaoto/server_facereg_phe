@@ -49,9 +49,9 @@ class DeepFaceService(FaceRecognitionBase):
             self.device = self._setup_gpu_acceleration()
             
             self.deepface = DeepFace
-            
-            # Options: "VGG-Face", "Facenet", "Facenet512", "OpenFace", "DeepFace", "ArcFace", "SFace"
-            self.deepface_model_name = "Facenet512"
+
+            # for PHE it only supports VGG-Face
+            self.deepface_model_name = "VGG-Face"
 
             self.detector_backend = "yunet" #other options: "opencv", "ssd", "mtcnn", "retinaface", "centerface"
             

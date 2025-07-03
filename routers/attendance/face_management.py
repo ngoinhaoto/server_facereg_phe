@@ -4,15 +4,30 @@ from database.db import get_db
 from services.face_recognition import FaceRecognitionService
 from schemas.user import UserResponse
 from security.auth import get_current_active_user
-from models.database import FaceEmbedding, FaceImage, User
+from fastapi.security.api_key import APIKeyHeader
+from config.app import settings
+from models.database import FaceEmbedding, User, ClassSession, Attendance, AttendanceStatus
 from starlette.concurrency import run_in_threadpool
-import base64
+import base64  # Add this back
 from typing import Dict, List, Optional, Tuple
 import numpy as np
 from utils.logging import logger
 from config.face_recognition_config import face_recognition_config
 from services.face_recognition.duplicate_detection import DuplicateFaceDetector
 import uuid
+from datetime import datetime, timezone
+from fastapi import BackgroundTasks
+from pydantic import BaseModel
+
+API_KEY_HEADER = APIKeyHeader(name="X-API-Key")
+
+def get_api_key(api_key: str = Depends(API_KEY_HEADER)):
+    if api_key == settings.PHE_API_KEY:
+        return api_key
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid or missing API key"
+    )
 
 router = APIRouter()
 
@@ -20,23 +35,15 @@ router = APIRouter()
 async def register_face(
     file: UploadFile = File(...),
     device_id: str = "web",
-    model: str = None,
-    store_both_models: bool = False,
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_active_user)
 ):
-    if model is None:
-        model = face_recognition_config.get_model_for_operation("register_face")
-    
-    if model not in ["insightface", "deepface"]:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid model selection. Choose 'insightface' or 'deepface'"
-        )
+    # Always use DeepFace model
+    model = "deepface"
     
     image_data = await file.read()
     
-    logger.info(f"Registering face using {model} model with store_both_models={store_both_models}")
+    logger.info(f"Registering face using {model} model")
     
     face_service = FaceRecognitionService.get_instance(model_type=model)
     processed_image = await run_in_threadpool(
@@ -50,7 +57,6 @@ async def register_face(
         )
     )
     
-    # Handle both 3-value and 4-value returns for backward compatibility
     if len(result) == 3:
         embedding_primary, confidence_primary, aligned_face_primary = result
         spoof_result = None
@@ -99,62 +105,6 @@ async def register_face(
         )
     )
     
-    if aligned_face_primary and embedding_id_primary:
-        try:
-            face_image = FaceImage(
-                embedding_id=embedding_id_primary,
-                image_data=aligned_face_primary
-            )
-            db.add(face_image)
-            db.commit()
-        except Exception as e:
-            logger.error(f"Error storing face image: {str(e)}")
-    
-    # If requested, also store with the secondary model (with the same group ID)
-    embedding_id_secondary = None
-    
-    if store_both_models:
-        # Get the other model
-        other_model = "insightface" if model == "deepface" else "deepface"
-        
-        try:
-            # Process with secondary model
-            secondary_service = FaceRecognitionService.get_instance(model_type=other_model)
-            result = await run_in_threadpool(
-                lambda: secondary_service.extract_face_embedding(processed_image)
-            )
-            
-            # Handle different return formats
-            if len(result) == 3:
-                embedding_secondary, confidence_secondary, _ = result
-            else:
-                embedding_secondary, confidence_secondary, _, _ = result
-            
-            if embedding_secondary is not None:
-                # Store the secondary embedding with the same group ID
-                embedding_id_secondary = await run_in_threadpool(
-                    lambda: secondary_service.store_face_embedding(
-                        db, current_user.id, embedding_secondary, confidence_secondary, 
-                        f"{device_id}_auto_{other_model}", other_model, registration_group_id
-                    )
-                )
-                
-                # Also store the face image for the secondary embedding
-                if aligned_face_primary and embedding_id_secondary:
-                    try:
-                        secondary_face_image = FaceImage(
-                            embedding_id=embedding_id_secondary,
-                            image_data=aligned_face_primary
-                        )
-                        db.add(secondary_face_image)
-                        db.commit()
-                    except Exception as e:
-                        logger.error(f"Error storing face image for secondary model: {str(e)}")
-                
-                logger.info(f"Successfully stored secondary embedding with {other_model}")
-        except Exception as e:
-            logger.error(f"Error processing with secondary model {other_model}: {str(e)}")
-    
     # Get total embeddings count
     embeddings_count = await run_in_threadpool(
         lambda: face_service.get_user_embeddings_count(db, current_user.id)
@@ -166,12 +116,11 @@ async def register_face(
         "embeddings_count": embeddings_count,
         "confidence": confidence_primary,
         "face_id": embedding_id_primary,
-        "dual_models": store_both_models,
-        "secondary_model_success": embedding_id_secondary is not None if store_both_models else None,
         "anti_spoofing_passed": True,
         "duplicate_check_passed": True
     }
     
+    # Add aligned face if available
     if aligned_face_primary:
         response["aligned_face"] = base64.b64encode(aligned_face_primary).decode('utf-8')
     
@@ -211,15 +160,6 @@ async def get_my_faces(
         # Add this model to the group's models list
         model_type = getattr(emb, 'model_type', 'unknown')
         grouped_embeddings[group_id]["models"].append(model_type)
-        
-        # Try to get the face image if we don't have one yet
-        if not grouped_embeddings[group_id]["image"]:
-            try:
-                # Check if this embedding has an associated image
-                if hasattr(emb, 'face_image') and emb.face_image and emb.face_image.image_data:
-                    grouped_embeddings[group_id]["image"] = base64.b64encode(emb.face_image.image_data).decode('utf-8')
-            except Exception as e:
-                logger.error(f"Error retrieving face image for embedding {emb.id}: {str(e)}")
     
     # Convert the grouped dictionary to a list
     result_faces = list(grouped_embeddings.values())
@@ -319,11 +259,10 @@ async def get_face_recognition_settings(
             detail="Only administrators can access face recognition settings"
         )
     
-    available_models = ["insightface"] 
+    available_models = ["deepface"]  # Remove insightface
     
     try:
         import deepface
-        available_models.append("deepface")
         deepface_version = deepface.__version__
     except ImportError:
         deepface_version = None
@@ -335,23 +274,132 @@ async def get_face_recognition_settings(
     except ImportError:
         dlib_available = False
     
-    try:
-        import insightface
-        insightface_version = insightface.__version__
-    except:
-        insightface_version = "Unknown"
-    
     return {
         "available_models": available_models,
         "model_versions": {
-            "insightface": insightface_version,
             "deepface": deepface_version,
             "dlib": "Available" if dlib_available else "Not installed"
         },
         "anti_spoofing_supported": {
-            "insightface": "Custom implementation",
-            "deepface": "Yes" if "deepface" in available_models else "Not installed",
+            "deepface": "Yes" if deepface_version else "Not installed",
             "dlib": "Limited" if dlib_available else "Not installed"
         }
     }
 
+# Define a model for the request body
+class PHECheckInRequest(BaseModel):
+    session_id: int
+    user_id: int
+    verification_method: str = "phe"
+
+@router.post("/phe-check-in")
+async def phe_check_in(
+    data: PHECheckInRequest,
+    background_tasks: BackgroundTasks = None,
+    db: Session = Depends(get_db),
+    api_key: str = Depends(get_api_key) 
+):
+    """Record attendance based on PHE verification from microservice"""
+    # Extract values from the request body
+    session_id = data.session_id
+    user_id = data.user_id
+    verification_method = data.verification_method
+    
+    # Validate session
+    session = db.query(ClassSession).filter(ClassSession.id == session_id).first()
+    
+    if not session:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Class session not found"
+        )
+    
+    # Validate user
+    student_user = db.query(User).filter(User.id == user_id).first()
+    if not student_user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found in database."
+        )
+    
+    # Check if the student has access to this class
+    student_has_access = any(c.id == session.class_id for c in student_user.classes)
+    
+    # For PHE check-ins, we just verify that the student is enrolled in the class
+    if not student_has_access:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Student is not enrolled in this class."
+        )
+    
+    # Check if attendance record already exists
+    existing_attendance = db.query(Attendance).filter(
+        Attendance.student_id == user_id,
+        Attendance.session_id == session_id
+    ).first()
+    
+    now = datetime.now(timezone.utc)
+    # Calculate late minutes if student is late
+    late_minutes = 0
+    attendance_status = AttendanceStatus.PRESENT.value
+    if now > session.start_time:
+        # Calculate minutes late
+        time_diff = now - session.start_time
+        late_minutes = int(time_diff.total_seconds() / 60)
+        if late_minutes > 0:
+            attendance_status = AttendanceStatus.LATE.value
+
+    try:
+        if existing_attendance:
+            # Update existing attendance
+            existing_attendance.status = attendance_status
+            existing_attendance.check_in_time = now
+            existing_attendance.late_minutes = late_minutes
+            existing_attendance.verification_method = verification_method
+        else:
+            # Create new attendance record - no similarity needed
+            attendance = Attendance(
+                student_id=user_id,
+                session_id=session_id,
+                status=attendance_status,
+                check_in_time=now,
+                late_minutes=late_minutes,
+                verification_method=verification_method
+            )
+            db.add(attendance)
+        
+        db.commit()
+        
+        class_info = session.class_obj
+
+        return {
+            "message": "Attendance recorded successfully via PHE",
+            "status": attendance_status,
+            "late_minutes": late_minutes if attendance_status == AttendanceStatus.LATE.value else 0,
+            "user": {
+                "id": student_user.id,
+                "name": student_user.full_name,
+                "username": student_user.username,
+                "role": student_user.role
+            },
+            "session": {
+                "id": session.id,
+                "date": session.session_date,
+                "start_time": session.start_time,
+                "end_time": session.end_time,
+                "class": {
+                    "id": class_info.id,
+                    "name": class_info.name,
+                    "code": class_info.class_code
+                }
+            },
+            "check_in_time": now,
+            "verification_method": verification_method
+        }
+    except Exception as e:
+        db.rollback()
+        logger.error(f"Error recording PHE attendance: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error recording attendance: {str(e)}"
+        )
