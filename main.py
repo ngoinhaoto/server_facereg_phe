@@ -67,7 +67,6 @@ phe_instance = None
 async def startup_event():
     global phe_instance
     
-    # First check if the PHE public key exists
     if ensure_phe_public_key_exists():
         # Try to get the PHE instance
         phe_instance = get_phe_instance()
