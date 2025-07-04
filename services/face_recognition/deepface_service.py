@@ -161,7 +161,6 @@ class DeepFaceService(FaceRecognitionBase):
                     face_objs = self.deepface.extract_faces(
                         img_path=temp_path,
                         detector_backend=detector_to_use,
-                        enforce_detection=False,
                         align=True
                     )
                     
@@ -191,7 +190,6 @@ class DeepFaceService(FaceRecognitionBase):
                         anti_spoof_faces = self.deepface.extract_faces(
                             img_path=temp_path,
                             detector_backend=detector_to_use,
-                            enforce_detection=False,
                             align=True,
                             anti_spoofing=True
                         )
@@ -251,8 +249,6 @@ class DeepFaceService(FaceRecognitionBase):
                     img_path=temp_path,
                     model_name=self.deepface_model_name,
                     detector_backend=detector_to_use,
-                    enforce_detection=False,
-                    align=True
                 )
             except Exception as deep_error:
                 logger.error(f"DeepFace.represent failed: {str(deep_error)}")

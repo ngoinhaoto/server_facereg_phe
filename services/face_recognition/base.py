@@ -147,9 +147,6 @@ class FaceRecognitionBase:
             return False, None, 0.0
     
     def calculate_similarity(self, embedding1: np.ndarray, embedding2: np.ndarray) -> float:
-        """Calculate cosine similarity between two embeddings"""
-        # We'll standardize on cosine similarity for both
-        
         norm1 = np.linalg.norm(embedding1)
         norm2 = np.linalg.norm(embedding2)
         

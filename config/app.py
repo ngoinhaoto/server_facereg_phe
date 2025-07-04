@@ -14,9 +14,7 @@ class Settings(BaseSettings):
     DB_NAME: str = os.getenv("DB_NAME", "fhe_facereg_db")
     
     # PHE Service URLs
-    PHE_ONPREM_URL: str = os.getenv("PHE_ONPREM_URL", "http://localhost:8001")
-    PHE_CLOUD_URL: str = os.getenv("PHE_CLOUD_URL", "http://localhost:8001")
-    
+    PHE_ONPREM_URL: str = os.getenv("PHE_ONPREM_URL", "http://localhost:8001")    
 
     PHE_API_KEY: str = os.getenv("PHE_API_KEY", "your-secret-api-key")
     

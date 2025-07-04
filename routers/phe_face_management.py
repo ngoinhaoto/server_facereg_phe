@@ -17,7 +17,12 @@ from fastapi import Security
 from config.app import settings  
 import pickle
 import json
+import tempfile
+import os
+from datetime import datetime
+from utils.phe_helper import get_phe_instance
 
+import ast
 
 
 API_KEY = APIKeyHeader(name="X-API-Key")
@@ -39,6 +44,15 @@ class EncryptedEmbeddingData(BaseModel):
     aligned_face: Optional[str] = None
     embedding_size: Optional[int] = 0
     user_id: Optional[int] = None 
+
+class PublicKeyData(BaseModel):
+    public_key: str
+    key_id: str
+    algorithm: Optional[str] = "Paillier"
+    precision: Optional[int] = 19
+
+class EncryptedNumberData(BaseModel):
+    encrypted_number: str
 
 @router.post("/register-face")
 async def register_face_phe(
@@ -101,99 +115,6 @@ async def register_face_phe(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error registering face: {str(e)}"
-        )
-
-@router.post("/verify-face")
-async def verify_face_phe(
-    file: UploadFile = File(...),
-    user_id: Optional[int] = None,
-    threshold: float = 0.6,
-    db: Session = Depends(get_db)
-):
-    try:
-        image_data = await file.read()
-        
-        embedding_result = phe_service.extract_embedding(image_data)
-        plain_embedding = embedding_result.get("embedding")
-        
-        if not plain_embedding:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="No face detected in the image"
-            )
-        
-        query = db.query(FaceEmbedding, User).join(
-            User, FaceEmbedding.user_id == User.id
-        ).filter(
-            FaceEmbedding.embedding_type == EmbeddingType.PHE.value
-        )
-        
-        if user_id:
-            query = query.filter(FaceEmbedding.user_id == user_id)
-        
-        stored_embeddings = query.all()
-        
-        if not stored_embeddings:
-            return {
-                "verified": False,
-                "user_id": None,
-                "user_name": None,
-                "similarity": 0,
-                "message": "No registered faces found"
-            }
-        
-        best_match = None
-        best_user = None
-        best_similarity = 0
-        
-        for embedding, user in stored_embeddings:
-            try:
-                # Get the stored PHE embedding
-                encrypted_embedding = embedding.phe_embedding
-                
-                # Compute similarity
-                encrypted_similarity = phe_service.compute_similarity(plain_embedding, encrypted_embedding)
-                
-                # Decrypt the similarity score
-                similarity = phe_service.decrypt_similarity(encrypted_similarity)
-                
-                # Update best match if this is better
-                if similarity > best_similarity:
-                    best_similarity = similarity
-                    best_match = embedding
-                    best_user = user
-            except Exception as e:
-                logger.error(f"Error computing similarity for embedding: {str(e)}")
-                continue
-        
-        if best_match is None:
-            return {
-                "verified": False,
-                "user_id": None,
-                "user_name": None,
-                "similarity": 0,
-                "message": "No valid comparisons could be made"
-            }
-        
-        # Check if the similarity meets the threshold
-        verified = best_similarity >= threshold
-        
-        return {
-            "verified": verified,
-            "user_id": best_user.id,
-            "user_name": best_user.full_name or best_user.username,
-            "similarity": best_similarity,
-            "embedding_id": best_match.id,
-            "model_type": best_match.model_type,
-            "threshold": threshold
-        }
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Error verifying face with PHE")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error verifying face"
         )
 
 @router.get("/status")
@@ -576,4 +497,197 @@ async def validate_embeddings(
         "errors": errors if errors else None
     }
 
+@router.post("/register-face-server-side")
+async def register_face_server_side(
+    request: Request,
+    file: UploadFile = File(...),
+    api_key: str = Security(API_KEY),
+    db: Session = Depends(get_db),
+    current_user: Optional[UserResponse] = Depends(get_current_user_or_none)
+):
+    """Extract, encrypt, and store face embedding on the server side"""
+    try:
+        user_id = None
+        if current_user:
+            user_id = current_user.id
+            
+        if not user_id:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="User ID is required"
+            )
+            
+        # Read the image data
+        image_data = await file.read()
+        
+        # Extract embedding using DeepFace
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp:
+            temp.write(image_data)
+            temp_path = temp.name
+            
+        try:
+            from deepface import DeepFace
+            import numpy as np
+            
+            logger.info("Extracting face embedding with VGG-Face...")
+            embedding_objs = DeepFace.represent(
+                img_path=temp_path, 
+                model_name="VGG-Face",
+                detector_backend="yunet"
+            )
+            
+            if not embedding_objs or len(embedding_objs) == 0:
+                raise HTTPException(status_code=400, detail="No face detected in the image")
+            
+            embedding = embedding_objs[0]["embedding"]
+            embedding_size = len(embedding)
+            
+            from lightphe import LightPHE
+            from lightphe.models.Tensor import EncryptedTensor
+            
+            try:
+                cs = get_phe_instance()
+                
+                if not cs:
+                    raise HTTPException(
+                        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                        detail="Failed to initialize PHE encryption"
+                    )
+                    
+                encrypted = cs.encrypt(embedding)
+                
+                encrypted_bytes = pickle.dumps(encrypted)
+                
+                registration_group_id = str(uuid.uuid4())
+                
+                embedding_obj = FaceEmbedding(
+                    user_id=user_id,
+                    embedding=encrypted_bytes,
+                    embedding_type=EmbeddingType.PHE.value,
+                    confidence_score=1.0,
+                    device_id="server_side_encryption",
+                    model_type="deepface",
+                    registration_group_id=registration_group_id,
+                    embedding_size=embedding_size
+                )
+                
+                db.add(embedding_obj)
+                db.commit()
+                db.refresh(embedding_obj)
+                
+                # Save the unencrypted embedding to a debug file for comparison
+                os.makedirs("debug_embeddings", exist_ok=True)
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                embedding_norm = np.linalg.norm(np.array(embedding))
+                
+                with open(f"debug_embeddings/server_extracted_{timestamp}.json", "w") as f:
+                    debug_info = {
+                        "timestamp": str(datetime.now()),
+                        "user_id": user_id,
+                        "embedding_id": embedding_obj.id,
+                        "registration_group_id": registration_group_id,
+                        "embedding": {
+                            "length": len(embedding),
+                            "norm": float(embedding_norm),
+                            "is_normalized": bool(abs(embedding_norm - 1.0) < 0.01),
+                            "min": float(np.min(embedding)),
+                            "max": float(np.max(embedding)),
+                            "mean": float(np.mean(embedding)),
+                            "std": float(np.std(embedding)),
+                            "has_negative": bool(np.any(np.array(embedding) < 0)),
+                            "first_10_values": embedding[:10]
+                        }
+                    }
+                    json.dump(debug_info, f, indent=2)
+                
+                return {
+                    "message": "Face registered successfully with server-side encryption",
+                    "embedding_id": embedding_obj.id,
+                    "registration_group_id": registration_group_id,
+                    "embedding_type": EmbeddingType.PHE.value
+                }
+                
+            except Exception as encryption_error:
+                logger.error(f"Error during server-side encryption: {str(encryption_error)}")
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail=f"Error during server-side encryption: {str(encryption_error)}"
+                )
+                
+        finally:
+            if os.path.exists(temp_path):
+                os.unlink(temp_path)
+                
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error in server-side registration: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error in server-side registration: {str(e)}"
+        )
 
+
+@router.get("/key-compatibility-test")
+async def key_compatibility_test(api_key: str = Security(API_KEY)):
+    """
+    Test endpoint that encrypts a test array and returns it to verify key compatibility
+    """
+    try:
+        logger.info("Starting key compatibility test")
+        
+        # Create test array
+        test_array = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0]
+        logger.info(f"Test array: {test_array}")
+        
+        # Get PHE instance
+        from utils.phe_helper import get_phe_instance
+        phe_instance = get_phe_instance()
+        
+        if not phe_instance:
+            raise HTTPException(
+                status_code=500,
+                detail="Failed to initialize PHE instance"
+            )
+        
+        # Get current key ID
+        key_info_path = "keys/key_info.json"
+        current_key_id = "unknown"
+        if os.path.exists(key_info_path):
+            try:
+                with open(key_info_path, 'r') as f:
+                    key_info = json.load(f)
+                    current_key_id = key_info.get("key_id", "unknown")
+            except Exception as e:
+                logger.error(f"Error reading key info: {str(e)}")
+        
+        # Encrypt the test array
+        try:
+            encrypted_array = phe_instance.encrypt(test_array)
+
+            encrypted_array = encrypted_array
+            logger.info(f"Successfully encrypted test array with key ID: {current_key_id}")
+            
+            # Serialize for transport
+            import base64
+            import pickle
+            serialized = base64.b64encode(pickle.dumps(encrypted_array)).decode('utf-8')
+            
+            return {
+                "test_array": test_array,
+                "encrypted_array": serialized,
+                "key_id": current_key_id
+            }
+        except Exception as e:
+            logger.error(f"Error encrypting test array: {str(e)}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Error encrypting test array: {str(e)}"
+            )
+            
+    except Exception as e:
+        logger.error(f"Error in key compatibility test: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error in key compatibility test: {str(e)}"
+        )

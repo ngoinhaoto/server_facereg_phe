@@ -13,9 +13,7 @@ class PHEService:
     """
     
     def __init__(self):
-        # URLs for PHE microservices
-        self.onprem_url = settings.PHE_ONPREM_URL  # Client-side service with private key
-        self.cloud_url = settings.PHE_CLOUD_URL    # Could be same as onprem for testing
+        self.onprem_url = settings.PHE_ONPREM_URL
     
     def extract_embedding(self, image_data: bytes) -> Dict[str, Any]:
         """Extract face embedding using the client-side PHE microservice"""
@@ -46,27 +44,21 @@ class PHEService:
             raise
     
     def compute_similarity(self, plain_embedding: List[float], encrypted_embedding) -> str:
-        """
-        Compute similarity between plain and encrypted embeddings using the @ operator
-        
-        This is done on the server side (exactly as in your notebook),
-        but the result remains encrypted and can only be decrypted by the client.
-        """
         try:
             from lightphe.models.Tensor import EncryptedTensor
+            import numpy as np
             
             if isinstance(encrypted_embedding, EncryptedTensor):
-                # Already an EncryptedTensor object, use it directly
                 enc_embedding = encrypted_embedding
-            
-            # Use @ operator (matrix multiplication) for similarity computation
+                
             encrypted_similarity = enc_embedding @ plain_embedding
             
             return encrypted_similarity
         except Exception as e:
             logger.error(f"Error computing similarity: {str(e)}")
             raise
-    
+
+
     def extract_and_encrypt(self, image_data: bytes) -> Dict[str, Any]:
         """Extract and encrypt in one operation using the client-side PHE microservice"""
         try:
