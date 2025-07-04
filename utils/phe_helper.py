@@ -50,9 +50,6 @@ def ensure_phe_public_key_exists():
     return True
 
 def get_phe_instance():
-    """
-    Get a LightPHE instance initialized with the public key.
-    """
     from lightphe import LightPHE
     
     if not ensure_phe_public_key_exists():
@@ -60,7 +57,6 @@ def get_phe_instance():
         return None
     
     try:
-        # Initialize LightPHE with public key
         public_key_path = "keys/public_key.txt"
         phe_instance = LightPHE(algorithm_name="Paillier", precision=19, key_file=public_key_path)
         logger.info("Successfully initialized PHE with public key")

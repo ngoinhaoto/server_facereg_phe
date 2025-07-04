@@ -649,26 +649,12 @@ async def key_compatibility_test(api_key: str = Security(API_KEY)):
                 status_code=500,
                 detail="Failed to initialize PHE instance"
             )
-        
-        # Get current key ID
-        key_info_path = "keys/key_info.json"
-        current_key_id = "unknown"
-        if os.path.exists(key_info_path):
-            try:
-                with open(key_info_path, 'r') as f:
-                    key_info = json.load(f)
-                    current_key_id = key_info.get("key_id", "unknown")
-            except Exception as e:
-                logger.error(f"Error reading key info: {str(e)}")
-        
-        # Encrypt the test array
+                
         try:
             encrypted_array = phe_instance.encrypt(test_array)
 
             encrypted_array = encrypted_array
-            logger.info(f"Successfully encrypted test array with key ID: {current_key_id}")
             
-            # Serialize for transport
             import base64
             import pickle
             serialized = base64.b64encode(pickle.dumps(encrypted_array)).decode('utf-8')
@@ -676,7 +662,6 @@ async def key_compatibility_test(api_key: str = Security(API_KEY)):
             return {
                 "test_array": test_array,
                 "encrypted_array": serialized,
-                "key_id": current_key_id
             }
         except Exception as e:
             logger.error(f"Error encrypting test array: {str(e)}")
