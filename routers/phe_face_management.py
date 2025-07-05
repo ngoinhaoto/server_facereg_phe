@@ -76,7 +76,6 @@ async def register_face_phe(
                 detail="Failed to extract and encrypt face embedding"
             )
         
-        # Generate a unique ID for this registration
         registration_group_id = str(uuid.uuid4())
         
         db_embedding = FaceEmbedding(
@@ -636,7 +635,6 @@ async def key_compatibility_test(api_key: str = Security(API_KEY)):
     try:
         logger.info("Starting key compatibility test")
         
-        # Create test array
         test_array = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0]
         logger.info(f"Test array: {test_array}")
         

@@ -38,7 +38,6 @@ async def register_face(
     db: Session = Depends(get_db),
     current_user: UserResponse = Depends(get_current_active_user)
 ):
-    # Always use DeepFace model
     model = "deepface"
     
     image_data = await file.read()
@@ -110,7 +109,6 @@ async def register_face(
         lambda: face_service.get_user_embeddings_count(db, current_user.id)
     )
     
-    # Return response
     response = {
         "message": "Face registered successfully",
         "embeddings_count": embeddings_count,

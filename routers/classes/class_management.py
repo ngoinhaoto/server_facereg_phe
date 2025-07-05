@@ -4,7 +4,7 @@ from typing import List, Optional
 from database.db import get_db
 from schemas.class_schema import ClassCreate, ClassResponse, ClassUpdate, ClassWithTeacherResponse
 from schemas.user import UserResponse
-from crud.class_crud import create_class, get_class, get_classes, update_class, delete_class
+from crud.class_crud import create_class, get_class, get_classes, update_class, delete_class, get_class_sessions
 from security.auth import get_current_active_user, get_current_teacher_or_admin
 from starlette.concurrency import run_in_threadpool
 from models.database import Class, User
@@ -59,7 +59,6 @@ async def read_classes(
     # Enhance classes with teacher information
     result = []
     for class_obj in classes:
-        # Convert to dict for easier manipulation
         class_dict = {
             "id": class_obj.id,
             "class_code": class_obj.class_code,
@@ -73,7 +72,18 @@ async def read_classes(
             "end_time": class_obj.end_time,
             "created_at": class_obj.created_at,
             "updated_at": class_obj.updated_at,
-            "teacher": None
+            "teacher": None,
+            "sessions": [  
+                {
+                    "id": s.id,
+                    "class_id": s.class_id,  
+                    "session_date": s.session_date,
+                    "start_time": s.start_time,
+                    "end_time": s.end_time,
+                    "notes": s.notes,
+                }
+                for s in get_class_sessions(db, class_id=class_obj.id)
+            ]
         }
         
         # Add teacher information if available
