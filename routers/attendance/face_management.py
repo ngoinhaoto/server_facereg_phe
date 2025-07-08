@@ -295,7 +295,6 @@ async def phe_check_in(
     data: PHECheckInRequest,
     background_tasks: BackgroundTasks = None,
     db: Session = Depends(get_db),
-    api_key: str = Depends(get_api_key) 
 ):
     """Record attendance based on PHE verification from microservice"""
     # Extract values from the request body
