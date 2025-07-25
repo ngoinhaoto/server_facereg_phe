@@ -22,7 +22,7 @@ class FaceRecognitionConfig(BaseModel):
     ENABLE_REGISTRATION_ANTISPOOFING: bool = True  
     
 
-    ENABLE_DUPLICATE_DETECTION: bool = True 
+    ENABLE_DUPLICATE_DETECTION: bool = False 
     DUPLICATE_DETECTION_THRESHOLD: float = 0.45 
     
     SIMILARITY_THRESHOLD: float = 0.5

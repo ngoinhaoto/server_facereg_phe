@@ -49,7 +49,7 @@ class PublicKeyData(BaseModel):
     public_key: str
     key_id: str
     algorithm: Optional[str] = "Paillier"
-    precision: Optional[int] = 19
+    precision: Optional[int] = 14
 
 class EncryptedNumberData(BaseModel):
     encrypted_number: str

@@ -58,7 +58,7 @@ def get_phe_instance():
     
     try:
         public_key_path = "keys/public_key.txt"
-        phe_instance = LightPHE(algorithm_name="Paillier", precision=19, key_file=public_key_path)
+        phe_instance = LightPHE(algorithm_name="Paillier", precision=14, key_file=public_key_path)
         logger.info("Successfully initialized PHE with public key")
         return phe_instance
     except Exception as e:
