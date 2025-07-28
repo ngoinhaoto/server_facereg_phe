@@ -30,6 +30,15 @@ class ClassUpdate(ClassBase):
     end_time: Optional[datetime] = None
     # students: List[int] = []  # List of student IDs
 
+class ClassResponse(ClassBase):
+    id: int
+    created_at: datetime
+    updated_at: Optional[datetime] = None  # Make updated_at optional with None as default
+
+    model_config = {
+        "from_attributes": True
+    }
+
 class ClassSessionBase(BaseModel):
     class_id: int  # This should be the correct field name, not class_code
     session_date: datetime
@@ -64,16 +73,8 @@ class TeacherInfo(BaseModel):
     model_config = {
         "from_attributes": True
     }
-
-class ClassResponse(ClassBase):
-    id: int
-    created_at: datetime
-    updated_at: Optional[datetime] = None
-    sessions: List[ClassSessionResponse] = []  
-
-    model_config = {
-        "from_attributes": True
-    }
-
+    
 class ClassWithTeacherResponse(ClassResponse):
     teacher: Optional[TeacherInfo] = None
+    # CHANGE THIS LINE: Use ClassSessionResponse instead of ClassSessionBase
+    sessions: Optional[List[ClassSessionResponse]] = None
